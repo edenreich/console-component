@@ -1,0 +1,9 @@
+# IDE's
+/.vscode
+
+# Dist Files
+Makefile
+.qmake.stash
+
+# Just in case
+*.o
