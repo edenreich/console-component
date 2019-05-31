@@ -1,7 +1,7 @@
 #pragma once
 
-#include <command.h>
-#include <types/exit_code.h>
+#include <commandline/console/command.h>
+#include <commandline/console/types/exit_code.h>
 
 /**
  * @description output hell world to the console
