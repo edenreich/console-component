@@ -3,30 +3,29 @@
 #define APPLICATION_H
 
 #include <string>
+#include <map>
+
 #include "command.h"
 
 class IApplication {
 
 public:
-    virtual ~IApplication() = 0;
-    virtual int run() = 0;
     virtual void setCommandsPath(const std::string & path) = 0;
     virtual void setApplicationName(const std::string & name) = 0;
     virtual void setApplicationVersion(const std::string & version) = 0;
-    virtual void setApplicationDescription(const std::string & descriptions) = 0;
+    virtual void setApplicationDescription(const std::string & description) = 0;
     virtual void addCommand(Command & command) = 0;
     virtual void printHelp() = 0;
+    virtual int run() = 0;
 
 };
 
 class Application : public IApplication {
 
 public:
-    ~Application() override {}
+    Application(int &argc, char ** argv);
 
-    int run() override {
-        return 1;
-    }
+    virtual ~Application();
 
     void setCommandsPath(const std::string & path) override;
 
@@ -40,12 +39,19 @@ public:
 
     void printHelp() override;
 
-private:
-    std::string & path;
-    std::string & name;
-    std::string & version;
-    std::string & description;
+    int run() override;
 
+private:
+    std::map<std::string, std::string> parseDir(const std::string & path) const;
+
+private:
+    int m_argc;
+    char ** m_argv;
+    std::string m_path;
+    std::string m_name;
+    std::string m_version;
+    std::string m_description;
+    std::map<std::string, Command> m_commands;
 };
 
 
