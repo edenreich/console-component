@@ -3,6 +3,7 @@
 #include <filesystem>
 #include "include/console/application.h"
 namespace fs = std::filesystem;
+//@todo use boost filesystem ?
 
 
 Application::Application(int & argc, char ** argv)
