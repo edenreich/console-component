@@ -9,7 +9,9 @@
 class Command {
 
 public:
-    virtual ExitCode handle(std::list<std::string> options) = 0;
+    Command() {}
+    virtual ~Command() {}
+    virtual ExitCode handle(const std::string * options) = 0;
 };
 
 #endif // COMMAND_H

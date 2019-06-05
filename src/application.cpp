@@ -1,9 +1,9 @@
 #include <iostream>
 #include <typeinfo>
 #include <filesystem>
+#include "include/console/application.h"
 namespace fs = std::filesystem;
 
-#include "include/console/application.h"
 
 Application::Application(int & argc, char ** argv)
 {
@@ -38,13 +38,13 @@ void Application::setApplicationDescription(const std::string & description)
 
 void addCommand(Command & command)
 {
-    //std::string commandName = typeid(command).name();
-    //m_commands.insert(commandName, command);
+    std::string commandName = typeid(command).name();
+    m_commands.insert(commandName);
 }
 
 void Application::printHelp()
 {
-    std::map<std::string, std::string> commands = parseDir(m_path);
+    parseDir(m_path);
 
     printf("%s \n", m_name.c_str());
     printf("Version: %s \n", m_version.c_str());
@@ -60,7 +60,7 @@ int Application::run()
     return 1;
 }
 
-std::map<std::string, std::string> Application::parseDir(const std::string & path) const
+void Application::parseDir(const std::string & path) const
 {
     // 1. list all header files from the given directory path
     for (const auto & entry : fs::directory_iterator(path))

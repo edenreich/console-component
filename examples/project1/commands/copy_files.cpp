@@ -6,10 +6,9 @@ CopyFiles::CopyFiles()
 
 }
 
-ExitCode CopyFiles::handle(const char * options[])
+ExitCode CopyFiles::handle(std::list<std::string> options)
 {
     std::cout << "command copy files was called";
-    std::cout << "Options: " << options;
 
     return ExitCode::Ok;
 }

@@ -42,7 +42,7 @@ public:
     int run() override;
 
 private:
-    std::map<std::string, std::string> parseDir(const std::string & path) const;
+    void parseDir(const std::string & path) const;
 
 private:
     int m_argc;
@@ -51,7 +51,7 @@ private:
     std::string m_name;
     std::string m_version;
     std::string m_description;
-    std::map<std::string, Command> m_commands;
+    std::list<std::string> m_commands;
 };
 
 

@@ -13,6 +13,6 @@ public:
     CopyFiles();
     ~CopyFiles();
 
-    ExitCode handle(const char * options[]);
+    ExitCode handle(std::list<std::string> options);
 
 };

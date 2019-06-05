@@ -6,10 +6,9 @@ HelloWorld::HelloWorld()
     
 }
 
-ExitCode HelloWorld::handle(const char * options[])
+ExitCode HelloWorld::handle(std::list<std::string> options)
 {
     std::cout << "command hello world was called";
-    std::cout << "Options: " << options;
 
     return ExitCode::Ok;
 }

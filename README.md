@@ -78,7 +78,7 @@ int main(int argc, char * argv[])
 
 ## Build
 
-Run `make && make clean`
+Run `cd build cmake && make clean`
 
 
 ## Distribute

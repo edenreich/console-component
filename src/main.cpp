@@ -7,9 +7,9 @@ int main(int argc, char ** argv)
     app.setApplicationName("Todo List Application");
     app.setApplicationVersion("1.0");
 
-    app.setApplicationDescription("Todo List Application");
+    // app.setApplicationDescription("Todo List Application");
 
-    app.setCommandsPath("commands");
+    // app.setCommandsPath("commands");
 
     // app.printHelp();
 

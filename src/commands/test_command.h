@@ -11,6 +11,6 @@ class TestCommand : public Command
 {
 
 public:
-    ExitCode handle(std::list<std::string> options);
+    ExitCode handle(const std::string * options) override;
 
 };
