@@ -9,7 +9,7 @@ int main(int argc, char ** argv)
 
     // app.setApplicationDescription("Todo List Application");
 
-    // app.setCommandsPath("commands");
+    // app.setCommandsDirectoryPath("commands");
 
     // app.printHelp();
 

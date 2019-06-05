@@ -17,9 +17,9 @@ Application::~Application()
 
 }
 
-void Application::setCommandsPath(const std::string & path)
+void Application::setCommandsDirectoryPath(const std::string & dir)
 {
-    m_path = path;
+    m_dir = dir;
 }
 
 void Application::setApplicationName(const std::string & name)
@@ -45,7 +45,7 @@ void addCommand(Command & command)
 
 void Application::printHelp()
 {
-    parseDir(m_path);
+    parseDir(m_dir);
 
     printf("%s \n", m_name.c_str());
     printf("Version: %s \n", m_version.c_str());

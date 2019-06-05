@@ -10,7 +10,7 @@
 class IApplication {
 
 public:
-    virtual void setCommandsPath(const std::string & path) = 0;
+    virtual void setCommandsDirectoryPath(const std::string & dir) = 0;
     virtual void setApplicationName(const std::string & name) = 0;
     virtual void setApplicationVersion(const std::string & version) = 0;
     virtual void setApplicationDescription(const std::string & description) = 0;
@@ -27,7 +27,7 @@ public:
 
     virtual ~Application();
 
-    void setCommandsPath(const std::string & path) override;
+    void setCommandsDirectoryPath(const std::string & dir) override;
 
     void setApplicationName(const std::string & name) override;
 
@@ -47,7 +47,7 @@ private:
 private:
     int m_argc;
     char ** m_argv;
-    std::string m_path;
+    std::string m_dir;
     std::string m_name;
     std::string m_version;
     std::string m_description;
