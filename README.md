@@ -78,9 +78,4 @@ int main(int argc, char * argv[])
 
 ## Build
 
-Run `cd build cmake && make clean`
-
-
-## Distribute
-
-Include and static library are located in `dist` folder.
+Run `cd build && cmake .. && make`
