@@ -1,6 +1,6 @@
 # Commandline Parser Library
 
-Commandline parser library for building powerful cli.
+An easy to use library for building powerful console applications written in c++.
 
 ## Usage
 
