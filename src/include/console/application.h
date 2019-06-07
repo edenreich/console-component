@@ -2,7 +2,6 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "command.h"
 #include "types/metadata.h"
 #include "application_interface.h"
 

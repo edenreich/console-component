@@ -1,6 +1,8 @@
 #ifndef APPLICATION_INTERFACE_H
 #define APPLICATION_INTERFACE_H
 
+#include "command.h"
+
 
 class IApplication {
 
