@@ -3,9 +3,12 @@
 #define APPLICATION_H
 
 #include <string>
-#include <map>
+#include <list>
 
 #include "command.h"
+
+typedef std::list<std::pair<std::string, std::string>> Anotations; // list of anotations, i.e @name, @description
+typedef std::list<std::pair<std::string, Anotations>> MetadataTagsCollection; // filename map to anotations
 
 class IApplication {
 
@@ -23,7 +26,7 @@ public:
 class Application : public IApplication {
 
 public:
-    Application(int &argc, char ** argv);
+    Application(int & argc, char ** argv);
 
     virtual ~Application();
 
@@ -51,7 +54,8 @@ private:
     std::string m_name;
     std::string m_version;
     std::string m_description;
-    std::list<std::string> m_commands;
+    Anotations m_anotations;
+    MetadataTagsCollection m_metadataTags;
 };
 
 
