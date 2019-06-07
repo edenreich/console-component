@@ -1,4 +1,6 @@
-#pragma once
+#ifndef EXIT_CODE_H
+#define EXIT_CODE_H
+
 
 enum ExitCode
 {
@@ -6,3 +8,6 @@ enum ExitCode
     Error,
     NeedHelp
 };
+
+
+#endif // EXIT_CODE_H

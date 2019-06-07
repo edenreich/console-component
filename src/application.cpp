@@ -1,15 +1,15 @@
 #include <iostream>
 #include <typeinfo>
-#include <filesystem>
+#include <dirent.h>
 #include "include/console/application.h"
-namespace fs = std::filesystem;
-//@todo use boost filesystem ?
 
 
 Application::Application(int & argc, char ** argv)
 {
     m_argc = argc;
     m_argv = argv;
+
+    m_dir = "commands";
 }
 
 Application::~Application()
@@ -39,8 +39,8 @@ void Application::setApplicationDescription(const std::string & description)
 
 void addCommand(Command & command)
 {
-    std::string commandName = typeid(command).name();
-    m_commands.insert(commandName);
+    // std::string commandName = typeid(command).name();
+    // m_commands.insert(commandName);
 }
 
 void Application::printHelp()
@@ -63,11 +63,22 @@ int Application::run()
 
 void Application::parseDir(const std::string & path) const
 {
-    // 1. list all header files from the given directory path
-    for (const auto & entry : fs::directory_iterator(path))
-    {
-        std::cout << entry.path() << std::endl;
+    DIR * dir;
+    struct dirent * entry;
+
+    dir = opendir(path.c_str());
+
+    if (dir == NULL) {
+        throw "Could not open directory";
     }
+
+    // 1. list all header files from the given directory path
+    while ( (entry = readdir(dir)) != NULL )
+    {
+        std::cout << entry->d_name << std::endl;
+    }
+
+    closedir(dir);
 
     // 2. parse the @ notations in the file to get @name and @description
     // 3. map command name to description

@@ -2,26 +2,10 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include <string>
-#include <list>
-
 #include "command.h"
+#include "types/metadata.h"
+#include "application_interface.h"
 
-typedef std::list<std::pair<std::string, std::string>> Anotations; // list of anotations, i.e @name, @description
-typedef std::list<std::pair<std::string, Anotations>> MetadataTagsCollection; // filename map to anotations
-
-class IApplication {
-
-public:
-    virtual void setCommandsDirectoryPath(const std::string & dir) = 0;
-    virtual void setApplicationName(const std::string & name) = 0;
-    virtual void setApplicationVersion(const std::string & version) = 0;
-    virtual void setApplicationDescription(const std::string & description) = 0;
-    virtual void addCommand(Command & command) = 0;
-    virtual void printHelp() = 0;
-    virtual int run() = 0;
-
-};
 
 class Application : public IApplication {
 
