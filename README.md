@@ -1,6 +1,13 @@
 # Commandline Parser Library
 
-An easy to use library for building powerful console applications written in c++.
+An easy to use library for building powerful console applications written in C++.
+
+## Todo
+
+- [ ] Resolve relative consumer commands directory
+- [ ] Parse the header files inside of that directory and look for @ notations during compile time save them in std::pair, alternative will be to use reflection.
+- [ ] When help is called display the results which was collected by the directory parser, something like [command name][\t][command description]
+- [ ] Implement a method to add command classes references and invoke their handle method and pass the options flags when called
 
 ## Usage
 
@@ -42,7 +49,6 @@ CopyFiles::CopyFiles()
 ExitCode CopyFiles::handle(const char * options[])
 {
     std::cout << "command copy files was called";
-    std::cout << "Options: " << options;
 
     return ExitCode::Ok;
 }
@@ -68,6 +74,8 @@ int main(int argc, char * argv[])
     app.setApplicationVersion("1.0");
 
     app.setApplicationDescription("My awesome application");
+    
+    app.setCommandsDirectoryPath("commands"); // optional
 
     app.addCommand(new CopyFiles);
     app.addCommand(new HelloWorld);
