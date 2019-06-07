@@ -37,7 +37,7 @@ void Application::setApplicationDescription(const std::string & description)
     m_description = description;
 }
 
-void addCommand(Command & command)
+void Application::addCommand(Command & command)
 {
     // std::string commandName = typeid(command).name();
     // m_commands.insert(commandName);
