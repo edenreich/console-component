@@ -15,4 +15,5 @@ public:
 
 };
 
+
 #endif // APPLICATION_INTERFACE_H
