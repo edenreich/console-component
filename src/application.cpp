@@ -160,11 +160,11 @@ ExitCode Application::run()
  * Store the header files names
  * from the commands directory.
  * 
- * @var std::vector<std::string>
+ * @var HeaderFiles
  */
-std::vector<std::string> Application::getHeaderFilesFromDir(const std::string & path) const
+HeaderFiles Application::getHeaderFilesFromDir(const std::string & path) const
 {
-    std::vector<std::string> files;
+    HeaderFiles files;
     DIR * dir;
     struct dirent * entry;
 
@@ -242,10 +242,10 @@ Anotations Application::parseFileMetadata(const std::string & file) const
  * Parse the metadata of
  * each header file.
  *
- * @param std::vector<std::string> files
+ * @param HeaderFiles files
  * @return AnotationsCollection
  */
-AnotationsCollection Application::parseFilesMetadata(std::vector<std::string> files) const
+AnotationsCollection Application::parseFilesMetadata(HeaderFiles files) const
 {
     AnotationsCollection collection;
 

@@ -2,7 +2,6 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include <vector>
 #include "types/metadata.h"
 #include "application_interface.h"
 
@@ -91,10 +90,11 @@ private:
     /**
      * Store the header files names
      * from the commands directory.
-     * 
-     * @var std::vector<std::string>
+     *
+     * @param const std::string & path
+     * @return HeaderFiles
      */
-    std::vector<std::string> getHeaderFilesFromDir(const std::string & path) const;
+    HeaderFiles getHeaderFilesFromDir(const std::string & path) const;
     
     /**
      * Parse the metadata of
@@ -109,10 +109,10 @@ private:
      * Parse the metadata of
      * each header file.
      *
-     * @param std::vector<std::string> files
+     * @param HeaderFiles files
      * @return AnotationsCollection
      */
-    AnotationsCollection parseFilesMetadata(std::vector<std::string> files) const;
+    AnotationsCollection parseFilesMetadata(HeaderFiles files) const;
 
 private:
 
@@ -172,9 +172,9 @@ private:
      * Store the application 
      * commands header file names.
      *
-     * @var std::vector<std::string>
+     * @var HeaderFiles
      */
-    std::vector<std::string> m_headerFiles;
+    HeaderFiles m_headerFiles;
 
     /**
      * Store the anotations
