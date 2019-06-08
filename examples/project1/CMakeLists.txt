@@ -8,10 +8,14 @@ include_directories(
 )
 
 set(HEADERS_CXX_FILES
+    commands/copy_files.h
+    commands/copy_files.h
 )
 
 set(SOURCES_CXX_FILES
     main.cpp
+    commands/copy_files.cpp
+    commands/hello_world.cpp
 )
 
 add_executable(${PROJECT_NAME}
