@@ -4,10 +4,13 @@ project(commandline)
 
 set(BUILD_SHARED_LIBS OFF)
 
-set(HEADERS_CXX_FILES
+set(HEADERS_CXX_FILES_CONSOLE
     include/console/application_interface.h
     include/console/application.h
     include/console/command.h
+)
+
+set(HEADERS_CXX_FILES_CONSOLE_TYPES
     include/console/types/colors.h
     include/console/types/exit_code.h
     include/console/types/metadata.h
@@ -37,6 +40,10 @@ install(
 )
 
 install(
-    FILES ${HEADERS_CXX_FILES}
-    DESTINATION ${DISTRIBUTE_DIR}/include
+    FILES ${HEADERS_CXX_FILES_CONSOLE}
+    DESTINATION ${DISTRIBUTE_DIR}/include/console
+)
+install(
+    FILES ${HEADERS_CXX_FILES_CONSOLE_TYPES}
+    DESTINATION ${DISTRIBUTE_DIR}/include/console/types
 )
