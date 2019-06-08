@@ -1,4 +1,5 @@
 #include "include/console/application.h"
+#include "commands/test_command.h"
 
 int main(int argc, char ** argv)
 {
@@ -11,6 +12,8 @@ int main(int argc, char ** argv)
     app.setApplicationDescription("Todo List Application");
 
     app.setCommandsDirectoryPath("src/commands");
+
+    // app.addCommand(new TestCommand);
 
     app.printHelp();
 

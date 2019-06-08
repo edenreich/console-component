@@ -7,6 +7,10 @@
 #include "include/console/application.h"
 
 
+/**
+ * - Initialize the arguments count
+ * - initalize the arguments values
+ */
 Application::Application(int & argc, char ** argv)
 {
     m_argc = argc;
@@ -16,42 +20,89 @@ Application::Application(int & argc, char ** argv)
     m_usage = "app [command] [options]";
 }
 
+/**
+ * Destroy the application.
+ */
 Application::~Application()
 {
 
 }
 
+/**
+ * Setter for the commands directory path
+ * This is where the anotation parser will look
+ * for command @name and command @description.
+ *
+ * @param const std::string & dir
+ * @return void
+ */
 void Application::setCommandsDirectoryPath(const std::string & dir)
 {
     m_dir = dir;
 }
 
+/**
+ * Setter for the application name.
+ *
+ * @param const std::string & name
+ * @return void
+ */
 void Application::setApplicationName(const std::string & name)
 {
     m_name = name;
 }
 
+/**
+ * Setter for the application usage.
+ *
+ * @param const std::string & usage
+ * @return void
+ */
 void Application::setApplicationUsage(const std::string & usage)
 {
     m_usage = usage;
 }
 
+/**
+ * Setter for the application version.
+ *
+ * @param const std::string & version
+ * @return void
+ */
 void Application::setApplicationVersion(const std::string & version)
 {
     m_version = version;
 }
 
+/**
+ * Setter for the application description.
+ *
+ * @param const std::string & description
+ * @return void
+ */
 void Application::setApplicationDescription(const std::string & description)
 {
     m_description = description;
 }
 
+/**
+ * Add a command instance to the application.
+ * 
+ * @param Command & command
+ * @return void
+ */
 void Application::addCommand(Command & command)
 {
-    // std::string commandName = typeid(command).name();
+    std::string commandName = typeid(command).name();
+    std::cout << commandName;
     // m_commands.insert(commandName);
 }
 
+/**
+ * Print the help message.
+ *
+ * @return void
+ */
 void Application::printHelp()
 {
 
@@ -91,7 +142,12 @@ void Application::printHelp()
     }
 }
 
-int Application::run()
+/**
+ * Run the console application.
+ * 
+ * @return ExitCode
+ */
+ExitCode Application::run()
 {
     // 1. check what command has been called 
     // 2. create an instance of that class
@@ -100,6 +156,12 @@ int Application::run()
     return ExitCode::Ok;
 }
 
+/**
+ * Store the header files names
+ * from the commands directory.
+ * 
+ * @var std::vector<std::string>
+ */
 std::vector<std::string> Application::getHeaderFilesFromDir(const std::string & path) const
 {
     std::vector<std::string> files;
@@ -130,6 +192,13 @@ std::vector<std::string> Application::getHeaderFilesFromDir(const std::string & 
     return files;
 }
 
+/**
+ * Parse the metadata of
+ * a given header file.
+ *
+ * @param const std::string & file
+ * @return Anotations
+ */
 Anotations Application::parseFileMetadata(const std::string & file) const
 {
     Anotations anotations;
@@ -169,9 +238,16 @@ Anotations Application::parseFileMetadata(const std::string & file) const
     return anotations;
 }
 
-MetadataTagsCollection Application::parseFilesMetadata(std::vector<std::string> files) const
+/**
+ * Parse the metadata of
+ * each header file.
+ *
+ * @param std::vector<std::string> files
+ * @return AnotationsCollection
+ */
+AnotationsCollection Application::parseFilesMetadata(std::vector<std::string> files) const
 {
-    MetadataTagsCollection collection;
+    AnotationsCollection collection;
 
     for (std::string & file: files)
     {

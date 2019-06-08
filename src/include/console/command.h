@@ -8,8 +8,6 @@
 class Command {
 
 public:
-    Command() {}
-    virtual ~Command() {}
     virtual ExitCode handle(const std::string * options) = 0;
 };
 
