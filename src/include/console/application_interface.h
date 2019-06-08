@@ -54,10 +54,10 @@ public:
     /**
      * Add a command instance to the application.
      *
-     * @param Command & command
+     * @param Command * command
      * @return void
      */
-    virtual void addCommand(Command & command) = 0;
+    virtual void addCommand(Command * command) = 0;
 
    /**
      * Print the help message.

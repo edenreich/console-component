@@ -89,12 +89,12 @@ void Application::setApplicationDescription(const std::string & description)
 /**
  * Add a command instance to the application.
  *
- * @param Command & command
+ * @param Command * command
  * @return void
  */
-void Application::addCommand(Command & command)
+void Application::addCommand(Command * command)
 {
-    std::string commandName = typeid(command).name();
+    std::string commandName = typeid(*(command)).name();
     std::cout << commandName;
     // m_commands.insert(commandName);
 }

@@ -17,8 +17,8 @@ int main(int argc, char * argv[])
     
     app.printHelp();
 
-    // app.addCommand(new CopyFiles);
-    // app.addCommand(new HelloWorld);
+    app.addCommand(new CopyFiles);
+    app.addCommand(new HelloWorld);
 
     return app.run();
 }

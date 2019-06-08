@@ -66,10 +66,10 @@ public:
     /**
      * Add a command instance to the application.
      *
-     * @param Command & command
+     * @param Command * command
      * @return void
      */
-    void addCommand(Command & command) override;
+    void addCommand(Command * command) override;
 
     /**
      * Print the help message.
