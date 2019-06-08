@@ -96,4 +96,9 @@ This project currently targets linux
 Often I find myself have to write the same code over and over again, so I thought it would be nice to parse the docblocks of each command,
 So the project could be maintained easily. After all, all it is needed is a CPP and HEADER file per command.
 Having dedicated class / object per command makes it easier to maintain.
+
 Because it is statically linked library I have avoided including external libraries and kept it as simple as possible.
+
+## Contributing Guidelines
+
+If you find this project interesting or have any suggestions, feel free to send a pull request. I will be more than happy to review it.
