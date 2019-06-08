@@ -28,10 +28,7 @@ class CopyFiles : public Command
 {
 
 public:
-    CopyFiles();
-    ~CopyFiles();
-
-    ExitCode handle(const char * options[]) override;
+    ExitCode handle(const std::string * options);
 
 };
 ```
@@ -41,22 +38,13 @@ public:
 ```
 // commands/copy_files.cpp
 #include "copy_files.h"
+#include <iostream>
 
-CopyFiles::CopyFiles()
-{
-
-}
-
-ExitCode CopyFiles::handle(const char * options[])
+ExitCode CopyFiles::handle(const std::string * options)
 {
     std::cout << "command copy files was called";
 
     return ExitCode::Ok;
-}
-
-~CopyFiles::CopyFiles()
-{
-    
 }
 ```
 
@@ -85,6 +73,8 @@ int main(int argc, char * argv[])
     return app.run();
 }
 ```
+
+Whenever you compile the program, a parser will look for the @name @description anotation and generate the help file for you.
 
 ## Build
 
