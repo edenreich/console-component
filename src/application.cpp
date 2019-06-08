@@ -12,7 +12,7 @@ Application::Application(int & argc, char ** argv)
     m_argc = argc;
     m_argv = argv;
 
-    m_dir = "commands";
+    m_dir = "../commands";
     m_usage = "app [command] [options]";
 }
 
