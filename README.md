@@ -21,6 +21,7 @@ An easy to use library for building powerful console applications written in C++
 #include <console/types/exit_code.h>
 
 /**
+ * @name copy-files
  * @description copy files from <source> to <dist>
  */
 class CopyFiles : public Command
@@ -68,14 +69,15 @@ ExitCode CopyFiles::handle(const char * options[])
 
 int main(int argc, char * argv[])
 {
-    ConsoleApplication app(argc, argv);
+    Application app(argc, argv);
 
-    app.setApplicationName("Awesome Application");
+    app.setApplicationName("Todo List Application");
+    app.setApplicationUsage("todo [command] [options]");
     app.setApplicationVersion("1.0");
 
-    app.setApplicationDescription("My awesome application");
-    
-    app.setCommandsDirectoryPath("commands"); // optional
+    app.setApplicationDescription("Todo List Application");
+
+    app.setCommandsDirectoryPath("src/commands");
 
     app.addCommand(new CopyFiles);
     app.addCommand(new HelloWorld);
