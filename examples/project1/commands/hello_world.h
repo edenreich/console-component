@@ -5,7 +5,7 @@
 
 /**
  * @name hello-world
- * @description output hell world to the console
+ * @description output hello world to the console
  */
 class HelloWorld : public Command
 {
