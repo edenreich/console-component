@@ -4,10 +4,11 @@ int main(int argc, char ** argv)
 {
     Application app(argc, argv);
 
-    // app.setApplicationName("Todo List Application");
-    // app.setApplicationVersion("1.0");
+    app.setApplicationName("Todo List Application");
+    app.setApplicationUsage("app [command] [options]");
+    app.setApplicationVersion("1.0");
 
-    // app.setApplicationDescription("Todo List Application");
+    app.setApplicationDescription("Todo List Application");
 
     app.setCommandsDirectoryPath("src/commands");
 

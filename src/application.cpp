@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <regex>
 #include <fstream>
+#include "include/console/types/colors.h"
 #include "include/console/application.h"
 
 
@@ -12,6 +13,7 @@ Application::Application(int & argc, char ** argv)
     m_argv = argv;
 
     m_dir = "commands";
+    m_usage = "app [command] [options]";
 }
 
 Application::~Application()
@@ -27,6 +29,11 @@ void Application::setCommandsDirectoryPath(const std::string & dir)
 void Application::setApplicationName(const std::string & name)
 {
     m_name = name;
+}
+
+void Application::setApplicationUsage(const std::string & usage)
+{
+    m_usage = usage;
 }
 
 void Application::setApplicationVersion(const std::string & version)
@@ -52,14 +59,34 @@ void Application::printHelp()
 
     m_metadataTags = parseFilesMetadata(m_headerFiles);
 
-    printf("%s \n", m_name.c_str());
-    printf("Version: %s \n", m_version.c_str());
-    printf("Description: %s \n", m_description.c_str());
+    printf("%s%s%s", COLOR_GREEN, m_name.c_str(), COLOR_RESET);
+    std::cout << '\n';
+    printf("Version: %s%s%s", COLOR_YELLOW, m_version.c_str(), COLOR_RESET);
+    std::cout << '\n';
+    printf("Description: %s", m_description.c_str());
+    std::cout << '\n';
+    std::cout << '\n';
+
+    // Usage
+    printf("%sUsage:%s", COLOR_YELLOW, COLOR_RESET);
+    std::cout << '\n';
+    printf("  %s", m_usage.c_str());
+    std::cout << '\n';
     std::cout << '\n';
     
+    // Options
+    printf("%sOptions:%s", COLOR_YELLOW, COLOR_RESET);
+    std::cout << '\n';
+    printf("  %s\t%s", "-h, --help", "Display this help message");
+    std::cout << '\n';
+    std::cout << '\n';
+
+    // Available Commands
+    printf("%sAvailable Commands:%s\n", COLOR_YELLOW, COLOR_RESET);
     for (auto & metadataTag : m_metadataTags)
     {
-        printf("%s\t\t%s", metadataTag.second.at("@name").c_str(), metadataTag.second.at("@description").c_str());
+        std::cout << "  ";
+        printf("%s%s%s\t%s", COLOR_GREEN, metadataTag.second.at("@name").c_str(), COLOR_RESET, metadataTag.second.at("@description").c_str());
         std::cout << '\n';
     }
 }

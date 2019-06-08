@@ -18,6 +18,8 @@ public:
 
     void setApplicationName(const std::string & name) override;
 
+    void setApplicationUsage(const std::string & usage) override;
+
     void setApplicationVersion(const std::string & version) override;
 
     void setApplicationDescription(const std::string & description) override;
@@ -38,6 +40,7 @@ private:
     char ** m_argv;
     std::string m_dir;
     std::string m_name;
+    std::string m_usage;
     std::string m_version;
     std::string m_description;
     std::vector<std::string> m_headerFiles;

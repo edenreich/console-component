@@ -9,6 +9,7 @@ class IApplication {
 public:
     virtual void setCommandsDirectoryPath(const std::string & dir) = 0;
     virtual void setApplicationName(const std::string & name) = 0;
+    virtual void setApplicationUsage(const std::string & usage) = 0;
     virtual void setApplicationVersion(const std::string & version) = 0;
     virtual void setApplicationDescription(const std::string & description) = 0;
     virtual void addCommand(Command & command) = 0;
