@@ -88,4 +88,4 @@ int main(int argc, char * argv[])
 
 ## Build
 
-Run `cd build && cmake .. && make`
+Run `cd build && cmake .. && cmake --build . --target install`
