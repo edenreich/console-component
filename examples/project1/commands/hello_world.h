@@ -11,9 +11,6 @@ class HelloWorld : public Command
 {
 
 public:
-    HelloWorld();
-    ~HelloWorld();
-
     ExitCode handle(const std::string * options);
 
 };

@@ -11,9 +11,6 @@ class CopyFiles : public Command
 {
 
 public:
-    CopyFiles();
-    ~CopyFiles();
-
     ExitCode handle(const std::string * options);
 
 };

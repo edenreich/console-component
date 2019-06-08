@@ -1,19 +1,9 @@
 #include "hello_world.h"
+#include <iostream>
 
-
-HelloWorld::HelloWorld()
-{
-    
-}
-
-ExitCode HelloWorld::handle(std::list<std::string> options)
+ExitCode HelloWorld::handle(const std::string * options)
 {
     std::cout << "command hello world was called";
 
     return ExitCode::Ok;
-}
-
-~HelloWorld::HelloWorld()
-{
-    
 }

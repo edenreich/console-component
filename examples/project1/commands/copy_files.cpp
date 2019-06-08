@@ -1,19 +1,9 @@
 #include "copy_files.h"
+#include <iostream>
 
-
-CopyFiles::CopyFiles()
-{
-
-}
-
-ExitCode CopyFiles::handle(std::list<std::string> options)
+ExitCode CopyFiles::handle(const std::string * options)
 {
     std::cout << "command copy files was called";
 
     return ExitCode::Ok;
-}
-
-~CopyFiles::CopyFiles()
-{
-    
 }
