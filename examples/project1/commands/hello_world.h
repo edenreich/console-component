@@ -1,7 +1,7 @@
 #pragma once
 
-#include <commandline/console/command.h>
-#include <commandline/console/types/exit_code.h>
+#include <console/command.h>
+#include <console/types/exit_code.h>
 
 /**
  * @description output hell world to the console
@@ -13,6 +13,6 @@ public:
     HelloWorld();
     ~HelloWorld();
 
-    ExitCode handle(std::list<std::string> options);
+    ExitCode handle(const std::string * options);
 
 };

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <commandline/console/command.h>
-#include <commandline/console/types/exit_code.h>
+#include <console/command.h>
+#include <console/types/exit_code.h>
 
 /**
  * @description copy files from <source> to <dist>
@@ -13,6 +13,6 @@ public:
     CopyFiles();
     ~CopyFiles();
 
-    ExitCode handle(std::list<std::string> options);
+    ExitCode handle(const std::string * options);
 
 };
