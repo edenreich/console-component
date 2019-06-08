@@ -12,7 +12,7 @@ public:
 
     /**
      * - Initialize the arguments count
-     * - initalize the arguments values
+     * - initialize the arguments values
      */
     Application(int & argc, char ** argv);
 

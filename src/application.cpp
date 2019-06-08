@@ -9,7 +9,7 @@
 
 /**
  * - Initialize the arguments count
- * - initalize the arguments values
+ * - initialize the arguments values
  */
 Application::Application(int & argc, char ** argv)
 {
