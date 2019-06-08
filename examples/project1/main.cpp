@@ -1,3 +1,6 @@
+#include <exception>
+#include <iostream>
+#include <string>
 #include <console/application.h>
 #include "commands/copy_files.h"
 #include "commands/hello_world.h"
@@ -12,7 +15,9 @@ int main(int argc, char * argv[])
 
     app.setApplicationDescription("Todo List Application");
 
-    app.setCommandsDirectoryPath("src/commands");
+    app.setCommandsDirectoryPath("commands");
+    
+    app.printHelp();
 
     // app.addCommand(new CopyFiles);
     // app.addCommand(new HelloWorld);

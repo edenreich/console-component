@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <regex>
 #include <fstream>
+#include <exception>
 #include "include/console/types/colors.h"
 #include "include/console/application.h"
 
