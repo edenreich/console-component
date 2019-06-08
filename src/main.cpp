@@ -4,14 +4,14 @@ int main(int argc, char ** argv)
 {
     Application app(argc, argv);
 
-    app.setApplicationName("Todo List Application");
-    app.setApplicationVersion("1.0");
+    // app.setApplicationName("Todo List Application");
+    // app.setApplicationVersion("1.0");
 
     // app.setApplicationDescription("Todo List Application");
 
-    // app.setCommandsDirectoryPath("commands");
+    app.setCommandsDirectoryPath("src/commands");
 
-    // app.printHelp();
+    app.printHelp();
 
     return app.run();
 }

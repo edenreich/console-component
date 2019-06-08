@@ -2,6 +2,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include <vector>
 #include "types/metadata.h"
 #include "application_interface.h"
 
@@ -28,7 +29,9 @@ public:
     int run() override;
 
 private:
-    void parseDir(const std::string & path) const;
+    std::vector<std::string> getHeaderFilesFromDir(const std::string & path) const;
+    Anotations parseFileMetadata(const std::string & file) const;
+    MetadataTagsCollection parseFilesMetadata(std::vector<std::string> files) const;
 
 private:
     int m_argc;
@@ -37,6 +40,7 @@ private:
     std::string m_name;
     std::string m_version;
     std::string m_description;
+    std::vector<std::string> m_headerFiles;
     Anotations m_anotations;
     MetadataTagsCollection m_metadataTags;
 };
