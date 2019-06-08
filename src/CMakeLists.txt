@@ -21,7 +21,6 @@ set(SOURCES_CXX_FILES
     application.cpp
 )
 
-
 add_library(${PROJECT_NAME}
     ${HEADERS_CXX_FILES}
     ${SOURCES_CXX_FILES}
