@@ -1,9 +1,7 @@
-#include <exception>
-#include <iostream>
-#include <string>
 #include <console/application.h>
 #include "commands/copy_files.h"
 #include "commands/hello_world.h"
+
 
 int main(int argc, char * argv[])
 {
