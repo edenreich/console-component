@@ -53,7 +53,7 @@ public:
 
     /**
      * Add a command instance to the application.
-     * 
+     *
      * @param Command & command
      * @return void
      */
@@ -68,7 +68,7 @@ public:
 
     /**
      * Run the console application.
-     * 
+     *
      * @return ExitCode
      */
     virtual ExitCode run() = 0;

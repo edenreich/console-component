@@ -65,7 +65,7 @@ public:
     
     /**
      * Add a command instance to the application.
-     * 
+     *
      * @param Command & command
      * @return void
      */
@@ -80,7 +80,7 @@ public:
 
     /**
      * Run the console application.
-     * 
+     *
      * @return ExitCode
      */
     ExitCode run() override;
@@ -179,7 +179,7 @@ private:
     /**
      * Store the anotations
      * (i.e @name, @description)
-     * 
+     *
      * @var Anotations
      */
     Anotations m_anotations;
@@ -187,7 +187,7 @@ private:
     /**
      * Store the header file name
      * mapped to anotations.
-     * 
+     *
      * @var AnotationsCollection
      */
     AnotationsCollection m_metadataTags;

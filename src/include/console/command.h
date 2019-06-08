@@ -8,6 +8,13 @@
 class Command {
 
 public:
+
+    /**
+     * Handle the command.
+     *
+     * @param const std::string * options
+     * @return ExitCode
+     */
     virtual ExitCode handle(const std::string * options) = 0;
 };
 

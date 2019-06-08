@@ -87,7 +87,7 @@ void Application::setApplicationDescription(const std::string & description)
 
 /**
  * Add a command instance to the application.
- * 
+ *
  * @param Command & command
  * @return void
  */
@@ -105,7 +105,6 @@ void Application::addCommand(Command & command)
  */
 void Application::printHelp()
 {
-
     m_headerFiles = getHeaderFilesFromDir(m_dir);
 
     m_metadataTags = parseFilesMetadata(m_headerFiles);
@@ -159,7 +158,7 @@ ExitCode Application::run()
 /**
  * Store the header files names
  * from the commands directory.
- * 
+ *
  * @var HeaderFiles
  */
 HeaderFiles Application::getHeaderFilesFromDir(const std::string & path) const
