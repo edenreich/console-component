@@ -176,7 +176,6 @@ MetadataTagsCollection Application::parseFilesMetadata(std::vector<std::string> 
     for (std::string & file: files)
     {
         file = m_dir+'/'+file;
-        // std::cout << file << std::endl;
         collection[file] = parseFileMetadata(file);
     }
 

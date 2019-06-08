@@ -4,10 +4,10 @@ An easy to use library for building powerful console applications written in C++
 
 ## Todo
 
-- [ ] Resolve relative consumer commands directory
+- [x] Resolve relative consumer commands directory
 - [x] Parse the header files inside of that directory and look for @ notations during compile time save them in std::map.
 - [x] When help is called display the results which was collected by the directory parser, something like [command name][\t][command description]
-- [ ] Implement a method to add command classes references and invoke their handle method and pass the options flags when called
+- [ ] Implement a method to add command classes references, invoke their handle method and pass the options flags when called
 
 ## Usage
 
