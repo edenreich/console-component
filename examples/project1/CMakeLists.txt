@@ -9,7 +9,7 @@ include_directories(
 
 set(HEADERS_CXX_FILES
     commands/copy_files.h
-    commands/copy_files.h
+    commands/hello_world.h
 )
 
 set(SOURCES_CXX_FILES
