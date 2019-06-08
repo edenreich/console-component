@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.12)
 
-project(App)
+project(todo)
 
 include_directories(
     ${CMAKE_BINARY_DIR}/dist/include

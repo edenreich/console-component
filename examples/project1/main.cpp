@@ -10,7 +10,7 @@ int main(int argc, char * argv[])
     Application app(argc, argv);
 
     app.setApplicationName("Todo List Application");
-    app.setApplicationUsage("todo [command] [options]");
+    app.setApplicationUsage("./bin/todo [command] [options]");
     app.setApplicationVersion("1.0");
 
     app.setApplicationDescription("Todo List Application");
