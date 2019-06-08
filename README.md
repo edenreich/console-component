@@ -82,3 +82,18 @@ Whenever you compile the program, a parser will look for the @name @description 
 ## Build
 
 Run `cd build && cmake .. && cmake --build . --target install`
+
+## Distributed Files
+
+After building the project all distributed files should be located in build/dist
+
+## Target
+
+This project currently targets linux
+
+## Motiviation
+
+Often I find myself have to write the same code over and over again, so I thought it would be nice to parse the docblocks of each command,
+So the project could be maintained easily. After all, all it is needed is a CPP and HEADER file per command.
+Having dedicated class / object per command makes it easier to maintain.
+Because it is statically linked library I have avoided including external libraries and kept it as simple as possible.
