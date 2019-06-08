@@ -3,6 +3,7 @@
 #define APPLICATION_H
 
 #include "types/metadata.h"
+#include "types/collections.h"
 #include "application_interface.h"
 
 
@@ -191,6 +192,13 @@ private:
      * @var AnotationsCollection
      */
     AnotationsCollection m_metadataTags;
+
+    /**
+     * Store the available commands.
+     *
+     * @var Commands
+     */
+    Commands m_commands;
 
 };
 
