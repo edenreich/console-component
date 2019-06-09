@@ -34,11 +34,11 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
 {
     output->writeLine("Copying files..");
 
-    std::cout << "with options: " << std::endl;
+    output->writeLine("with options: ");
     
     for (auto & option : input->getOptions()) 
     {
-        std::cout << option << std::endl;
+        output->writeLine(option);
     }
 
     return ExitCode::Ok;

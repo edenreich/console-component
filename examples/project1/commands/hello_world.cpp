@@ -34,12 +34,12 @@ ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::Outp
 {
     output->writeLine("command hello world was called");
 
-    // std::cout << "with options: " << std::endl;
+    output->writeLine("with options: ");
     
-    // for (auto & option : options) 
-    // {
-    //     std::cout << option << std::endl;
-    // }
+    for (auto & option : input->getOptions()) 
+    {
+        output->writeLine(option);
+    }
 
-    // return ExitCode::Ok;
+    return ExitCode::Ok;
 }
