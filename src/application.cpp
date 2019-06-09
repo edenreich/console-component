@@ -141,7 +141,6 @@ ExitCode Application::run()
     std::vector<std::string> options;
     std::string requestedCommand;
     std::smatch matchedOption;
-    std::smatch matchedCommand;
 
     for (std::size_t i = 0; i != arguments.size(); ++i) {
         std::regex isOption("^--(.*)");
