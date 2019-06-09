@@ -2,6 +2,7 @@
 
 #include <console/command.h>
 #include <console/types/exit_code.h>
+#include <vector>
 
 
 /**
@@ -16,9 +17,9 @@ public:
     /**
      * Handle the command.
      *
-     * @param const std::string * options
+     * @param std::vector<std::string> options
      * @return ExitCode
      */
-    ExitCode handle(const std::string * options);
+    ExitCode handle(std::vector<std::string> options);
 
 };

@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-ExitCode HelloWorld::handle(const std::string * options)
+ExitCode HelloWorld::handle(std::vector<std::string> options)
 {
     std::cout << "command hello world was called";
 

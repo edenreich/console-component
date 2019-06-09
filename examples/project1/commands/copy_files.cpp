@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-ExitCode CopyFiles::handle(const std::string * options)
+ExitCode CopyFiles::handle(std::vector<std::string> options)
 {
     std::cout << "command copy files was called";
 

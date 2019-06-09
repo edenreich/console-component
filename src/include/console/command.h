@@ -3,6 +3,7 @@
 
 #include "types/exit_code.h"
 #include <string>
+#include <vector>
 
 
 class Command {
@@ -12,10 +13,10 @@ public:
     /**
      * Handle the command.
      *
-     * @param const std::string * options
+     * @param std::vector<std::string> options
      * @return ExitCode
      */
-    virtual ExitCode handle(const std::string * options) = 0;
+    virtual ExitCode handle(std::vector<std::string> options) = 0;
 };
 
 

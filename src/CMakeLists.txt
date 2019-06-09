@@ -15,6 +15,7 @@ set(HEADERS_CXX_FILES_CONSOLE_TYPES
     include/console/types/colors.h
     include/console/types/exit_code.h
     include/console/types/metadata.h
+    include/console/types/collections.h
 )
 
 set(SOURCES_CXX_FILES

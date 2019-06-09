@@ -26,7 +26,11 @@ Application::Application(int & argc, char ** argv)
  */
 Application::~Application()
 {
-
+    for (auto & command : m_commands)
+    {
+        // just for safety delete all memory allocations
+        delete command.second;
+    }
 }
 
 /**
@@ -95,8 +99,8 @@ void Application::setApplicationDescription(const std::string & description)
 void Application::addCommand(Command * command)
 {
     std::string commandName = typeid(*(command)).name();
-    std::cout << commandName;
-    // m_commands.insert(commandName);
+    
+    m_commands[commandName] = command;
 }
 
 /**
@@ -149,6 +153,29 @@ void Application::printHelp()
  */
 ExitCode Application::run()
 {
+    std::vector<std::string> arguments(m_argv + 1, m_argv + m_argc);
+    std::vector<std::string> options;
+    std::string command;
+    std::smatch matches;
+
+    for (std::size_t i = 0; i != arguments.size(); ++i) {
+        std::regex isOption("^--.*");
+
+        if (std::regex_search(arguments[i], matches, isOption)) {
+            options.push_back(arguments[i]);
+            continue;
+        }
+
+        command = arguments[i];
+    }
+
+    std::cout << command << std::endl;
+
+    // for (auto & command : m_commands)
+    // {
+    //     std::cout << command.second->handle(options) << std::endl;
+    // }
+
     // 1. check what command has been called 
     // 2. create an instance of that class
     // 3. call the handle method and pass it the options
