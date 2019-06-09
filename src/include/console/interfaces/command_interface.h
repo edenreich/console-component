@@ -2,8 +2,8 @@
 #define COMMAND_H
 
 #include "../types/exit_code.h"
-#include <string>
-#include <vector>
+#include "input_interface.h"
+#include "output_interface.h"
 
 
 class CommandInterface {
@@ -13,10 +13,10 @@ public:
     /**
      * Handle the command.
      *
-     * @param std::vector<std::string> options
+     * @param InputInterface * input
      * @return ExitCode
      */
-    virtual ExitCode handle(std::vector<std::string> options) = 0;
+    virtual ExitCode handle(InputInterface * input, OutputInterface * output) = 0;
 
     /**
      * Retrieve the name of the command.

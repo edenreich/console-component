@@ -25,19 +25,21 @@ std::string CopyFiles::getDescription()
 /**
  * Handle the command.
  *
- * @param std::vector<std::string> options
+ * @param InputInterface * input
+ * @param OutputInterface * output
  * @return ExitCode
  */
-ExitCode CopyFiles::handle(std::vector<std::string> options)
+ExitCode CopyFiles::handle(InputInterface * input, OutputInterface * output)
 {
-    std::cout << "command copy files was called\n" << std::endl;
+    output->writeLine("Copying files..");
+    // std::cout << "command copy files was called\n" << std::endl;
 
-    std::cout << "with options: " << std::endl;
+    // std::cout << "with options: " << std::endl;
     
-    for (auto & option : options) 
-    {
-        std::cout << option << std::endl;
-    }
+    // for (auto & option : input->options()) 
+    // {
+    //     std::cout << option << std::endl;
+    // }
 
     return ExitCode::Ok;
 }

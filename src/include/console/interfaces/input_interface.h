@@ -1,6 +1,8 @@
 #ifndef INPUT_INTERFACE_H
 #define INPUT_INTERFACE_H
 
+#include <string>
+
 
 class InputInterface {
 

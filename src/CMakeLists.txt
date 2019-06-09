@@ -7,6 +7,8 @@ set(DISTRIBUTE_DIR ${CMAKE_BINARY_DIR}/dist)
 
 set(HEADERS_CXX_FILES_CONSOLE
     include/console/application.h
+    include/console/output.h
+    include/console/input.h
 )
 
 set(HEADERS_CXX_FILES_CONSOLE_INTERFACES
@@ -24,6 +26,8 @@ set(HEADERS_CXX_FILES_CONSOLE_TYPES
 
 set(SOURCES_CXX_FILES
     application.cpp
+    output.cpp
+    input.cpp
 )
 
 add_library(${PROJECT_NAME}

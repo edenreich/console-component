@@ -31,9 +31,10 @@ public:
     /**
      * Handle the command.
      *
-     * @param std::vector<std::string> options
+     * @param InputInterface * input
+     * @param OutputInterface * output
      * @return ExitCode
      */
-    ExitCode handle(std::vector<std::string> options) override;
+    ExitCode handle(InputInterface * input, OutputInterface * output) override;
 
 };

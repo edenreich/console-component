@@ -1,6 +1,8 @@
 #ifndef OUTPUT_INTERFACE_H
 #define OUTPUT_INTERFACE_H
 
+#include <string>
+
 
 class OutputInterface {
 

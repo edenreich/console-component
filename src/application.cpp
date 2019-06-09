@@ -7,6 +7,8 @@
 
 #include "include/console/types/colors.h"
 #include "include/console/application.h"
+#include "include/console/input.h"
+#include "include/console/output.h"
 
 
 /**
@@ -162,7 +164,9 @@ ExitCode Application::run()
         }
 
         if (command.second->getName() == requestedCommand) {
-            command.second->handle(options);
+            Input input;
+            Output output;
+            command.second->handle(&input, &output);
             break;
         }
     }

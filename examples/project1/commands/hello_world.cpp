@@ -25,19 +25,20 @@ std::string HelloWorld::getDescription()
 /**
  * Handle the command.
  *
- * @param std::vector<std::string> options
+ * @param InputInterface * input
+ * @param OutputInterface * output
  * @return ExitCode
  */
-ExitCode HelloWorld::handle(std::vector<std::string> options)
+ExitCode HelloWorld::handle(InputInterface * input, OutputInterface * output)
 {
-    std::cout << "command hello world was called" << std::endl;
+    output->writeLine("command hello world was called");
 
-    std::cout << "with options: " << std::endl;
+    // std::cout << "with options: " << std::endl;
     
-    for (auto & option : options) 
-    {
-        std::cout << option << std::endl;
-    }
+    // for (auto & option : options) 
+    // {
+    //     std::cout << option << std::endl;
+    // }
 
-    return ExitCode::Ok;
+    // return ExitCode::Ok;
 }
