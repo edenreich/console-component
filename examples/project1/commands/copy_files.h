@@ -1,6 +1,6 @@
 #pragma once
 
-#include <console/command.h>
+#include <console/interfaces/command_interface.h>
 #include <console/types/exit_code.h>
 #include <vector>
 
@@ -9,7 +9,7 @@
  * @name copy-files
  * @description copy files from <source> to <dist>
  */
-class CopyFiles : public Command
+class CopyFiles : public CommandInterface
 {
 
 public:

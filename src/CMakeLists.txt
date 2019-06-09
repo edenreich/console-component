@@ -6,11 +6,14 @@ set(BUILD_SHARED_LIBS OFF)
 set(DISTRIBUTE_DIR ${CMAKE_BINARY_DIR}/dist)
 
 set(HEADERS_CXX_FILES_CONSOLE
-    include/console/output_interface.h
-    include/console/input_interface.h
-    include/console/application_interface.h
     include/console/application.h
-    include/console/command.h
+)
+
+set(HEADERS_CXX_FILES_CONSOLE_INTERFACES
+    include/console/interfaces/command_interface.h
+    include/console/interfaces/output_interface.h
+    include/console/interfaces/input_interface.h
+    include/console/interfaces/application_interface.h
 )
 
 set(HEADERS_CXX_FILES_CONSOLE_TYPES
@@ -43,6 +46,12 @@ install(
     FILES ${HEADERS_CXX_FILES_CONSOLE}
     DESTINATION ${DISTRIBUTE_DIR}/include/console
 )
+
+install(
+    FILES ${HEADERS_CXX_FILES_CONSOLE_INTERFACES}
+    DESTINATION ${DISTRIBUTE_DIR}/include/console/interfaces
+)
+
 install(
     FILES ${HEADERS_CXX_FILES_CONSOLE_TYPES}
     DESTINATION ${DISTRIBUTE_DIR}/include/console/types

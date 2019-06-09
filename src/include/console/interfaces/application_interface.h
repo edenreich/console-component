@@ -1,8 +1,8 @@
 #ifndef APPLICATION_INTERFACE_H
 #define APPLICATION_INTERFACE_H
 
-#include "command.h"
-#include "types/exit_code.h"
+#include "command_interface.h"
+#include "../types/exit_code.h"
 
 
 class ApplicationInterface {
@@ -44,10 +44,10 @@ public:
     /**
      * Add a command instance to the application.
      *
-     * @param Command * command
+     * @param CommandInterface * command
      * @return void
      */
-    virtual void addCommand(Command * command) = 0;
+    virtual void addCommand(CommandInterface * command) = 0;
 
    /**
      * Print the help message.

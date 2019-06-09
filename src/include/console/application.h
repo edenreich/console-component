@@ -3,7 +3,7 @@
 #define APPLICATION_H
 
 #include "types/collections.h"
-#include "application_interface.h"
+#include "interfaces/application_interface.h"
 
 
 class Application : public ApplicationInterface {
@@ -56,10 +56,10 @@ public:
     /**
      * Add a command instance to the application.
      *
-     * @param Command * command
+     * @param CommandInterface * command
      * @return void
      */
-    void addCommand(Command * command) override;
+    void addCommand(CommandInterface * command) override;
 
     /**
      * Print the help message.

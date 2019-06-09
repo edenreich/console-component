@@ -80,10 +80,10 @@ void Application::setApplicationDescription(const std::string & description)
 /**
  * Add a command instance to the application.
  *
- * @param Command * command
+ * @param CommandInterface * command
  * @return void
  */
-void Application::addCommand(Command * command)
+void Application::addCommand(CommandInterface * command)
 {
     std::string commandName = typeid(*(command)).name();
     

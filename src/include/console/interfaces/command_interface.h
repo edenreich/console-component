@@ -1,12 +1,12 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "types/exit_code.h"
+#include "../types/exit_code.h"
 #include <string>
 #include <vector>
 
 
-class Command {
+class CommandInterface {
 
 public:
 
