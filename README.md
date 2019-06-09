@@ -6,9 +6,6 @@ An easy to use library for building powerful console applications written in C++
 
 ## Todo
 
-- [x] Resolve relative consumer commands directory
-- [x] Parse the header files inside of that directory and look for @ notations during compile time save them in std::map.
-- [x] When help is called display the results which was collected by the directory parser, something like [command name][\t][command description]
 - [ ] Implement a method to add command classes references, invoke their handle method and pass the options flags when called
 
 ## Usage
@@ -22,15 +19,16 @@ An easy to use library for building powerful console applications written in C++
 #include <console/command.h>
 #include <console/types/exit_code.h>
 
-/**
- * @name copy-files
- * @description copy files from <source> to <dist>
- */
+
 class CopyFiles : public Command
 {
 
 public:
-    ExitCode handle(const std::string * options);
+    std::string getName() override;
+
+    std::string getDescription() override;
+
+    ExitCode handle(const std::string * options) override;
 
 };
 ```
@@ -41,6 +39,18 @@ public:
 // commands/copy_files.cpp
 #include "copy_files.h"
 #include <iostream>
+
+
+std::string CopyFiles::getName()
+{
+    return "copy-files";
+}
+
+
+std::string CopyFiles::getDescription()
+{
+    return "copy files from <source> to <dist>";
+}
 
 ExitCode CopyFiles::handle(const std::string * options)
 {
@@ -68,18 +78,15 @@ int main(int argc, char * argv[])
 
     app.setApplicationDescription("Todo List Application");
 
-    app.setCommandsDirectoryPath("commands");
-    
-    app.printHelp();
+    app.addCommand(new CopyFiles);
+    app.addCommand(new HelloWorld);
 
-    // app.addCommand(new CopyFiles);
-    // app.addCommand(new HelloWorld);
+    app.printHelp();
 
     return app.run();
 }
 ```
 
-Whenever you compile the program, a parser will look for the @name @description anotation and generate the help file for you.
 
 ## Build
 
