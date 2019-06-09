@@ -13,12 +13,10 @@ int main(int argc, char * argv[])
 
     app.setApplicationDescription("Todo List Application");
 
-    app.setCommandsDirectoryPath("commands");
-    
-    app.printHelp();
-
     app.addCommand(new CopyFiles);
     app.addCommand(new HelloWorld);
+
+    app.printHelp();
 
     return app.run();
 }

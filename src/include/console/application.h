@@ -23,16 +23,6 @@ public:
     virtual ~Application();
 
     /**
-     * Setter for the commands directory path
-     * This is where the anotation parser will look
-     * for command @name and command @description.
-     *
-     * @param const std::string & dir
-     * @return void
-     */
-    void setCommandsDirectoryPath(const std::string & dir) override;
-
-    /**
      * Setter for the application name.
      *
      * @param const std::string & name
@@ -101,14 +91,6 @@ private:
      * @var char ** m_argv
      */
     char ** m_argv;
-
-    /**
-     * Store the path 
-     * of the commands directory.
-     *
-     * @var std::string
-     */
-    std::string m_dir;
 
     /**
      * Store the name 

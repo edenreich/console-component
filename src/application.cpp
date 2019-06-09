@@ -17,7 +17,6 @@ Application::Application(int & argc, char ** argv)
     m_argc = argc;
     m_argv = argv;
 
-    m_dir = "../commands";
     m_usage = "app [command] [options]";
 }
 
@@ -31,19 +30,6 @@ Application::~Application()
         // just for safety delete all memory allocations
         delete command.second;
     }
-}
-
-/**
- * Setter for the commands directory path
- * This is where the anotation parser will look
- * for command @name and command @description.
- *
- * @param const std::string & dir
- * @return void
- */
-void Application::setCommandsDirectoryPath(const std::string & dir)
-{
-    m_dir = dir;
 }
 
 /**
@@ -110,9 +96,7 @@ void Application::addCommand(Command * command)
  */
 void Application::printHelp()
 {
-    m_headerFiles = getHeaderFilesFromDir(m_dir);
-
-    m_metadataTags = parseFilesMetadata(m_headerFiles);
+    // @todo Loop throught all commands and get their names and descriptions.
 
     printf("%s%s%s", COLOR_GREEN, m_name.c_str(), COLOR_RESET);
     std::cout << '\n';
@@ -179,8 +163,6 @@ ExitCode Application::run()
             continue;
         }
     }
-
-    // @todo reflect the class names.
 
     return ExitCode::Ok;
 }

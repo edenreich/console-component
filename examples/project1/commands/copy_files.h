@@ -15,11 +15,25 @@ class CopyFiles : public Command
 public:
 
     /**
+     * Retrieve the name of the command.
+     *
+     * @return std::string
+     */
+    std::string getName() override;
+
+    /**
+     * Retrieve the description of the command.
+     *
+     * @return std::string
+     */
+    std::string getDescription() override;
+
+    /**
      * Handle the command.
      *
      * @param std::vector<std::string> options
      * @return ExitCode
      */
-    ExitCode handle(std::vector<std::string> options);
+    ExitCode handle(std::vector<std::string> options) override;
 
 };

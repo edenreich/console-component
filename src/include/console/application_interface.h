@@ -10,16 +10,6 @@ class IApplication {
 public:
 
     /**
-     * Setter for the commands directory path
-     * This is where the anotation parser will look
-     * for command @name and command @description.
-     *
-     * @param const std::string & dir
-     * @return void
-     */
-    virtual void setCommandsDirectoryPath(const std::string & dir) = 0;
-
-    /**
      * Setter for the application name.
      *
      * @param const std::string & name
