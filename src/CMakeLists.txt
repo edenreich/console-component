@@ -6,6 +6,8 @@ set(BUILD_SHARED_LIBS OFF)
 set(DISTRIBUTE_DIR ${CMAKE_BINARY_DIR}/dist)
 
 set(HEADERS_CXX_FILES_CONSOLE
+    include/console/output_interface.h
+    include/console/input_interface.h
     include/console/application_interface.h
     include/console/application.h
     include/console/command.h
