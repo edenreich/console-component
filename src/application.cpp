@@ -96,7 +96,7 @@ void Application::addCommand(Command * command)
  */
 void Application::printHelp()
 {
-    // @todo Loop throught all commands and get their names and descriptions.
+    // @todo refactor this into it's own template file maybe
 
     printf("%s%s%s", COLOR_GREEN, m_name.c_str(), COLOR_RESET);
     std::cout << '\n';
