@@ -1,15 +1,15 @@
 #pragma once
 
 #include <console/interfaces/command_interface.h>
-#include <console/types/exit_code.h>
-#include <vector>
+
+namespace Interfaces = Console::Interfaces;
 
 
 /**
  * @name hello-world
  * @description output hello world to the console
  */
-class HelloWorld : public CommandInterface
+class HelloWorld : public Interfaces::CommandInterface
 {
 
 public:
@@ -35,6 +35,6 @@ public:
      * @param OutputInterface * output
      * @return ExitCode
      */
-    ExitCode handle(InputInterface * input, OutputInterface * output);
+    ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output);
 
 };

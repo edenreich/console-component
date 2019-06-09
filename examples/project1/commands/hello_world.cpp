@@ -1,4 +1,5 @@
 #include "hello_world.h"
+
 #include <iostream>
 
 
@@ -29,7 +30,7 @@ std::string HelloWorld::getDescription()
  * @param OutputInterface * output
  * @return ExitCode
  */
-ExitCode HelloWorld::handle(InputInterface * input, OutputInterface * output)
+ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
 {
     output->writeLine("command hello world was called");
 

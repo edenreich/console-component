@@ -5,7 +5,7 @@
 
 int main(int argc, char * argv[])
 {
-    Application app(argc, argv);
+    Console::Application app(argc, argv);
 
     app.setApplicationName("Todo List Application");
     app.setApplicationUsage("./bin/todo [command] [options]");

@@ -1,6 +1,9 @@
-#include "include/console/output.h"
+#include "console/output.h"
 
 #include <iostream>
+
+using namespace Console;
+
 
 
 /**

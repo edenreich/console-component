@@ -1,7 +1,18 @@
-#include "include/console/input.h"
+#include "console/input.h"
 
 #include <iostream>
 
+using namespace Console;
+
+
+
+/**
+ * - Initialize the options
+ */
+Input::Input(Options options)
+{
+    m_options = options;
+}
 
 /**
  * Retrieve an input from the user.
@@ -16,4 +27,14 @@ std::string Input::ask(const std::string & question)
     std::cin >> input;
 
     return input;
+}
+
+/**
+ * Retrieve the parsed options.
+ *
+ * @return Options
+ */
+Options Input::getOptions()
+{
+    return m_options;
 }

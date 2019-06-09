@@ -1,14 +1,14 @@
 #include <iostream>
 #include <typeinfo>
-#include <dirent.h>
 #include <regex>
-#include <fstream>
-#include <exception>
 
-#include "include/console/types/colors.h"
-#include "include/console/application.h"
-#include "include/console/input.h"
-#include "include/console/output.h"
+#include "console/types/colors.h"
+#include "console/application.h"
+#include "console/input.h"
+#include "console/output.h"
+
+
+using namespace Console;
 
 
 /**
@@ -33,6 +33,8 @@ Application::~Application()
         // just for safety delete all memory allocations
         delete command.second;
     }
+
+    m_commands.clear();
 }
 
 /**
@@ -85,7 +87,7 @@ void Application::setApplicationDescription(const std::string & description)
  * @param CommandInterface * command
  * @return void
  */
-void Application::addCommand(CommandInterface * command)
+void Application::addCommand(Interfaces::CommandInterface * command)
 {
     std::string commandName = typeid(*(command)).name();
     
@@ -141,7 +143,7 @@ void Application::printHelp()
 ExitCode Application::run()
 {
     std::vector<std::string> arguments(m_argv + 1, m_argv + m_argc);
-    std::vector<std::string> options;
+    Types::Options options;
     std::string requestedCommand;
     std::smatch matchedOption;
 
@@ -164,7 +166,7 @@ ExitCode Application::run()
         }
 
         if (command.second->getName() == requestedCommand) {
-            Input input;
+            Input input(options);
             Output output;
             command.second->handle(&input, &output);
             break;

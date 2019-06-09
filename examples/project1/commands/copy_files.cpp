@@ -1,4 +1,5 @@
 #include "copy_files.h"
+
 #include <iostream>
 
 
@@ -29,17 +30,16 @@ std::string CopyFiles::getDescription()
  * @param OutputInterface * output
  * @return ExitCode
  */
-ExitCode CopyFiles::handle(InputInterface * input, OutputInterface * output)
+ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
 {
     output->writeLine("Copying files..");
-    // std::cout << "command copy files was called\n" << std::endl;
 
-    // std::cout << "with options: " << std::endl;
+    std::cout << "with options: " << std::endl;
     
-    // for (auto & option : input->options()) 
-    // {
-    //     std::cout << option << std::endl;
-    // }
+    for (auto & option : input->getOptions()) 
+    {
+        std::cout << option << std::endl;
+    }
 
     return ExitCode::Ok;
 }

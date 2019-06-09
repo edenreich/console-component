@@ -6,22 +6,22 @@ set(BUILD_SHARED_LIBS OFF)
 set(DISTRIBUTE_DIR ${CMAKE_BINARY_DIR}/dist)
 
 set(HEADERS_CXX_FILES_CONSOLE
-    include/console/application.h
-    include/console/output.h
-    include/console/input.h
+    console/application.h
+    console/output.h
+    console/input.h
 )
 
 set(HEADERS_CXX_FILES_CONSOLE_INTERFACES
-    include/console/interfaces/command_interface.h
-    include/console/interfaces/output_interface.h
-    include/console/interfaces/input_interface.h
-    include/console/interfaces/application_interface.h
+    console/interfaces/command_interface.h
+    console/interfaces/output_interface.h
+    console/interfaces/input_interface.h
+    console/interfaces/application_interface.h
 )
 
 set(HEADERS_CXX_FILES_CONSOLE_TYPES
-    include/console/types/colors.h
-    include/console/types/exit_code.h
-    include/console/types/collections.h
+    console/types/colors.h
+    console/types/exit_code.h
+    console/types/collections.h
 )
 
 set(SOURCES_CXX_FILES

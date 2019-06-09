@@ -1,15 +1,14 @@
 #pragma once
 
 #include <console/interfaces/command_interface.h>
-#include <console/types/exit_code.h>
-#include <vector>
 
+namespace Interfaces = Console::Interfaces;
 
 /**
  * @name copy-files
  * @description copy files from <source> to <dist>
  */
-class CopyFiles : public CommandInterface
+class CopyFiles : public Interfaces::CommandInterface
 {
 
 public:
@@ -35,6 +34,6 @@ public:
      * @param OutputInterface * output
      * @return ExitCode
      */
-    ExitCode handle(InputInterface * input, OutputInterface * output) override;
+    ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output) override;
 
 };
