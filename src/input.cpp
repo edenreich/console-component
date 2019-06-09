@@ -5,11 +5,10 @@
 using namespace Console;
 
 
-
 /**
  * - Initialize the options
  */
-Input::Input(Options options)
+Input::Input(Types::Options options)
 {
     m_options = options;
 }
@@ -34,7 +33,7 @@ std::string Input::ask(const std::string & question)
  *
  * @return Options
  */
-Options Input::getOptions()
+Types::Options Input::getOptions()
 {
     return m_options;
 }
