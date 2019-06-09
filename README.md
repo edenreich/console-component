@@ -16,45 +16,91 @@ An easy to use library for building powerful console applications written in C++
 // commands/copy_files.h
 #pragma once
 
-#include <console/command.h>
-#include <console/types/exit_code.h>
+#include <console/interfaces/command_interface.h>
 
+namespace Interfaces = Console::Interfaces;
 
-class CopyFiles : public Command
+/**
+ * @name copy-files
+ * @description copy files from <source> to <dist>
+ */
+class CopyFiles : public Interfaces::CommandInterface
 {
 
 public:
+
+    /**
+     * Retrieve the name of the command.
+     *
+     * @return std::string
+     */
     std::string getName() override;
 
+    /**
+     * Retrieve the description of the command.
+     *
+     * @return std::string
+     */
     std::string getDescription() override;
 
-    ExitCode handle(const std::string * options) override;
+    /**
+     * Handle the command.
+     *
+     * @param InputInterface * input
+     * @param OutputInterface * output
+     * @return ExitCode
+     */
+    ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output) override;
 
 };
 ```
 
-2. Create a command implemention file:
+1. Create a command implemention file:
 
 ```
 // commands/copy_files.cpp
 #include "copy_files.h"
+
 #include <iostream>
 
 
+/**
+ * Retrieve the name of the command.
+ *
+ * @return std::string
+ */
 std::string CopyFiles::getName()
 {
     return "copy-files";
 }
 
-
+/**
+ * Retrieve the description of the command.
+ *
+ * @return std::string
+ */
 std::string CopyFiles::getDescription()
 {
     return "copy files from <source> to <dist>";
 }
 
-ExitCode CopyFiles::handle(const std::string * options)
+/**
+ * Handle the command.
+ *
+ * @param InputInterface * input
+ * @param OutputInterface * output
+ * @return ExitCode
+ */
+ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
 {
-    std::cout << "command copy files was called";
+    output->writeLine("Copying files..");
+
+    output->writeLine("with options: ");
+    
+    for (auto & option : input->getOptions()) 
+    {
+        output->writeLine(option);
+    }
 
     return ExitCode::Ok;
 }
