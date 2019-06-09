@@ -6,7 +6,7 @@
 #include "application_interface.h"
 
 
-class Application : public IApplication {
+class Application : public ApplicationInterface {
 
 public:
 

@@ -5,7 +5,7 @@
 #include "types/exit_code.h"
 
 
-class IApplication {
+class ApplicationInterface {
 
 public:
 
