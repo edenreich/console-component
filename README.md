@@ -4,10 +4,6 @@
 
 An easy to use library for building powerful console applications written in C++.
 
-## Todo
-
-- [ ] Implement a method to add command classes references, invoke their handle method and pass the options flags when called
-
 ## Usage
 
 1. Create a command definition file:
