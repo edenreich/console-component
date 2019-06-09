@@ -155,30 +155,32 @@ ExitCode Application::run()
 {
     std::vector<std::string> arguments(m_argv + 1, m_argv + m_argc);
     std::vector<std::string> options;
-    std::string command;
-    std::smatch matches;
+    std::string requestedCommand;
+    std::smatch matchedOption;
+    std::smatch matchedCommand;
 
     for (std::size_t i = 0; i != arguments.size(); ++i) {
-        std::regex isOption("^--.*");
+        std::regex isOption("^--(.*)");
 
-        if (std::regex_search(arguments[i], matches, isOption)) {
-            options.push_back(arguments[i]);
+        if (std::regex_search(arguments[i], matchedOption, isOption)) {
+            options.push_back(matchedOption.str());
             continue;
         }
 
-        command = arguments[i];
+        requestedCommand = arguments[i];
     }
 
-    std::cout << command << std::endl;
+    for (auto & command : m_commands)
+    {
+        std::regex isRequestedCommand("\\d"+requestedCommand);
+        std::cout << command.first << std::endl;
+        if (std::regex_search(command.first, matchedCommand, isRequestedCommand)) {
+            command.second->handle(options);
+            continue;
+        }
+    }
 
-    // for (auto & command : m_commands)
-    // {
-    //     std::cout << command.second->handle(options) << std::endl;
-    // }
-
-    // 1. check what command has been called 
-    // 2. create an instance of that class
-    // 3. call the handle method and pass it the options
+    // @todo reflect the class names.
 
     return ExitCode::Ok;
 }
