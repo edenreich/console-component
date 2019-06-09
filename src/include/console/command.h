@@ -17,6 +17,21 @@ public:
      * @return ExitCode
      */
     virtual ExitCode handle(std::vector<std::string> options) = 0;
+
+    /**
+     * Retrieve the name of the command.
+     *
+     * @return std::string
+     */
+    virtual std::string getName() = 0;
+
+    /**
+     * Retrieve the description of the command.
+     *
+     * @return std::string
+     */
+    virtual std::string getDescription() = 0;
+
 };
 
 

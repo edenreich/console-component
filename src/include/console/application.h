@@ -89,35 +89,6 @@ public:
 private:
 
     /**
-     * Store the header files names
-     * from the commands directory.
-     *
-     * @param const std::string & path
-     * @return HeaderFiles
-     */
-    HeaderFiles getHeaderFilesFromDir(const std::string & path) const;
-    
-    /**
-     * Parse the metadata of
-     * a given header file.
-     *
-     * @param const std::string & file
-     * @return Anotations
-     */
-    Anotations parseFileMetadata(const std::string & file) const;
-    
-    /**
-     * Parse the metadata of
-     * each header file.
-     *
-     * @param HeaderFiles files
-     * @return AnotationsCollection
-     */
-    AnotationsCollection parseFilesMetadata(HeaderFiles files) const;
-
-private:
-
-    /**
      * Store the arguments count.
      *
      * @var int
@@ -168,30 +139,6 @@ private:
      * @var std::string
      */
     std::string m_description;
-
-    /**
-     * Store the application 
-     * commands header file names.
-     *
-     * @var HeaderFiles
-     */
-    HeaderFiles m_headerFiles;
-
-    /**
-     * Store the anotations
-     * (i.e @name, @description)
-     *
-     * @var Anotations
-     */
-    Anotations m_anotations;
-
-    /**
-     * Store the header file name
-     * mapped to anotations.
-     *
-     * @var AnotationsCollection
-     */
-    AnotationsCollection m_metadataTags;
 
     /**
      * Store the available commands.
