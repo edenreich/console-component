@@ -5,7 +5,6 @@
 using namespace Console;
 
 
-
 /**
  * Retrieve an input from the user.
  *
