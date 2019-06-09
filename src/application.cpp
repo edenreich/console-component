@@ -156,10 +156,14 @@ ExitCode Application::run()
 
     for (auto & command : m_commands)
     {
-        std::regex isRequestedCommand("\\d"+requestedCommand);
-        if (std::regex_search(command.first, matchedCommand, isRequestedCommand)) {
+        if (requestedCommand.empty()) {
+            printHelp();
+            break;
+        }
+
+        if (command.second->getName() == requestedCommand) {
             command.second->handle(options);
-            continue;
+            break;
         }
     }
 
