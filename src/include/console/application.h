@@ -2,7 +2,6 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "types/metadata.h"
 #include "types/collections.h"
 #include "application_interface.h"
 
