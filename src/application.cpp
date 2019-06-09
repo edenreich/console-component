@@ -21,6 +21,7 @@ Application::Application(int & argc, char ** argv)
     m_argv = argv;
 
     m_usage = "app [command] [options]";
+    m_printHelpAutomatically = false;
 }
 
 /**
@@ -136,6 +137,17 @@ void Application::printHelp()
 }
 
 /**
+ * Set print help to automatically.
+ *
+ * @param bool yes
+ * @return void
+ */
+void Application::setAutoPrintHelp(bool yes)
+{
+    m_printHelpAutomatically = yes;
+}
+
+/**
  * Run the console application.
  * 
  * @return ExitCode
@@ -160,7 +172,7 @@ ExitCode Application::run()
 
     for (auto & command : m_commands)
     {
-        if (requestedCommand.empty()) {
+        if (requestedCommand.empty() && m_printHelpAutomatically) {
             printHelp();
             break;
         }

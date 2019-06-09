@@ -61,6 +61,14 @@ namespace Console::Interfaces {
 		 */
 		virtual void printHelp() = 0;
 
+        /**
+		 * Set print help to automatically.
+		 *
+		 * @param bool yes
+		 * @return void
+		 */
+		virtual void setAutoPrintHelp(bool yes) = 0;
+
 		/**
 		 * Run the console application.
 		 *

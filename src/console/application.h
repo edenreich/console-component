@@ -72,6 +72,14 @@ namespace Console {
         void printHelp() override;
 
         /**
+		 * Set print help to automatically.
+		 *
+		 * @param bool yes
+		 * @return void
+		 */
+		void setAutoPrintHelp(bool yes) override;
+
+        /**
          * Run the console application.
          *
          * @return ExitCode
@@ -123,6 +131,13 @@ namespace Console {
          * @var std::string
          */
         std::string m_description;
+
+        /**
+         * Store the print help flag.
+         *
+         * @var bool
+         */
+        bool m_printHelpAutomatically;
 
         /**
          * Store the available commands.
