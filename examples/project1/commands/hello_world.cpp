@@ -9,7 +9,7 @@
  */
 std::string HelloWorld::getName()
 {
-    return "copy-files";
+    return "hello-world";
 }
 
 /**
@@ -19,7 +19,7 @@ std::string HelloWorld::getName()
  */
 std::string HelloWorld::getDescription()
 {
-    return "copy files from <source> to <dist>";
+    return "output hello world to the console";
 }
 
 /**
