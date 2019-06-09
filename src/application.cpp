@@ -121,13 +121,13 @@ void Application::printHelp()
     std::cout << '\n';
 
     // Available Commands
-    // printf("%sAvailable Commands:%s\n", COLOR_YELLOW, COLOR_RESET);
-    // for (auto & metadataTag : m_metadataTags)
-    // {
-    //     std::cout << "  ";
-    //     printf("%s%s%s\t%s", COLOR_GREEN, metadataTag.second.at("@name").c_str(), COLOR_RESET, metadataTag.second.at("@description").c_str());
-    //     std::cout << '\n';
-    // }
+    printf("%sAvailable Commands:%s\n", COLOR_YELLOW, COLOR_RESET);
+    for (auto & command : m_commands)
+    {
+        std::cout << "  ";
+        printf("%s%s%s\t%s", COLOR_GREEN, command.second->getName().c_str(), COLOR_RESET, command.second->getDescription().c_str());
+        std::cout << '\n';
+    }
 }
 
 /**
