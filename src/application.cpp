@@ -157,7 +157,6 @@ ExitCode Application::run()
     for (auto & command : m_commands)
     {
         std::regex isRequestedCommand("\\d"+requestedCommand);
-        std::cout << command.first << std::endl;
         if (std::regex_search(command.first, matchedCommand, isRequestedCommand)) {
             command.second->handle(options);
             continue;
