@@ -54,6 +54,16 @@ namespace Console::Interfaces {
 		 */
 		virtual void addCommand(CommandInterface * command) = 0;
 
+		/**
+		 * Add a command instance to the application.
+		 *
+		 * @param const std::string & Option
+		 * @param const std::string & description
+		 * @param const std::string & alias
+		 * @return void
+		 */
+		virtual void addGlobalOption(const std::string & Option, const std::string & description, const std::string & alias) = 0;
+
         /**
 		 * Print the help message.
 		 *

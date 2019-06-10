@@ -96,14 +96,25 @@ void Application::addCommand(Interfaces::CommandInterface * command)
 }
 
 /**
+ * Add a command instance to the application.
+ *
+ * @param const std::string & option
+ * @param const std::string & description
+ * @param const std::string & alias
+ * @return void
+ */
+void Application::addGlobalOption(const std::string & option, const std::string & description, const std::string & alias)
+{   
+    m_options[alias] = std::pair<std::string, std::string>(option, description);
+}
+
+/**
  * Print the help message.
  *
  * @return void
  */
 void Application::printHelp()
 {
-    // @todo refactor this into it's own template file maybe
-
     printf("%s%s%s", COLOR_GREEN, m_name.c_str(), COLOR_RESET);
     std::cout << '\n';
     printf("Version: %s%s%s", COLOR_YELLOW, m_version.c_str(), COLOR_RESET);
@@ -124,6 +135,13 @@ void Application::printHelp()
     std::cout << '\n';
     printf("  %s\t%s", "-h, --help", "Display this help message");
     std::cout << '\n';
+    for (auto & option : m_options)
+    {
+        std::cout << "  ";
+        printf("%s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
+        std::cout << '\n';
+    }
+    
     std::cout << '\n';
 
     // Available Commands
@@ -160,7 +178,7 @@ ExitCode Application::run()
     std::smatch matchedOption;
 
     for (std::size_t i = 0; i != arguments.size(); ++i) {
-        std::regex isOption("^--(.*)");
+        std::regex isOption("^--?(.*)");
 
         if (std::regex_search(arguments[i], matchedOption, isOption)) {
             options.push_back(matchedOption.str());

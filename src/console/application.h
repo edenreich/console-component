@@ -63,6 +63,16 @@ namespace Console {
          * @return void
          */
         void addCommand(Interfaces::CommandInterface * command) override;
+    
+		/**
+		 * Add a command instance to the application.
+		 *
+		 * @param const std::string & Option
+		 * @param const std::string & description
+		 * @param const std::string & alias
+		 * @return void
+		 */
+		void addGlobalOption(const std::string & Option, const std::string & description, const std::string & alias) override;
 
         /**
          * Print the help message.
@@ -142,9 +152,16 @@ namespace Console {
         /**
          * Store the available commands.
          *
-         * @var Commands
+         * @var Types::Commands
          */
         Types::Commands m_commands;
+
+        /**
+         * Store the available options.
+         * 
+         * @var Types::AvailableOptions
+         */
+        Types::AvailableOptions m_options;
 
     };
 
