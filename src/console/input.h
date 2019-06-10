@@ -14,7 +14,9 @@ namespace Console {
     public:
 
         /**
-         * - Initialize the options
+         * Initialize the options
+         * 
+         * @param Types::Options options
          */
         Input(Types::Options options);
 

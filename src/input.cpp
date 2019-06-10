@@ -6,7 +6,9 @@ using namespace Console;
 
 
 /**
- * - Initialize the options
+ * Initialize the options
+ * 
+ * @param Types::Options options
  */
 Input::Input(Types::Options options)
 {
