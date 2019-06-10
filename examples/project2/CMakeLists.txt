@@ -15,10 +15,6 @@ set(LIBRARY_LIB_DIRECTORY
     ${PROJECT_ROOT_DIRECTORY}/build/dist/lib
 )
 
-include_directories(
-    ${LIBRARY_INCLUDE_DIRECTORY}
-)
-
 set(HEADERS_CXX_FILES
     commands/long_task.h
 )
@@ -28,11 +24,18 @@ set(SOURCES_CXX_FILES
     commands/long_task.cpp
 )
 
+include_directories(
+    ${LIBRARY_INCLUDE_DIRECTORY}
+)
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 add_executable(${PROJECT_NAME}
     ${HEADERS_CXX_FILES}
     ${SOURCES_CXX_FILES}
 )
 
-target_link_libraries(${PROJECT_NAME} ${LIBRARY_LIB_DIRECTORY}/libcommandline.a)
+target_link_libraries(${PROJECT_NAME} ${LIBRARY_LIB_DIRECTORY}/libcommandline.a Threads::Threads)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin)

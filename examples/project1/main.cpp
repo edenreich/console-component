@@ -14,6 +14,8 @@ int main(int argc, char * argv[])
 
     app.setApplicationDescription("Todo List Application");
 
+    app.addGlobalOption("--test", "Testing the application", "-t");
+
     app.addCommand(new CopyFiles);
     app.addCommand(new HelloWorld);
 
