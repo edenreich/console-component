@@ -198,10 +198,9 @@ ExitCode Application::run()
         if (command.second->getName() == requestedCommand) {
             Input input(options);
             Output output;
-            command.second->handle(&input, &output);
-            break;
+            return command.second->handle(&input, &output);
         }
     }
 
-    return ExitCode::Ok;
+    return ExitCode::NeedHelp;
 }

@@ -14,7 +14,9 @@ namespace Console {
     public:
 
         /**
-         * - Initialize the options
+         * Initialize the options
+         * 
+         * @param Types::Options options
          */
         Input(Types::Options options);
 
@@ -31,7 +33,7 @@ namespace Console {
          *
          * @return Options
          */
-        Types::Options getOptions();
+        Types::Options getOptions() override;
 
     private:
 
