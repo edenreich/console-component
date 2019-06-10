@@ -88,12 +88,12 @@ ExitCode LongTask::handle(Interfaces::InputInterface * input, Interfaces::Output
     output->writeLine("Making a long running tasks..");
     
     std::thread t1(&LongTask::exampleTask, this, output);
-    // std::thread t2(&LongTask::exampleTask2, this, output);
+    std::thread t2(&LongTask::exampleTask2, this, output);
 
     output->writeLine("Spawned tasks..");
 
     t1.join();
-    // t2.join();
+    t2.join();
 
     output->writeLine("Tasks completed..");
 

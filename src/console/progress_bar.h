@@ -2,7 +2,6 @@
 #define PROGRESS_BAR_H
 
 #include "interfaces/output_interface.h"
-#include <chrono>
 
 
 namespace Console {
@@ -83,21 +82,13 @@ namespace Console {
         unsigned int m_progress;
 
         /**
-         * Indicate if progress bar
-         * should stop.
-         * 
-         * @var m_stop
-         */
-        bool m_stop;
-
-        /**
          * Indicate how often should
          * the progress bar redraw
          * in milliseconds.
          * 
-         * @var std::chrono::miliseconds m_redrawFrequency 
+         * @var unsigned int m_redrawFrequency 
          */
-        std::chrono::milliseconds m_redrawFrequency;
+        unsigned int m_redrawFrequency;
 
         /**
          * Store the indicator
@@ -106,6 +97,27 @@ namespace Console {
          * @var std::string m_indicator
          */
         std::string m_indicator;
+
+        /**
+         * Store the width of the progress bar.
+         * 
+         * @var unsigned int m_width
+         */
+        unsigned int m_width;
+
+        /**
+         * Store the current percentage.
+         * 
+         * @var float m_currentPercentage
+         */
+        float m_currentPercentage;
+
+        /**
+         * Store the max percentage.
+         * 
+         * @var float m_maxPercentage
+         */
+        float m_maxPercentage;
 
     };
 

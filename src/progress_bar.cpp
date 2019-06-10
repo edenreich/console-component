@@ -1,9 +1,8 @@
 #include "console/progress_bar.h"
-#include <thread>
-#include <ostream>
+
 #include <iostream>
-#include <string>
 #include <cmath>
+#include <unistd.h>
 
 using namespace Console;
 
@@ -12,13 +11,18 @@ using namespace Console;
  * - Initialize the progress bar.
  * - Initialize the total items to progress.
  */
-ProgressBar::ProgressBar(Interfaces::OutputInterface * output, const unsigned int totalItems)
+ProgressBar::ProgressBar(Interfaces::OutputInterface * output, const unsigned int totalItems = 100)
 {
     m_output = output;
     m_totalItems = totalItems;
 
-    m_redrawFrequency = std::chrono::milliseconds { 60 };
+    m_redrawFrequency = 60;
     m_indicator = '>';
+
+    m_width = 100;
+    m_progress = 1;
+    m_currentPercentage = 0.0;
+    m_maxPercentage = 100.0;
 }
 
 /**
@@ -28,12 +32,7 @@ ProgressBar::ProgressBar(Interfaces::OutputInterface * output, const unsigned in
  */
 void ProgressBar::start()
 {
-    m_stop = false;
-
-    std::cout << '\n';
-    std::thread t(&ProgressBar::draw, this);
-
-    t.detach();
+    draw();
 }
 
 /**
@@ -44,11 +43,13 @@ void ProgressBar::start()
  */
 void ProgressBar::advance(const unsigned int progress)
 {
-    if (m_progress > m_totalItems) {
+    if (m_progress >= m_totalItems) {
         m_progress = m_totalItems;
+    } else {
+        m_progress += progress;
     }
 
-    m_progress = m_progress + progress;
+    draw();
 }
 
 /**
@@ -58,7 +59,8 @@ void ProgressBar::advance(const unsigned int progress)
  */
 void ProgressBar::stop()
 {
-    m_stop = true;
+    std::cout << '\n';
+    std::cout.flush();
 }
 
 /**
@@ -68,27 +70,20 @@ void ProgressBar::stop()
  */
 void ProgressBar::draw()
 {
-    float percentage = 1;
-    unsigned int currentPosition = 1;
-    float maxPercentage = 100.0;
-    unsigned int progressBarWidth = maxPercentage;
-    m_indicator.resize(progressBarWidth);
-    std::fill(m_indicator.begin(), m_indicator.begin()+progressBarWidth, '-');
+    m_indicator.resize(m_width);
+    std::fill(m_indicator.begin(), m_indicator.begin()+m_width, '-');
+
+    m_currentPercentage = std::floor(((m_progress * m_width) / ((m_totalItems / m_maxPercentage) * 100)));
+    unsigned int position = static_cast<unsigned int>((m_currentPercentage / m_maxPercentage) * m_width);
     
-    // @todos 
-    // - check how to make this better
-    // - check how not to force pthread linking, maybe add a flag to cmake, this is currently breaking example/project1
-    do
-    {
-        if (percentage < maxPercentage) {
-            currentPosition = static_cast<int>(percentage);
-            m_indicator[currentPosition] = '=';
-            m_indicator[currentPosition+1] = '>';
-        }
+    
+    if (m_currentPercentage < m_maxPercentage) {
+        std::fill(m_indicator.begin(), m_indicator.begin()+position, '=');
+        m_indicator[position] = '>';
+    }
 
-        std::cout << '\r' << percentage << '%' << " [" << m_indicator.c_str() << "] items: " << m_progress << " / " << m_totalItems << std::flush;
-
-        percentage = std::floor(m_progress / maxPercentage);
-        std::this_thread::sleep_for(m_redrawFrequency);
-    } while (!m_stop);
+    std::cout << '\r' << m_currentPercentage << '%' << " [" << m_indicator.c_str() << "] items: " << m_progress << " / " << m_totalItems;
+    std::cout.flush();
+    
+    usleep(m_redrawFrequency * 1000);
 }
