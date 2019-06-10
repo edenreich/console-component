@@ -20,6 +20,11 @@ namespace Console {
         ProgressBar(Interfaces::OutputInterface * output, const unsigned int totalItems);
 
         /**
+         * Destroy the progress bar.
+         */
+        ~ProgressBar();
+
+        /**
          * Start the progress bar.
          *
          * @return void

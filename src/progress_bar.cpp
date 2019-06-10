@@ -26,6 +26,14 @@ ProgressBar::ProgressBar(Interfaces::OutputInterface * output, const unsigned in
 }
 
 /**
+ * Destroy the progress bar.
+ */
+ProgressBar::~ProgressBar()
+{
+    stop();
+}
+
+/**
  * Start the progress bar.
  *
  * @return void
@@ -43,10 +51,10 @@ void ProgressBar::start()
  */
 void ProgressBar::advance(const unsigned int progress)
 {
-    if (m_progress >= m_totalItems) {
-        m_progress = m_totalItems;
+    if (m_progress < m_totalItems) {
+        m_progress = m_progress + progress;
     } else {
-        m_progress += progress;
+        m_progress = m_totalItems;
     }
 
     draw();
@@ -73,9 +81,8 @@ void ProgressBar::draw()
     m_indicator.resize(m_width);
     std::fill(m_indicator.begin(), m_indicator.begin()+m_width, '-');
 
-    m_currentPercentage = std::floor(((m_progress * m_width) / ((m_totalItems / m_maxPercentage) * 100)));
+    m_currentPercentage = std::floor(((m_progress * m_width) / ((m_totalItems / m_maxPercentage) * m_maxPercentage)));
     unsigned int position = static_cast<unsigned int>((m_currentPercentage / m_maxPercentage) * m_width);
-    
     
     if (m_currentPercentage < m_maxPercentage) {
         std::fill(m_indicator.begin(), m_indicator.begin()+position, '=');
@@ -84,6 +91,4 @@ void ProgressBar::draw()
 
     std::cout << '\r' << m_currentPercentage << '%' << " [" << m_indicator.c_str() << "] items: " << m_progress << " / " << m_totalItems;
     std::cout.flush();
-    
-    usleep(m_redrawFrequency * 1000);
 }
