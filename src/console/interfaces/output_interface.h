@@ -3,6 +3,11 @@
 
 #include <string>
 
+namespace Console {
+
+    class ProgressBar;
+
+}
 
 namespace Console::Interfaces {
 
@@ -20,6 +25,14 @@ namespace Console::Interfaces {
          * @return void
          */
         virtual void writeLine(const std::string & line) = 0;
+
+        /**
+         * Create a progress bar instance.
+         * 
+         * @param const unsigned int items
+         * @return Console::ProgressBar
+         */
+        virtual ProgressBar * createProgressBar(const unsigned int items) = 0;
 
     };
 

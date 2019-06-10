@@ -9,6 +9,7 @@ set(HEADERS_CXX_FILES_CONSOLE
     console/application.h
     console/output.h
     console/input.h
+    console/progress_bar.h
 )
 
 set(HEADERS_CXX_FILES_CONSOLE_INTERFACES
@@ -28,6 +29,7 @@ set(SOURCES_CXX_FILES
     application.cpp
     output.cpp
     input.cpp
+    progress_bar.cpp
 )
 
 add_library(${PROJECT_NAME}
