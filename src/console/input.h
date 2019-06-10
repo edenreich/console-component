@@ -33,7 +33,7 @@ namespace Console {
          *
          * @return Options
          */
-        Types::Options getOptions();
+        Types::Options getOptions() override;
 
     private:
 
