@@ -78,6 +78,8 @@ void ProgressBar::stop()
  */
 void ProgressBar::draw()
 {
+    // @todo something is still wrong with the calculation here
+
     m_indicator.resize(m_width);
     std::fill(m_indicator.begin(), m_indicator.begin()+m_width, '-');
 
