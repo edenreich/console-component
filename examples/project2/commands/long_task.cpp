@@ -13,17 +13,17 @@
  */
 void LongTask::exampleTask(Interfaces::OutputInterface * output)
 {
-    const unsigned int items = 1000;
+    const unsigned int items = 15;
 
     Console::ProgressBar * progressBar1 = output->createProgressBar(items);
     
     progressBar1->start();
 
-    for (int i = 0; i < items; i++)
+    for (int i = 0; i <= items; i++)
     {
         // long running task..
-        progressBar1->advance(i);
-        std::this_thread::sleep_for(std::chrono::milliseconds(60));
+        progressBar1->advance(1);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
 
     progressBar1->stop();
@@ -88,12 +88,12 @@ ExitCode LongTask::handle(Interfaces::InputInterface * input, Interfaces::Output
     output->writeLine("Making a long running tasks..");
     
     std::thread t1(&LongTask::exampleTask, this, output);
-    std::thread t2(&LongTask::exampleTask2, this, output);
+    // std::thread t2(&LongTask::exampleTask2, this, output);
 
     output->writeLine("Spawned tasks..");
 
     t1.join();
-    t2.join();
+    // t2.join();
 
     output->writeLine("Tasks completed..");
 

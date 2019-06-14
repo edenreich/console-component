@@ -16,8 +16,11 @@ namespace Console {
         /**
          * - Initialize the output interface.
          * - Initialize the total items to progress.
+         *
+         * @param Interfaces::OutputInterface * output
+         * @param const unsigned int totalItems
          */
-        ProgressBar(Interfaces::OutputInterface * output, const unsigned int totalItems);
+        ProgressBar(Interfaces::OutputInterface * output, const unsigned int totalItems = 100);
 
         /**
          * Destroy the progress bar.
@@ -113,16 +116,24 @@ namespace Console {
         /**
          * Store the current percentage.
          * 
-         * @var float m_currentPercentage
+         * @var unsigned int m_currentPercentage
          */
-        float m_currentPercentage;
+        unsigned int m_currentPercentage;
 
         /**
          * Store the max percentage.
          * 
-         * @var float m_maxPercentage
+         * @var unsigned int m_maxPercentage
          */
-        float m_maxPercentage;
+        unsigned int m_maxPercentage;
+
+        /**
+         * Store the current position on 
+         * the progress bar indicator.
+         * 
+         * @var unsigned int m_maxPercentage
+         */
+        unsigned int m_position;
 
     };
 
