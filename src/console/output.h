@@ -21,6 +21,14 @@ namespace Console {
          */
         void writeLine(const std::string & line) override;
 
+        /**
+         * Create a progress bar instance.
+         * 
+         * @param const unsigned int items
+         * @return ProgressBar
+         */
+        ProgressBar * createProgressBar(const unsigned int items) override;
+
     };
 
 }

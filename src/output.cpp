@@ -1,4 +1,5 @@
 #include "console/output.h"
+#include "console/progress_bar.h"
 
 #include <iostream>
 
@@ -14,4 +15,15 @@ using namespace Console;
 void Output::writeLine(const std::string & line)
 {
     std::cout << line << std::endl;
+}
+
+/**
+ * Create a progress bar instance.
+ * 
+ * @param const unsigned int items
+ * @return ProgressBar *
+ */
+ProgressBar * Output::createProgressBar(const unsigned int items)
+{
+    return new ProgressBar(this, items);
 }
