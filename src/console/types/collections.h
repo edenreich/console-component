@@ -6,13 +6,13 @@
 #include <string>
 #include <vector>
 
-namespace Console::Interfaces {
-
-    class CommandInterface;
-
-}
-
 namespace Console {
+
+    namespace Interfaces {
+
+        class CommandInterface;
+
+    }
 
     namespace  Types {
 
