@@ -14,7 +14,7 @@ namespace Console {
 
     }
 
-    namespace  Types {
+    namespace Types {
 
         typedef std::vector<std::string> Options;
         typedef std::map<std::string, Interfaces::CommandInterface *> Commands;
