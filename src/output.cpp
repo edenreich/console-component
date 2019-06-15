@@ -2,7 +2,6 @@
 #include "console/progress_bar.h"
 
 #include <iostream>
-#include "console/types/colors.h"
 
 using namespace Console;
 
@@ -24,41 +23,111 @@ Output::Output(Interfaces::ApplicationInterface * app)
  */
 void Output::printHelp()
 {
-    printf("%s%s%s\n", COLOR_GREEN, m_app->getApplicationName().c_str(), COLOR_RESET);
-    printf("Version: %s%s%s\n", COLOR_YELLOW, m_app->getApplicationVersion().c_str(), COLOR_RESET);
-    printf("Description: %s\n\n", m_app->getApplicationDescription().c_str());
+    writeLine(m_app->getApplicationName(), Types::Colors::GREEN);
+    write("Version: ");
+    writeLine(m_app->getApplicationVersion(), Types::Colors::YELLOW);
+    writeLine(m_app->getApplicationDescription());
+    writeLineBreak();
 
     // Usage
-    printf("%sUsage:%s\n", COLOR_YELLOW, COLOR_RESET);
-    printf("  %s\n\n", m_app->getApplicationUsage().c_str());
+    writeLine("Usage:", Types::Colors::YELLOW);
+    write("  ");
+    writeLine(m_app->getApplicationUsage());
+    writeLineBreak();
     
     // Options
-    printf("%sOptions:%s\n", COLOR_YELLOW, COLOR_RESET);
-    printf("  %s\t%s\n", "-h, --help", "Display this help message");
+    writeLine("Options:", Types::Colors::YELLOW);
+    write("  ");
+    writeLine("-h, --help\tDisplay this help message");
     for (auto & option : m_app->getAvailableGlobalOptions())
     {
-        printf("  ");
-        printf("%s, %s\t%s\n", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
+        write("  ");
+        write(option.first);
+        write(", ");
+        write(option.second.first);
+        write("\t");
+        write(option.second.second);
+        writeLineBreak();
     }
 
+    writeLineBreak();
+
     // Available Commands
-    printf("\n%sAvailable Commands:%s\n", COLOR_YELLOW, COLOR_RESET);
+    writeLine("Available Commands:", Types::Colors::YELLOW);
     for (auto & command : m_app->getAvailableCommands())
     {
-        printf("  ");
-        printf("%s%s%s\t%s\n", COLOR_GREEN, command.second->getName().c_str(), COLOR_RESET, command.second->getDescription().c_str());
+        write("  ");
+        write(command.second->getName(), Types::Colors::GREEN);
+        write("\t");
+        write(command.second->getDescription());
+        writeLineBreak();
     }
 }
 
 /**
- * Retrieve an input from the user.
+ * Write a string to the console.
  *
  * @param const std::string & line
+ * @param Types::Colors color
  * @return void
  */
-void Output::writeLine(const std::string & line)
+void Output::write(const std::string & line, Types::Colors color)
 {
-    std::cout << line << std::endl;
+    switch (color)
+    {
+    case Types::Colors::WHITE:
+        printf("%s", line.c_str());
+        break;
+    case Types::Colors::RED:
+        printf("%s%s%s", COLOR_CRITICAL, line.c_str(), COLOR_RESET);
+        break;
+    case Types::Colors::YELLOW:
+        printf("%s%s%s", COLOR_YELLOW, line.c_str(), COLOR_RESET);
+        break;
+    case Types::Colors::GREEN:
+        printf("%s%s%s", COLOR_GREEN, line.c_str(), COLOR_RESET);
+        break;
+    default:
+        break;
+    }
+}
+
+/**
+ * Write a line to the console.
+ *
+ * @param const std::string & line
+ * @param Types::Colors color
+ * @return void
+ */
+void Output::writeLine(const std::string & line, Types::Colors color)
+{
+    switch (color)
+    {
+    case Types::Colors::WHITE:
+        printf("%s\n", line.c_str());
+        break;
+    case Types::Colors::RED:
+        printf("%s%s%s\n", COLOR_CRITICAL, line.c_str(), COLOR_RESET);
+        break;
+    case Types::Colors::YELLOW:
+        printf("%s%s%s\n", COLOR_YELLOW, line.c_str(), COLOR_RESET);
+        break;
+    case Types::Colors::GREEN:
+        printf("%s%s%s\n", COLOR_GREEN, line.c_str(), COLOR_RESET);
+        break;
+    default:
+        break;
+    }
+}
+
+/**
+ * Write a line break to the console.
+ * 
+ * @return void
+ */
+void Output::writeLineBreak()
+{
+    std::cout << '\n';
 }
 
 /**

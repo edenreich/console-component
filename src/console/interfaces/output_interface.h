@@ -2,11 +2,18 @@
 #define OUTPUT_INTERFACE_H
 
 #include <string>
+#include "../types/colors.h"
 
 
 namespace Console {
 
     class ProgressBar;
+
+    namespace Types {
+
+        enum class Colors;
+
+    }
 
     namespace Interfaces {
 
@@ -25,12 +32,29 @@ namespace Console {
             virtual void printHelp() = 0;
 
             /**
-             * Retrieve an input from the user.
+             * Write a string to the console.
              *
              * @param const std::string & line
+             * @param Types::Colors color
              * @return void
              */
-            virtual void writeLine(const std::string & line) = 0;
+            virtual void write(const std::string & line, Types::Colors color = Types::Colors::WHITE) = 0;
+
+            /**
+             * Write a line to the console.
+             *
+             * @param const std::string & line
+             * @param Types::Colors color
+             * @return void
+             */
+            virtual void writeLine(const std::string & line, Types::Colors color = Types::Colors::WHITE) = 0;
+
+            /**
+             * Write a line break to the console.
+             * 
+             * @return void
+             */
+            virtual void writeLineBreak() = 0;
 
             /**
              * Create a progress bar instance.

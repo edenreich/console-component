@@ -2,10 +2,24 @@
 #define COLORS_H
 
 
-#define COLOR_CRITICAL  "\27[1;31m"
-#define COLOR_RESET     "\033[0m"
-#define COLOR_YELLOW    "\27[1;33m"
-#define COLOR_GREEN     "\27[0;32m"
+#define COLOR_RESET     "\u001b[0m"
+
+#define COLOR_CRITICAL  "\u001b[41m"
+#define COLOR_YELLOW    "\u001b[33m"
+#define COLOR_GREEN     "\u001b[32m"
+
+namespace Console {
+    namespace Types {
+
+        enum class Colors {
+            WHITE,
+            RED,
+            YELLOW,
+            GREEN
+        };
+
+    }
+}
 
 
 #endif // COLORS_H
