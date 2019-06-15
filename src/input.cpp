@@ -6,13 +6,13 @@ using namespace Console;
 
 
 /**
- * Initialize the options.
+ * Initialize the application interface.
  * 
- * @param Types::Options options
+ * @param Interfaces::ApplicationInterface * app
  */
-Input::Input(Types::Options options)
+Input::Input(Interfaces::ApplicationInterface * app)
 {
-    m_options = options;
+    m_app = app;
 }
 
 /**
@@ -38,4 +38,16 @@ std::string Input::ask(const std::string & question)
 Types::Options Input::getOptions()
 {
     return m_options;
+}
+
+
+/**
+ * Setter for the parsed options.
+ *
+ * @return Types::Options options
+ * @return void
+ */
+void Input::setOptions(Types::Options options)
+{
+    m_options = options;
 }

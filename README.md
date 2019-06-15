@@ -1,4 +1,4 @@
-<p align="left"><img src="https://drive.google.com/uc?export=view&id=1-x4N2CctotfbV9U-m7b8AUjOtXLlH9cs"></p>
+<p align="left"><img src="https://drive.google.com/uc?export=view&id=1lsu360wEzjfEyqACii6PtRU0KSv1B6hK"></p>
 
 # Commandline Parser Library
 
@@ -8,13 +8,14 @@ An easy to use library for building powerful console applications written in C++
 
 1. Create a command definition file:
 
-```
+```cpp
 // commands/copy_files.h
 #pragma once
 
 #include <console/interfaces/command_interface.h>
 
 namespace Interfaces = Console::Interfaces;
+
 
 /**
  * @name copy-files
@@ -53,11 +54,9 @@ public:
 
 1. Create a command implemention file:
 
-```
+```cpp
 // commands/copy_files.cpp
 #include "copy_files.h"
-
-#include <iostream>
 
 
 /**
@@ -98,13 +97,18 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
         output->writeLine(option);
     }
 
+    // if (/** wrong input */) {
+    //     output->printHelp();
+    //     return ExitCode::NeedHelp;
+    // }
+
     return ExitCode::Ok;
 }
 ```
 
 3. Create the application and add the command:
 
-```
+```cpp
 // main.cpp
 #include <console/application.h>
 #include "commands/copy_files.h"

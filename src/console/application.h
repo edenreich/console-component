@@ -3,6 +3,9 @@
 
 #include "types/collections.h"
 #include "interfaces/application_interface.h"
+#include "interfaces/output_interface.h"
+#include "interfaces/input_interface.h"
+
 
 namespace Console {
 
@@ -16,6 +19,9 @@ namespace Console {
         /**
          * - Initialize the arguments count
          * - initialize the arguments values
+         *
+         * @param int & argc
+         * @param char ** argv
          */
         Application(int & argc, char ** argv);
 
@@ -32,6 +38,13 @@ namespace Console {
          */
         void setApplicationName(const std::string & name) override;
 
+		/**
+		 * Getter for the application name.
+		 *
+		 * @return std::string
+		 */
+		std::string getApplicationName() override;
+
         /**
          * Setter for the application usage.
          *
@@ -39,6 +52,13 @@ namespace Console {
          * @return void
          */
         void setApplicationUsage(const std::string & usage) override;
+
+		/**
+		 * Getter for the application usage.
+		 *
+		 * @return std::string
+		 */
+		std::string getApplicationUsage() override;
         
         /**
          * Setter for the application version.
@@ -47,6 +67,13 @@ namespace Console {
          * @return void
          */
         void setApplicationVersion(const std::string & version) override;
+
+        /**
+		 * Getter for the application version.
+		 *
+		 * @return std::string
+		 */
+		std::string getApplicationVersion() override;
         
         /**
          * Setter for the application description.
@@ -56,6 +83,13 @@ namespace Console {
          */
         void setApplicationDescription(const std::string & description) override;
         
+		/**
+		 * Getter for the application description.
+		 *
+		 * @return std::string
+		 */
+		std::string getApplicationDescription() override;
+
         /**
          * Add a command instance to the application.
          *
@@ -64,6 +98,14 @@ namespace Console {
          */
         void addCommand(Interfaces::CommandInterface * command) override;
     
+		/**
+		 * Getter for the available commands,
+		 * registered by the application.
+		 *
+		 * @return Types::Commands
+		 */
+		Types::Commands getAvailableCommands() override;
+
 		/**
 		 * Add a command instance to the application.
 		 *
@@ -74,12 +116,12 @@ namespace Console {
 		 */
 		void addGlobalOption(const std::string & Option, const std::string & description, const std::string & alias) override;
 
-        /**
-         * Print the help message.
-         *
-         * @return void
-         */
-        void printHelp() override;
+		/**
+		 * Getter for the available global options.
+		 *
+		 * @return Types::AvailableOptions
+		 */
+		Types::AvailableOptions getAvailableGlobalOptions() override;
 
         /**
 		 * Set print help to automatically.
@@ -88,6 +130,21 @@ namespace Console {
 		 * @return void
 		 */
 		void setAutoPrintHelp(bool yes) override;
+
+        /**
+		 * Indicates if the application should print
+		 * the help automatically.
+		 *
+		 * @return bool
+		 */
+		bool shouldPrintHelpAutomatically() override;
+
+		/**
+		 * Getter for the input interface.
+		 * 
+		 * @return Interfaces::InputInterface
+		 */
+		Interfaces::InputInterface * getInput();
 
         /**
          * Run the console application.
@@ -162,6 +219,20 @@ namespace Console {
          * @var Types::AvailableOptions
          */
         Types::AvailableOptions m_options;
+
+        /**
+         * Store the output interface.
+         * 
+         * @var Interfaces::OutputInterface * m_output
+         */
+        Interfaces::OutputInterface * m_output;
+
+        /**
+         * Store the input interface.
+         * 
+         * @var Interfaces::InputInterface m_input
+         */
+        Interfaces::InputInterface * m_input;
 
     };
 

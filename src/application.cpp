@@ -2,11 +2,9 @@
 #include <typeinfo>
 #include <regex>
 
-#include "console/types/colors.h"
 #include "console/application.h"
 #include "console/input.h"
 #include "console/output.h"
-
 
 using namespace Console;
 
@@ -14,11 +12,17 @@ using namespace Console;
 /**
  * - Initialize the arguments count
  * - initialize the arguments values
+ * 
+ * @param int & argc
+ * @param char ** argv
  */
 Application::Application(int & argc, char ** argv)
 {
     m_argc = argc;
     m_argv = argv;
+
+    m_output = nullptr;
+    m_input = nullptr;
 
     m_usage = "app [command] [options]";
     m_printHelpAutomatically = false;
@@ -29,13 +33,13 @@ Application::Application(int & argc, char ** argv)
  */
 Application::~Application()
 {
-    for (auto & command : m_commands)
+    for (auto & command : getAvailableCommands())
     {
-        // just for safety delete all memory allocations
         delete command.second;
     }
 
-    m_commands.clear();
+    delete m_output;
+    delete m_input;
 }
 
 /**
@@ -50,6 +54,16 @@ void Application::setApplicationName(const std::string & name)
 }
 
 /**
+ * Getter for the application name.
+ *
+ * @return std::string
+ */
+std::string Application::getApplicationName()
+{
+    return m_name;
+}
+
+/**
  * Setter for the application usage.
  *
  * @param const std::string & usage
@@ -58,6 +72,16 @@ void Application::setApplicationName(const std::string & name)
 void Application::setApplicationUsage(const std::string & usage)
 {
     m_usage = usage;
+}
+
+/**
+ * Getter for the application usage.
+ *
+ * @return std::string
+ */
+std::string Application::getApplicationUsage()
+{
+    return m_usage;
 }
 
 /**
@@ -72,6 +96,16 @@ void Application::setApplicationVersion(const std::string & version)
 }
 
 /**
+ * Getter for the application version.
+ *
+ * @return std::string
+ */
+std::string Application::getApplicationVersion()
+{
+    return m_version;
+}
+
+/**
  * Setter for the application description.
  *
  * @param const std::string & description
@@ -80,6 +114,16 @@ void Application::setApplicationVersion(const std::string & version)
 void Application::setApplicationDescription(const std::string & description)
 {
     m_description = description;
+}
+
+/**
+ * Getter for the application description.
+ *
+ * @return std::string
+ */
+std::string Application::getApplicationDescription()
+{
+    return m_description;
 }
 
 /**
@@ -96,6 +140,17 @@ void Application::addCommand(Interfaces::CommandInterface * command)
 }
 
 /**
+ * Getter for the available commands,
+ * registered by the application.
+ *
+ * @return Types::Commands
+ */
+Types::Commands Application::getAvailableCommands()
+{
+    return m_commands;
+}
+
+/**
  * Add a command instance to the application.
  *
  * @param const std::string & option
@@ -109,49 +164,13 @@ void Application::addGlobalOption(const std::string & option, const std::string 
 }
 
 /**
- * Print the help message.
+ * Getter for the available global options.
  *
- * @return void
+ * @return Types::AvailableOptions
  */
-void Application::printHelp()
+Types::AvailableOptions Application::getAvailableGlobalOptions()
 {
-    printf("%s%s%s", COLOR_GREEN, m_name.c_str(), COLOR_RESET);
-    std::cout << '\n';
-    printf("Version: %s%s%s", COLOR_YELLOW, m_version.c_str(), COLOR_RESET);
-    std::cout << '\n';
-    printf("Description: %s", m_description.c_str());
-    std::cout << '\n';
-    std::cout << '\n';
-
-    // Usage
-    printf("%sUsage:%s", COLOR_YELLOW, COLOR_RESET);
-    std::cout << '\n';
-    printf("  %s", m_usage.c_str());
-    std::cout << '\n';
-    std::cout << '\n';
-    
-    // Options
-    printf("%sOptions:%s", COLOR_YELLOW, COLOR_RESET);
-    std::cout << '\n';
-    printf("  %s\t%s", "-h, --help", "Display this help message");
-    std::cout << '\n';
-    for (auto & option : m_options)
-    {
-        std::cout << "  ";
-        printf("%s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
-        std::cout << '\n';
-    }
-    
-    std::cout << '\n';
-
-    // Available Commands
-    printf("%sAvailable Commands:%s\n", COLOR_YELLOW, COLOR_RESET);
-    for (auto & command : m_commands)
-    {
-        std::cout << "  ";
-        printf("%s%s%s\t%s", COLOR_GREEN, command.second->getName().c_str(), COLOR_RESET, command.second->getDescription().c_str());
-        std::cout << '\n';
-    }
+    return m_options;
 }
 
 /**
@@ -166,12 +185,35 @@ void Application::setAutoPrintHelp(bool yes)
 }
 
 /**
+ * Indicates if the application should print
+ * the help automatically.
+ *
+ * @return bool
+ */
+bool Application::shouldPrintHelpAutomatically()
+{
+    return m_printHelpAutomatically;
+}
+
+/**
+ * Getter for the input interface.
+ * 
+ * @return Interfaces::InputInterface
+ */
+Interfaces::InputInterface * Application::getInput()
+{
+    return m_input;
+}
+
+/**
  * Run the console application.
  * 
  * @return ExitCode
  */
 ExitCode Application::run()
 {
+    m_input = new Input(this);
+    m_output = new Output(this);
     std::vector<std::string> arguments(m_argv + 1, m_argv + m_argc);
     Types::Options options;
     std::string requestedCommand;
@@ -188,17 +230,16 @@ ExitCode Application::run()
         requestedCommand = arguments[i];
     }
 
-    for (auto & command : m_commands)
+    for (auto & command : getAvailableCommands())
     {
-        if (requestedCommand.empty() && m_printHelpAutomatically) {
-            printHelp();
+        if (requestedCommand.empty() && shouldPrintHelpAutomatically()) {
+            m_output->printHelp();
             break;
         }
 
         if (command.second->getName() == requestedCommand) {
-            Input input(options);
-            Output output;
-            return command.second->handle(&input, &output);
+            m_input->setOptions(options);
+            return command.second->handle(m_input, m_output);
         }
     }
 
