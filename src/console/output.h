@@ -2,6 +2,7 @@
 #define OUTPUT_H
 
 #include "interfaces/output_interface.h"
+#include "interfaces/application_interface.h"
 
 
 namespace Console {
@@ -12,6 +13,20 @@ namespace Console {
     class Output : public Interfaces::OutputInterface {
 
     public:
+
+        /**
+         * Initialize the application interface.
+         * 
+         * @param Interfaces::ApplicationInterface * app
+         */
+        Output(Interfaces::ApplicationInterface * app);
+
+        /**
+         * Print the help message.
+         *
+         * @return void
+         */
+        void printHelp() override;
 
         /**
          * Retrieve an input from the user.
@@ -28,6 +43,15 @@ namespace Console {
          * @return ProgressBar
          */
         ProgressBar * createProgressBar(const unsigned int items) override;
+
+    private:
+
+        /**
+         * Store the application interface.
+         * 
+         * @var Interfaces::ApplicationInterface * m_app
+         */
+        Interfaces::ApplicationInterface * m_app;
 
     };
 

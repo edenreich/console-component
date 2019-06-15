@@ -23,12 +23,26 @@ namespace Console::Interfaces {
 		virtual void setApplicationName(const std::string & name) = 0;
 
 		/**
+		 * Getter for the application name.
+		 *
+		 * @return std::string
+		 */
+		virtual std::string getApplicationName() = 0;
+
+		/**
 		 * Setter for the application usage.
 		 *
 		 * @param const std::string & usage
 		 * @return void
 		 */
 		virtual void setApplicationUsage(const std::string & usage) = 0;
+
+		/**
+		 * Getter for the application usage.
+		 *
+		 * @return std::string
+		 */
+		virtual std::string getApplicationUsage() = 0;
 
 		/**
 		 * Setter for the application version.
@@ -39,12 +53,26 @@ namespace Console::Interfaces {
 		virtual void setApplicationVersion(const std::string & version) = 0;
 
 		/**
+		 * Getter for the application version.
+		 *
+		 * @return std::string
+		 */
+		virtual std::string getApplicationVersion() = 0;
+
+		/**
 		 * Setter for the application description.
 		 *
 		 * @param const std::string & description
 		 * @return void
 		 */
 		virtual void setApplicationDescription(const std::string & description) = 0;
+
+		/**
+		 * Getter for the application description.
+		 *
+		 * @return std::string
+		 */
+		virtual std::string getApplicationDescription() = 0;
 
 		/**
 		 * Add a command instance to the application.
@@ -55,7 +83,15 @@ namespace Console::Interfaces {
 		virtual void addCommand(CommandInterface * command) = 0;
 
 		/**
-		 * Add a command instance to the application.
+		 * Getter for the available commands,
+		 * registered by the application.
+		 *
+		 * @return Types::Commands
+		 */
+		virtual Types::Commands getAvailableCommands() = 0;
+
+		/**
+		 * Add a global options.
 		 *
 		 * @param const std::string & Option
 		 * @param const std::string & description
@@ -64,12 +100,12 @@ namespace Console::Interfaces {
 		 */
 		virtual void addGlobalOption(const std::string & Option, const std::string & description, const std::string & alias) = 0;
 
-        /**
-		 * Print the help message.
+		/**
+		 * Getter for the available global options.
 		 *
-		 * @return void
+		 * @return Types::AvailableOptions
 		 */
-		virtual void printHelp() = 0;
+		virtual Types::AvailableOptions getAvailableGlobalOptions() = 0;
 
         /**
 		 * Set print help to automatically.
@@ -78,6 +114,21 @@ namespace Console::Interfaces {
 		 * @return void
 		 */
 		virtual void setAutoPrintHelp(bool yes) = 0;
+
+        /**
+		 * Indicates if the application should print
+		 * the help automatically.
+		 *
+		 * @return bool
+		 */
+		virtual bool shouldPrintHelpAutomatically() = 0;
+
+		/**
+		 * Getter for the input interface.
+		 * 
+		 * @return InputInterface
+		 */
+		virtual InputInterface * getInput() = 0;
 
 		/**
 		 * Run the console application.

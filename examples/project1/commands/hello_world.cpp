@@ -1,7 +1,5 @@
 #include "hello_world.h"
 
-#include <iostream>
-
 
 /**
  * Retrieve the name of the command.
@@ -40,6 +38,11 @@ ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::Outp
     {
         output->writeLine(option);
     }
+
+    // if (/** wrong input */) {
+    //     output->printHelp();
+    //     return ExitCode::NeedHelp;
+    // }
 
     return ExitCode::Ok;
 }

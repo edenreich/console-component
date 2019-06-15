@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include "interfaces/input_interface.h"
+#include "interfaces/application_interface.h"
 
 
 namespace Console {
@@ -14,11 +15,11 @@ namespace Console {
     public:
 
         /**
-         * Initialize the options
+         * Initialize the application interface.
          * 
-         * @param Types::Options options
+         * @param Interfaces::ApplicationInterface * app
          */
-        Input(Types::Options options);
+        Input(Interfaces::ApplicationInterface * app);
 
         /**
          * Retrieve an input from the user.
@@ -35,6 +36,14 @@ namespace Console {
          */
         Types::Options getOptions() override;
 
+        /**
+         * Setter for the parsed options.
+         *
+         * @return Console::Types::Options options
+         * @return void
+         */
+        void setOptions(Console::Types::Options options) override;
+
     private:
 
         /**
@@ -43,6 +52,13 @@ namespace Console {
          * @var Options options
          */
         Types::Options m_options;
+
+        /**
+         * Store the application interface.
+         * 
+         * @var Interfaces::ApplicationInterface * m_app
+         */
+        Interfaces::ApplicationInterface * m_app;
 
     };
 

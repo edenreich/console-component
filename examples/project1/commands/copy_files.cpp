@@ -1,7 +1,5 @@
 #include "copy_files.h"
 
-#include <iostream>
-
 
 /**
  * Retrieve the name of the command.
@@ -40,6 +38,11 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
     {
         output->writeLine(option);
     }
+
+    // if (/** wrong input */) {
+    //     output->printHelp();
+    //     return ExitCode::NeedHelp;
+    // }
 
     return ExitCode::Ok;
 }

@@ -24,9 +24,17 @@ namespace Console::Interfaces {
         /**
          * Retrieve the parsed options.
          *
-         * @return Options
+         * @return Console::Types::Options
          */
         virtual Console::Types::Options getOptions() = 0;
+
+        /**
+         * Setter for the parsed options.
+         *
+         * @return Console::Types::Options options
+         * @return void
+         */
+        virtual void setOptions(Console::Types::Options options) = 0;
 
     };
 

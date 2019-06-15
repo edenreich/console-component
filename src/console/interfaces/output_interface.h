@@ -19,6 +19,13 @@ namespace Console::Interfaces {
     public:
 
         /**
+         * Print the help message.
+         *
+         * @return void
+         */
+        virtual void printHelp() = 0;
+
+        /**
          * Retrieve an input from the user.
          *
          * @param const std::string & line
