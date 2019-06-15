@@ -142,11 +142,11 @@ Run `cd build && cmake .. && cmake --build . --target install`
 
 ## Distributed Files
 
-After building the project all distributed files should be located in build/dist
+After building the project all distributed files should be located in `build/dist`.
 
 ## Target
 
-This project currently targets linux
+This project is currently focused to target linux, and yet it also supports windows.
 
 ## Motiviation
 
