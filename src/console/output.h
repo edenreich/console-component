@@ -62,6 +62,30 @@ namespace Console {
         void writeLineBreak() override;
 
         /**
+         * Write an error to the console.
+         *
+         * @param const std::string & line
+         * @return void
+         */
+        void error(const std::string & line) override;
+
+        /**
+         * Write an info to the console.
+         *
+         * @param const std::string & line
+         * @return void
+         */
+        void info(const std::string & line) override;
+
+        /**
+         * Write a warning to the console.
+         *
+         * @param const std::string & line
+         * @return void
+         */
+        void warning(const std::string & line) override;
+
+        /**
          * Create a progress bar instance.
          * 
          * @param const unsigned int items

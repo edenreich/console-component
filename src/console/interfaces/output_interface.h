@@ -67,6 +67,30 @@ namespace Console {
             virtual void writeLineBreak() = 0;
 
             /**
+             * Write an error to the console.
+             *
+             * @param const std::string & line
+             * @return void
+             */
+            virtual void error(const std::string & line) = 0;
+
+            /**
+             * Write an info to the console.
+             *
+             * @param const std::string & line
+             * @return void
+             */
+            virtual void info(const std::string & line) = 0;
+
+            /**
+             * Write a warning to the console.
+             *
+             * @param const std::string & line
+             * @return void
+             */
+            virtual void warning(const std::string & line) = 0;
+
+            /**
              * Create a progress bar instance.
              * 
              * @param const unsigned int items

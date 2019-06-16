@@ -51,6 +51,7 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
     }
 
     if (input->getOption("source").empty() || input->getOption("dest").empty()) {
+        output->warning("wrong options..");
         output->printCommandHelp(this);
         return ExitCode::NeedHelp;
     }

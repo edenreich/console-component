@@ -115,7 +115,7 @@ void Output::write(const std::string & line, Types::Colors color)
             printf("%s", line.c_str());
             break;
         case Types::Colors::RED:
-            SetConsoleTextAttribute(hConsole, COLOR_CRITICAL);
+            SetConsoleTextAttribute(hConsole, COLOR_RED);
             printf("%s", line.c_str());
             break;
         case Types::Colors::YELLOW:
@@ -139,7 +139,7 @@ void Output::write(const std::string & line, Types::Colors color)
             printf("%s", line.c_str());
             break;
         case Types::Colors::RED:
-            printf("%s%s%s", COLOR_CRITICAL, line.c_str(), COLOR_RESET);
+            printf("%s%s%s", COLOR_RED, line.c_str(), COLOR_RESET);
             break;
         case Types::Colors::YELLOW:
             printf("%s%s%s", COLOR_YELLOW, line.c_str(), COLOR_RESET);
@@ -174,7 +174,7 @@ void Output::writeLine(const std::string & line, Types::Colors color)
             printf("%s\n", line.c_str());
             break;
         case Types::Colors::RED:
-            SetConsoleTextAttribute(hConsole, COLOR_CRITICAL);
+            SetConsoleTextAttribute(hConsole, COLOR_RED);
             printf("%s\n", line.c_str());
             break;
         case Types::Colors::YELLOW:
@@ -198,7 +198,7 @@ void Output::writeLine(const std::string & line, Types::Colors color)
             printf("%s\n", line.c_str());
             break;
         case Types::Colors::RED:
-            printf("%s%s%s\n", COLOR_CRITICAL, line.c_str(), COLOR_RESET);
+            printf("%s%s%s\n", COLOR_RED, line.c_str(), COLOR_RESET);
             break;
         case Types::Colors::YELLOW:
             printf("%s%s%s\n", COLOR_YELLOW, line.c_str(), COLOR_RESET);
@@ -221,6 +221,39 @@ void Output::writeLine(const std::string & line, Types::Colors color)
 void Output::writeLineBreak()
 {
     std::cout << '\n';
+}
+
+/**
+ * Write an error to the console.
+ *
+ * @param const std::string & line
+ * @return void
+ */
+void Output::error(const std::string & line)
+{
+    writeLine(line, Types::Colors::RED);
+}
+
+/**
+ * Write an info to the console.
+ *
+ * @param const std::string & line
+ * @return void
+ */
+void Output::info(const std::string & line)
+{
+    writeLine(line, Types::Colors::NORMAL);
+}
+
+/**
+ * Write a warning to the console.
+ *
+ * @param const std::string & line
+ * @return void
+ */
+void Output::warning(const std::string & line)
+{
+    writeLine(line, Types::Colors::YELLOW);
 }
 
 /**
