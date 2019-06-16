@@ -65,6 +65,37 @@ void Output::printHelp()
 }
 
 /**
+ * Print the command help message.
+ *
+ * @param Interfaces::CommandInterface * command
+ * @return void
+ */
+void Output::printCommandHelp(Interfaces::CommandInterface * command)
+{
+    // Usage
+    writeLine("Usage:", Types::Colors::YELLOW);
+    write("  ");
+    write(command->getName());
+    write(" [options]");
+    writeLineBreak();
+
+    // Options
+    writeLine("Options:", Types::Colors::YELLOW);
+    write("  ");
+    writeLine("-h, --help\tDisplay this help message");
+    for (auto & option : command->getOptions())
+    {
+        write("  ");
+        write(option.first);
+        write(", ");
+        write(option.second.first);
+        write("\t");
+        write(option.second.second);
+        writeLineBreak();
+    }
+}
+
+/**
  * Write a string to the console.
  *
  * @param const std::string & line

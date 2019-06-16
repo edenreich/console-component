@@ -29,6 +29,14 @@ namespace Console {
         void printHelp() override;
 
         /**
+         * Print the command help message.
+         *
+         * @param Interfaces::CommandInterface * command
+         * @return void
+         */
+        void printCommandHelp(Interfaces::CommandInterface * command) override;
+
+        /**
          * Write a string to the console.
          *
          * @param const std::string & line

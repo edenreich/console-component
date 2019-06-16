@@ -64,9 +64,9 @@ void ProgressBar::advance(const unsigned int progress)
 }
 
 /**
- * Stops the progress bar.
+ * Stop the progress bar.
  * 
- * @return ProgressBar
+ * @return void
  */
 void ProgressBar::stop()
 {

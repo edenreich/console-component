@@ -22,6 +22,20 @@ std::string HelloWorld::getDescription()
 }
 
 /**
+ * Retrieve the command options.
+ *
+ * @return Types::AvailableOptions
+ */
+Types::AvailableOptions HelloWorld::getOptions()
+{
+    Types::AvailableOptions options;
+
+    options["-t"] = std::pair<std::string, std::string>("--to", "say hello to someone instead");
+
+    return options;
+}
+
+/**
  * Handle the command.
  *
  * @param InputInterface * input
@@ -39,10 +53,10 @@ ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::Outp
         output->writeLine(option);
     }
 
-    // if (/** wrong input */) {
-    //     output->printHelp();
-    //     return ExitCode::NeedHelp;
-    // }
+    if (true /** wrong input for example */) {
+        output->printCommandHelp(this);
+        return ExitCode::NeedHelp;
+    }
 
     return ExitCode::Ok;
 }
