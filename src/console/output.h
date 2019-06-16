@@ -35,7 +35,7 @@ namespace Console {
          * @param Types::Colors color
          * @return void
          */
-        void write(const std::string & line, Types::Colors color = Types::Colors::WHITE) override;
+        void write(const std::string & line, Types::Colors color = Types::Colors::NORMAL) override;
 
         /**
          * Write a line to the console.
@@ -44,7 +44,7 @@ namespace Console {
          * @param Types::Colors color
          * @return void
          */
-        void writeLine(const std::string & line, Types::Colors color = Types::Colors::WHITE) override;
+        void writeLine(const std::string & line, Types::Colors color = Types::Colors::NORMAL) override;
 
         /**
          * Write a line break to the console.

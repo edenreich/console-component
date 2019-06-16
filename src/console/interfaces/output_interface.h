@@ -38,7 +38,7 @@ namespace Console {
              * @param Types::Colors color
              * @return void
              */
-            virtual void write(const std::string & line, Types::Colors color = Types::Colors::WHITE) = 0;
+            virtual void write(const std::string & line, Types::Colors color = Types::Colors::NORMAL) = 0;
 
             /**
              * Write a line to the console.
@@ -47,7 +47,7 @@ namespace Console {
              * @param Types::Colors color
              * @return void
              */
-            virtual void writeLine(const std::string & line, Types::Colors color = Types::Colors::WHITE) = 0;
+            virtual void writeLine(const std::string & line, Types::Colors color = Types::Colors::NORMAL) = 0;
 
             /**
              * Write a line break to the console.

@@ -73,23 +73,54 @@ void Output::printHelp()
  */
 void Output::write(const std::string & line, Types::Colors color)
 {
-    switch (color)
-    {
-    case Types::Colors::WHITE:
-        printf("%s", line.c_str());
-        break;
-    case Types::Colors::RED:
-        printf("%s%s%s", COLOR_CRITICAL, line.c_str(), COLOR_RESET);
-        break;
-    case Types::Colors::YELLOW:
-        printf("%s%s%s", COLOR_YELLOW, line.c_str(), COLOR_RESET);
-        break;
-    case Types::Colors::GREEN:
-        printf("%s%s%s", COLOR_GREEN, line.c_str(), COLOR_RESET);
-        break;
-    default:
-        break;
-    }
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+        HANDLE hConsole;
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        FlushConsoleInputBuffer(hConsole);
+
+        switch (color)
+        {
+        case Types::Colors::NORMAL:
+            printf("%s", line.c_str());
+            break;
+        case Types::Colors::RED:
+            SetConsoleTextAttribute(hConsole, COLOR_CRITICAL);
+            printf("%s", line.c_str());
+            break;
+        case Types::Colors::YELLOW:
+            SetConsoleTextAttribute(hConsole, COLOR_YELLOW);
+            printf("%s", line.c_str());
+            break;
+        case Types::Colors::GREEN:
+            SetConsoleTextAttribute(hConsole, COLOR_GREEN);
+            printf("%s", line.c_str());
+            break;
+        default:
+            printf("%s", line.c_str());
+            break;
+        }
+
+        SetConsoleTextAttribute(hConsole, 15);
+    #else
+        switch (color)
+        {
+        case Types::Colors::NORMAL:
+            printf("%s", line.c_str());
+            break;
+        case Types::Colors::RED:
+            printf("%s%s%s", COLOR_CRITICAL, line.c_str(), COLOR_RESET);
+            break;
+        case Types::Colors::YELLOW:
+            printf("%s%s%s", COLOR_YELLOW, line.c_str(), COLOR_RESET);
+            break;
+        case Types::Colors::GREEN:
+            printf("%s%s%s", COLOR_GREEN, line.c_str(), COLOR_RESET);
+            break;
+        default:
+            printf("%s", line.c_str());
+            break;
+        }
+    #endif
 }
 
 /**
@@ -101,23 +132,54 @@ void Output::write(const std::string & line, Types::Colors color)
  */
 void Output::writeLine(const std::string & line, Types::Colors color)
 {
-    switch (color)
-    {
-    case Types::Colors::WHITE:
-        printf("%s\n", line.c_str());
-        break;
-    case Types::Colors::RED:
-        printf("%s%s%s\n", COLOR_CRITICAL, line.c_str(), COLOR_RESET);
-        break;
-    case Types::Colors::YELLOW:
-        printf("%s%s%s\n", COLOR_YELLOW, line.c_str(), COLOR_RESET);
-        break;
-    case Types::Colors::GREEN:
-        printf("%s%s%s\n", COLOR_GREEN, line.c_str(), COLOR_RESET);
-        break;
-    default:
-        break;
-    }
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+        HANDLE hConsole;
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        FlushConsoleInputBuffer(hConsole);
+
+        switch (color)
+        {
+        case Types::Colors::NORMAL:
+            printf("%s\n", line.c_str());
+            break;
+        case Types::Colors::RED:
+            SetConsoleTextAttribute(hConsole, COLOR_CRITICAL);
+            printf("%s\n", line.c_str());
+            break;
+        case Types::Colors::YELLOW:
+            SetConsoleTextAttribute(hConsole, COLOR_YELLOW);
+            printf("%s\n", line.c_str());
+            break;
+        case Types::Colors::GREEN:
+            SetConsoleTextAttribute(hConsole, COLOR_GREEN);
+            printf("%s\n", line.c_str());
+            break;
+        default:
+            printf("%s\n", line.c_str());
+            break;
+        }
+
+        SetConsoleTextAttribute(hConsole, 15);
+    #else
+        switch (color)
+        {
+        case Types::Colors::NORMAL:
+            printf("%s\n", line.c_str());
+            break;
+        case Types::Colors::RED:
+            printf("%s%s%s\n", COLOR_CRITICAL, line.c_str(), COLOR_RESET);
+            break;
+        case Types::Colors::YELLOW:
+            printf("%s%s%s\n", COLOR_YELLOW, line.c_str(), COLOR_RESET);
+            break;
+        case Types::Colors::GREEN:
+            printf("%s%s%s\n", COLOR_GREEN, line.c_str(), COLOR_RESET);
+            break;
+        default:
+            printf("%s\n", line.c_str());
+            break;
+        }
+    #endif
 }
 
 /**
