@@ -22,6 +22,20 @@ std::string HelloWorld::getDescription()
 }
 
 /**
+ * Retrieve the command options.
+ *
+ * @return Types::AvailableOptions
+ */
+Types::AvailableOptions HelloWorld::getOptions()
+{
+    Types::AvailableOptions options;
+
+    options["-t"] = std::pair<std::string, std::string>("--to", "say hello to someone instead");
+
+    return options;
+}
+
+/**
  * Handle the command.
  *
  * @param InputInterface * input
@@ -30,18 +44,29 @@ std::string HelloWorld::getDescription()
  */
 ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
 {
-    output->writeLine("command hello world was called");
-
-    output->writeLine("with options: ");
-    
     for (auto & option : input->getOptions()) 
     {
-        output->writeLine(option);
+        if (input->wantsHelp()) {
+            output->printCommandHelp(this);
+            return ExitCode::NeedHelp;
+        }
     }
 
-    // if (/** wrong input */) {
-    //     output->printHelp();
-    //     return ExitCode::NeedHelp;
+    std::string to = input->getOption("to", "t");
+
+    if (to.empty()) {
+        output->writeLine("Hello World..");
+    }
+    else
+    {
+        output->write("Hello "); output->writeLine(to);
+    }
+
+    // for (auto & option : input->getOptions()) 
+    // {
+    //     output->write("alias: "); output->writeLine(option.first);
+    //     output->write("key: ");   output->writeLine(option.second.first);
+    //     output->write("value: "); output->writeLine(option.second.second);
     // }
 
     return ExitCode::Ok;

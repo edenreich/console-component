@@ -2,21 +2,22 @@
 #define COLLECTIONS_H
 
 #include <map>
-#include <utility>
 #include <string>
 #include <vector>
 
-namespace Console::Interfaces {
-
-    class CommandInterface;
-
-}
 
 namespace Console {
 
-    namespace  Types {
+    namespace Interfaces {
 
-        typedef std::vector<std::string> Options;
+        class CommandInterface;
+
+    }
+
+    namespace Types {
+
+        typedef std::pair<std::string, std::string> Option;
+        typedef std::map<std::string, Option> Options;
         typedef std::map<std::string, Interfaces::CommandInterface *> Commands;
         typedef std::map<std::string, std::pair<std::string, std::string>> AvailableOptions;
 

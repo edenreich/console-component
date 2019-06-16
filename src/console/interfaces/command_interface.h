@@ -6,40 +6,48 @@
 #include "output_interface.h"
 
 
-namespace Console::Interfaces {
-
-    /**
-     * The Command Interface
-     */
-    class CommandInterface {
-
-    public:
+namespace Console {
+    namespace Interfaces {
 
         /**
-         * Handle the command.
-         *
-         * @param InputInterface * input
-         * @param InputInterface * output
-         * @return ExitCode
+         * The Command Interface
          */
-        virtual ExitCode handle(InputInterface * input, OutputInterface * output) = 0;
+        class CommandInterface {
 
-        /**
-         * Retrieve the name of the command.
-         *
-         * @return std::string
-         */
-        virtual std::string getName() = 0;
+        public:
 
-        /**
-         * Retrieve the description of the command.
-         *
-         * @return std::string
-         */
-        virtual std::string getDescription() = 0;
+            /**
+             * Handle the command.
+             *
+             * @param InputInterface * input
+             * @param InputInterface * output
+             * @return ExitCode
+             */
+            virtual ExitCode handle(InputInterface * input, OutputInterface * output) = 0;
 
-    };
+            /**
+             * Retrieve the name of the command.
+             *
+             * @return std::string
+             */
+            virtual std::string getName() = 0;
 
+            /**
+             * Retrieve the description of the command.
+             *
+             * @return std::string
+             */
+            virtual std::string getDescription() = 0;
+
+            /**
+             * Retrieve the command options.
+             *
+             * @return Types::AvailableOptions
+             */
+            virtual Types::AvailableOptions getOptions() = 0;
+
+        };
+    }
 }
 
 

@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <cmath>
-#include <unistd.h>
 
 using namespace Console;
 
@@ -65,9 +64,9 @@ void ProgressBar::advance(const unsigned int progress)
 }
 
 /**
- * Stops the progress bar.
+ * Stop the progress bar.
  * 
- * @return ProgressBar
+ * @return void
  */
 void ProgressBar::stop()
 {
@@ -85,8 +84,11 @@ void ProgressBar::draw()
     m_indicator.resize(m_width);
     std::fill(m_indicator.begin(), m_indicator.begin()+m_width, '-');
 
+    #pragma warning( push )
+    #pragma warning( disable : 4244)
     m_currentPercentage = std::floor((static_cast<float>(m_progress) / static_cast<float>(m_totalItems)) * m_maxPercentage);
     m_position = std::floor((static_cast<float>(m_currentPercentage) / static_cast<float>(m_maxPercentage)) * m_width);
+    #pragma warning( pop )
 
     if (m_currentPercentage > m_maxPercentage) {
         m_position = m_width;

@@ -160,7 +160,7 @@ Types::Commands Application::getAvailableCommands()
  */
 void Application::addGlobalOption(const std::string & option, const std::string & description, const std::string & alias)
 {   
-    m_options[alias] = std::pair<std::string, std::string>(option, description);
+    m_options[alias] = Types::Option(option, description);
 }
 
 /**
@@ -217,17 +217,82 @@ ExitCode Application::run()
     std::vector<std::string> arguments(m_argv + 1, m_argv + m_argc);
     Types::Options options;
     std::string requestedCommand;
+
+    std::regex isOptionWithEqual("^--([^-].+)=([^-].+)$");
+    std::regex isAliasOption("^-{1}([^-]{1})$");
+    std::regex isOption("^--([^-].+)$");
+    std::regex isOptionValue("^[^-](.+)$");
     std::smatch matchedOption;
+    std::smatch matchedOptionWithEqual;
+    std::smatch matchedOptionAlias;
+    std::smatch matchedOptionValue;
 
-    for (std::size_t i = 0; i != arguments.size(); ++i) {
-        std::regex isOption("^--?(.*)");
+    if (arguments.empty()) {
+        if (shouldPrintHelpAutomatically()) {
+            m_output->printHelp();
+            return ExitCode::NeedHelp;
+        }
 
-        if (std::regex_search(arguments[i], matchedOption, isOption)) {
-            options.push_back(matchedOption.str());
+        return ExitCode::Ok;
+    }
+    
+    requestedCommand = arguments[0];
+
+    for (std::size_t i = 1; i != arguments.size(); ++i)
+    {
+        // Is it an option with = sign ? (i.e --option=value)
+        if (std::regex_search(arguments[i], matchedOptionWithEqual, isOptionWithEqual)) {
+            std::string optionKey;
+            std::string optionValue;
+
+            optionKey = matchedOptionWithEqual[1].str();
+            optionValue = matchedOptionWithEqual[2].str();
+            
+            options[std::to_string(i)] = Types::Option(optionKey, optionValue);
             continue;
         }
 
-        requestedCommand = arguments[i];
+        // Is it an option which is an alias ? (i.e -h)
+        if (std::regex_search(arguments[i], matchedOptionAlias, isAliasOption)) {
+            
+            // Is it the last argument ? if so treat it as a flag.
+            if (i+1 >= arguments.size()) {
+                options[matchedOptionAlias[1].str()] = Types::Option("none", "true");
+            }
+            // Is the next value is valid option value ? (=not an option).
+            else if (std::regex_search(arguments[i+1], matchedOptionValue, isOptionValue)) {
+                options[matchedOptionAlias[1].str()] = Types::Option("none", matchedOptionValue.str());   
+                i++; 
+            }
+            // otherwise, treat the option as a flag.
+            else
+            {
+                options[matchedOptionAlias[1].str()] = Types::Option("none", "true");
+            }
+
+            continue;
+        }
+
+        // Is it a regular option ? (i.e --option value)
+        if (std::regex_search(arguments[i], matchedOption, isOption)) {
+
+            // Is it the last argument ? if so treat it as a flag.
+            if (i+1 >= arguments.size()) {
+                options[std::to_string(i)] = Types::Option(matchedOption[1].str(), "true");
+            }
+            // Is the next value is valid option value ? (=not an option).
+            else if (std::regex_search(arguments[i+1], matchedOptionValue, isOptionValue)) {
+                options[std::to_string(i)] = Types::Option(matchedOption[1].str(), matchedOptionValue.str());   
+                i++; 
+            }
+            // otherwise, treat the option as a flag.
+            else
+            {
+                options[std::to_string(i)] = Types::Option(matchedOption[1].str(), "true");
+            }
+            
+            continue;
+        }
     }
 
     for (auto & command : getAvailableCommands())
@@ -243,5 +308,5 @@ ExitCode Application::run()
         }
     }
 
-    return ExitCode::NeedHelp;
+    return ExitCode::Ok;
 }

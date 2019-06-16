@@ -29,12 +29,37 @@ namespace Console {
         void printHelp() override;
 
         /**
-         * Retrieve an input from the user.
+         * Print the command help message.
          *
-         * @param const std::string & line
+         * @param Interfaces::CommandInterface * command
          * @return void
          */
-        void writeLine(const std::string & line) override;
+        void printCommandHelp(Interfaces::CommandInterface * command) override;
+
+        /**
+         * Write a string to the console.
+         *
+         * @param const std::string & line
+         * @param Types::Colors color
+         * @return void
+         */
+        void write(const std::string & line, Types::Colors color = Types::Colors::NORMAL) override;
+
+        /**
+         * Write a line to the console.
+         *
+         * @param const std::string & line
+         * @param Types::Colors color
+         * @return void
+         */
+        void writeLine(const std::string & line, Types::Colors color = Types::Colors::NORMAL) override;
+
+        /**
+         * Write a line break to the console.
+         * 
+         * @return void
+         */
+        void writeLineBreak() override;
 
         /**
          * Create a progress bar instance.

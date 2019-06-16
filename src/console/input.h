@@ -44,6 +44,33 @@ namespace Console {
          */
         void setOptions(Console::Types::Options options) override;
 
+        /**
+         * Determine if the -h or --help flag
+         * was supplied.
+         * 
+         * @return bool
+         */
+        bool wantsHelp() override;
+
+        /**
+         * Retrieve the option value
+         * by given option.
+         * 
+         * @param const std::string & option
+         * @return std::string
+         */
+        std::string getOption(const std::string & option) override;
+
+        /**
+         * Retrieve the option value
+         * by given option and alias.
+         * 
+         * @param const std::string & option
+         * @param const std::string & alias
+         * @return std::string
+         */
+        std::string getOption(const std::string & option, const std::string & alias) override;
+
     private:
 
         /**

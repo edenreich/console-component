@@ -77,6 +77,20 @@ std::string LongTask::getDescription()
 }
 
 /**
+ * Retrieve the command options.
+ *
+ * @return Types::AvailableOptions
+ */
+Types::AvailableOptions LongTask::getOptions()
+{
+    Types::AvailableOptions options;
+
+    options["-t"] = std::pair<std::string, std::string>("--threads", "the amount of threads to run");
+
+    return options;
+}
+
+/**
  * Handle the command.
  *
  * @param InputInterface * input
@@ -88,12 +102,12 @@ ExitCode LongTask::handle(Interfaces::InputInterface * input, Interfaces::Output
     output->writeLine("Making a long running tasks..");
     
     std::thread t1(&LongTask::exampleTask, this, output);
-    std::thread t2(&LongTask::exampleTask2, this, output);
+    // std::thread t2(&LongTask::exampleTask2, this, output);
 
     output->writeLine("Spawned tasks..");
 
     t1.join();
-    t2.join();
+    // t2.join();
 
     output->writeLine("Tasks completed..");
 
