@@ -44,19 +44,30 @@ Types::AvailableOptions HelloWorld::getOptions()
  */
 ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
 {
-    output->writeLine("command hello world was called");
-
-    output->writeLine("with options: ");
-    
     for (auto & option : input->getOptions()) 
     {
-        output->writeLine(option);
+        if (input->wantsHelp()) {
+            output->printCommandHelp(this);
+            return ExitCode::NeedHelp;
+        }
     }
 
-    if (true /** wrong input for example */) {
-        output->printCommandHelp(this);
-        return ExitCode::NeedHelp;
+    std::string to = input->getOption("to", "t");
+
+    if (to.empty()) {
+        output->writeLine("Hello World..");
     }
+    else
+    {
+        output->write("Hello "); output->writeLine(to);
+    }
+
+    // for (auto & option : input->getOptions()) 
+    // {
+    //     output->write("alias: "); output->writeLine(option.first);
+    //     output->write("key: ");   output->writeLine(option.second.first);
+    //     output->write("value: "); output->writeLine(option.second.second);
+    // }
 
     return ExitCode::Ok;
 }

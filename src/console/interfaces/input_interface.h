@@ -37,6 +37,33 @@ namespace Console {
              */
             virtual void setOptions(Console::Types::Options options) = 0;
 
+            /**
+             * Determine if the -h or --help flag
+             * was supplied.
+             * 
+             * @return bool
+             */
+            virtual bool wantsHelp() = 0;
+
+            /**
+             * Retrieve the option value
+             * by given option.
+             * 
+             * @param const std::string & option
+             * @return std::string
+             */
+            virtual std::string getOption(const std::string & option) = 0;
+
+            /**
+             * Retrieve the option value
+             * by given option and alias.
+             * 
+             * @param const std::string & option
+             * @param const std::string & alias
+             * @return std::string
+             */
+            virtual std::string getOption(const std::string & option, const std::string & alias) = 0;
+
         };
     }
 }

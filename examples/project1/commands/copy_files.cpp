@@ -45,19 +45,27 @@ Types::AvailableOptions CopyFiles::getOptions()
  */
 ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
 {
-    output->writeLine("Copying files..");
-
-    output->writeLine("with options: ");
-    
-    for (auto & option : input->getOptions()) 
-    {
-        output->writeLine(option);
-    }
-
-    if (true/** wrong input for example */) {
+    if (input->wantsHelp()) {
         output->printCommandHelp(this);
         return ExitCode::NeedHelp;
     }
+
+    if (input->getOption("source").empty() || input->getOption("dest").empty()) {
+        output->printCommandHelp(this);
+        return ExitCode::NeedHelp;
+    }
+
+    std::string source = input->getOption("source");
+    std::string dest = input->getOption("dest");
+
+    output->write("Copying files from "); output->write(source); output->write(" to "); output->writeLine(dest);
+
+    // for (auto & option : input->getOptions()) 
+    // {
+    //     output->write("alias: "); output->writeLine(option.first);
+    //     output->write("key: ");   output->writeLine(option.second.first);
+    //     output->write("value: "); output->writeLine(option.second.second);
+    // }
 
     return ExitCode::Ok;
 }
