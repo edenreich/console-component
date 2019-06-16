@@ -7,15 +7,13 @@
 
     #define COLOR_RESET     0x0015
 
-    #define COLOR_CRITICAL  0x0047
     #define COLOR_RED       0x0047
-    #define COLOR_WARNING   0x0006
     #define COLOR_YELLOW    0x0006
     #define COLOR_GREEN     0x0002
 #else
     #define COLOR_RESET     "\u001b[0m"
 
-    #define COLOR_CRITICAL  "\u001b[41m"
+    #define COLOR_RED       "\u001b[41m"
     #define COLOR_YELLOW    "\u001b[33m"
     #define COLOR_GREEN     "\u001b[32m"
 #endif

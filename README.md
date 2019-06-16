@@ -13,9 +13,10 @@ An easy to use library for building powerful console applications written in C++
 #pragma once
 
 #include <console/interfaces/command_interface.h>
+#include <console/types/collections.h>
 
 namespace Interfaces = Console::Interfaces;
-
+namespace Types = Console::Types;
 
 /**
  * @name copy-files
@@ -39,6 +40,13 @@ public:
      * @return std::string
      */
     std::string getDescription() override;
+
+    /**
+     * Retrieve the command options.
+     *
+     * @return Types::AvailableOptions
+     */
+    Types::AvailableOptions getOptions() override;
 
     /**
      * Handle the command.
@@ -80,6 +88,21 @@ std::string CopyFiles::getDescription()
 }
 
 /**
+ * Retrieve the command options.
+ *
+ * @return Types::AvailableOptions
+ */
+Types::AvailableOptions CopyFiles::getOptions()
+{
+    Types::AvailableOptions options;
+
+    options["-s"] = std::pair<std::string, std::string>("--source", "specific the source");
+    options["-d"] = std::pair<std::string, std::string>("--dest", "specific the destination");
+
+    return options;
+}
+
+/**
  * Handle the command.
  *
  * @param InputInterface * input
@@ -88,18 +111,27 @@ std::string CopyFiles::getDescription()
  */
 ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
 {
-    output->writeLine("Copying files..");
-
-    output->writeLine("with options: ");
-    
-    for (auto & option : input->getOptions()) 
-    {
-        output->writeLine(option);
+    if (input->wantsHelp()) {
+        output->printCommandHelp(this);
+        return ExitCode::NeedHelp;
     }
 
-    // if (/** wrong input */) {
-    //     output->printHelp();
-    //     return ExitCode::NeedHelp;
+    if (input->getOption("source").empty() || input->getOption("dest").empty()) {
+        output->error("wrong options..");
+        output->printCommandHelp(this);
+        return ExitCode::NeedHelp;
+    }
+
+    std::string source = input->getOption("source");
+    std::string dest = input->getOption("dest");
+
+    output->write("Copying files from "); output->write(source); output->write(" to "); output->writeLine(dest);
+
+    // for (auto & option : input->getOptions()) 
+    // {
+    //     output->write("alias: "); output->writeLine(option.first);
+    //     output->write("key: ");   output->writeLine(option.second.first);
+    //     output->write("value: "); output->writeLine(option.second.second);
     // }
 
     return ExitCode::Ok;
@@ -111,6 +143,7 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
 ```cpp
 // main.cpp
 #include <console/application.h>
+
 #include "commands/copy_files.h"
 #include "commands/hello_world.h"
 
