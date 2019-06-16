@@ -2,10 +2,36 @@
 #define COLORS_H
 
 
-#define COLOR_CRITICAL  "\27[1;31m"
-#define COLOR_RESET     "\033[0m"
-#define COLOR_YELLOW    "\27[1;33m"
-#define COLOR_GREEN     "\27[0;32m"
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+    #include <windows.h>
+
+    #define COLOR_RESET     0x0015
+
+    #define COLOR_CRITICAL  0x0047
+    #define COLOR_RED       0x0047
+    #define COLOR_WARNING   0x0006
+    #define COLOR_YELLOW    0x0006
+    #define COLOR_GREEN     0x0002
+#else
+    #define COLOR_RESET     "\u001b[0m"
+
+    #define COLOR_CRITICAL  "\u001b[41m"
+    #define COLOR_YELLOW    "\u001b[33m"
+    #define COLOR_GREEN     "\u001b[32m"
+#endif
+
+namespace Console {
+    namespace Types {
+
+        enum class Colors {
+            NORMAL,
+            RED,
+            YELLOW,
+            GREEN
+        };
+
+    }
+}
 
 
 #endif // COLORS_H
