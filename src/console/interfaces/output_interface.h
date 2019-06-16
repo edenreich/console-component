@@ -17,6 +17,8 @@ namespace Console {
 
     namespace Interfaces {
 
+        class CommandInterface;
+
         /**
          * The Output Interface
          */
@@ -30,6 +32,14 @@ namespace Console {
              * @return void
              */
             virtual void printHelp() = 0;
+
+            /**
+             * Print the command help message.
+             *
+             * @param CommandInterface * command
+             * @return void
+             */
+            virtual void printCommandHelp(CommandInterface * command) = 0;
 
             /**
              * Write a string to the console.

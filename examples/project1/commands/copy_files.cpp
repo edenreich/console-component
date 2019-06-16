@@ -22,6 +22,21 @@ std::string CopyFiles::getDescription()
 }
 
 /**
+ * Retrieve the command options.
+ *
+ * @return Types::AvailableOptions
+ */
+Types::AvailableOptions CopyFiles::getOptions()
+{
+    Types::AvailableOptions options;
+
+    options["-s"] = std::pair<std::string, std::string>("--source", "specific the source");
+    options["-d"] = std::pair<std::string, std::string>("--dest", "specific the destination");
+
+    return options;
+}
+
+/**
  * Handle the command.
  *
  * @param InputInterface * input
@@ -39,10 +54,10 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
         output->writeLine(option);
     }
 
-    // if (/** wrong input */) {
-    //     output->printHelp();
-    //     return ExitCode::NeedHelp;
-    // }
+    if (true/** wrong input for example */) {
+        output->printCommandHelp(this);
+        return ExitCode::NeedHelp;
+    }
 
     return ExitCode::Ok;
 }

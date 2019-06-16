@@ -1,8 +1,10 @@
 #pragma once
 
 #include <console/interfaces/command_interface.h>
+#include <console/types/collections.h>
 
 namespace Interfaces = Console::Interfaces;
+namespace Types = Console::Types;
 
 
 /**
@@ -27,6 +29,13 @@ public:
      * @return std::string
      */
     std::string getDescription() override;
+
+    /**
+     * Retrieve the command options.
+     *
+     * @return Types::AvailableOptions
+     */
+    Types::AvailableOptions getOptions() override;
 
     /**
      * Handle the command.

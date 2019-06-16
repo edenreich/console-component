@@ -39,6 +39,13 @@ namespace Console {
              */
             virtual std::string getDescription() = 0;
 
+            /**
+             * Retrieve the command options.
+             *
+             * @return Types::AvailableOptions
+             */
+            virtual Types::AvailableOptions getOptions() = 0;
+
         };
     }
 }
