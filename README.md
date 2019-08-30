@@ -173,6 +173,8 @@ int main(int argc, char * argv[])
 
 Run `cd build && cmake .. && cmake --build . --target install`
 
+You can also build the project with examples to do that set `WITH_EXAMPLE` flag to `ON`.
+
 ## Distributed Files
 
 After building the project all distributed files should be located in `build/dist`.
