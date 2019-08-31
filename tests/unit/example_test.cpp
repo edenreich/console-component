@@ -4,7 +4,7 @@
 #include <console/application.h>
 #include <console/types/exit_code.h>
 
-TEST(ExampleTest, ItReturnsExitCodeNumberTwoIfNoPositionalArgumentWasGivenFirst) {
+TEST(ParserTest, ItReturnsExitCodeNumberTwoIfNoPositionalArgumentWasGivenFirst) {
     int argc = 2;
     char * argv[] = {(char*)"--option1=value1", (char*)"--option2=value2"}; 
 
