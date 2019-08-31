@@ -59,14 +59,7 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
     std::string source = input->getOption("source");
     std::string dest = input->getOption("dest");
 
-    output->write("Copying files from "); output->write(source); output->write(" to "); output->writeLine(dest);
-
-    // for (auto & option : input->getOptions()) 
-    // {
-    //     output->write("alias: "); output->writeLine(option.first);
-    //     output->write("key: ");   output->writeLine(option.second.first);
-    //     output->write("value: "); output->writeLine(option.second.second);
-    // }
+    output->info("Copying files from %s to %s", source.c_str(), dest.c_str());
 
     return ExitCode::Ok;
 }

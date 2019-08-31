@@ -3,30 +3,8 @@ cmake_minimum_required(VERSION 3.12)
 
 project(todo)
 
-set(PROJECT_ROOT_DIRECTORY 
-    ${PROJECT_SOURCE_DIR}/../../
-)
-
-set(LIBRARY_INCLUDE_DIRECTORY
-    ${PROJECT_ROOT_DIRECTORY}/build/dist/include
-)
-
-set(LIBRARY_LIB_DIRECTORY
-    ${PROJECT_ROOT_DIRECTORY}/build/dist/lib
-)
-
-if(MSVC)
-set(LIBRARY_FILENAME
-    commandline.lib
-)
-else()
-set(LIBRARY_FILENAME
-    libcommandline.a
-)
-endif(MSVC)
-
 include_directories(
-    ${LIBRARY_INCLUDE_DIRECTORY}
+    ${CMAKE_BINARY_DIR}/dist/include
 )
 
 set(HEADERS_CXX_FILES
@@ -45,6 +23,6 @@ add_executable(${PROJECT_NAME}
     ${SOURCES_CXX_FILES}
 )
 
-target_link_libraries(${PROJECT_NAME} ${LIBRARY_LIB_DIRECTORY}/${LIBRARY_FILENAME})
+target_link_libraries(${PROJECT_NAME} commandline)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin)

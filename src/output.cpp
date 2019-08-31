@@ -2,6 +2,7 @@
 #include "console/progress_bar.h"
 
 #include <iostream>
+#include <cstdarg>
 
 using namespace Console;
 
@@ -23,44 +24,31 @@ Output::Output(Interfaces::ApplicationInterface * app)
  */
 void Output::printHelp()
 {
-    writeLine(m_app->getApplicationName(), Types::Colors::GREEN);
-    write("Version: ");
-    writeLine(m_app->getApplicationVersion(), Types::Colors::YELLOW);
+    writeLine(Types::Colors::GREEN, m_app->getApplicationName());
+    writeLine(Types::Colors::YELLOW, "Version: %s", m_app->getApplicationVersion().c_str());
     writeLine(m_app->getApplicationDescription());
-    writeLineBreak();
 
     // Usage
-    writeLine("Usage:", Types::Colors::YELLOW);
-    write("  ");
-    writeLine(m_app->getApplicationUsage());
-    writeLineBreak();
+    writeLine(Types::Colors::YELLOW, "Usage:");
+    writeLine("  %s\n", m_app->getApplicationUsage().c_str());
     
     // Options
-    writeLine("Options:", Types::Colors::YELLOW);
-    write("  ");
-    writeLine("-h, --help\tDisplay this help message");
+    writeLine(Types::Colors::YELLOW, "Options:");
+    writeLine("  -h, --help\tDisplay this help message");
     for (auto & option : m_app->getAvailableGlobalOptions())
     {
-        write("  ");
-        write(option.first);
-        write(", ");
-        write(option.second.first);
-        write("\t");
-        write(option.second.second);
-        writeLineBreak();
+        writeLine("  %s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
     }
 
-    writeLineBreak();
+    write("\n");
 
     // Available Commands
-    writeLine("Available Commands:", Types::Colors::YELLOW);
+    writeLine(Types::Colors::YELLOW, "Available Commands:");
     for (auto & command : m_app->getAvailableCommands())
     {
-        write("  ");
-        write(command.second->getName(), Types::Colors::GREEN);
+        write(Types::Colors::GREEN, "  %s", command.second->getName().c_str());
         write("\t");
-        write(command.second->getDescription());
-        writeLineBreak();
+        writeLine(command.second->getDescription());
     }
 }
 
@@ -73,37 +61,47 @@ void Output::printHelp()
 void Output::printCommandHelp(Interfaces::CommandInterface * command)
 {
     // Usage
-    writeLine("Usage:", Types::Colors::YELLOW);
-    write("  ");
-    write(command->getName());
-    write(" [options]");
-    writeLineBreak();
+    writeLine(Types::Colors::YELLOW, "Usage:");
+    writeLine("  %s [options]\n", command->getName().c_str());
 
     // Options
-    writeLine("Options:", Types::Colors::YELLOW);
-    write("  ");
-    writeLine("-h, --help\tDisplay this help message");
+    writeLine(Types::Colors::YELLOW, "Options:");
+    writeLine("  -h, --help\tDisplay this help message");
     for (auto & option : command->getOptions())
     {
-        write("  ");
-        write(option.first);
-        write(", ");
-        write(option.second.first);
-        write("\t");
-        write(option.second.second);
-        writeLineBreak();
+        writeLine("  %s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
     }
 }
 
 /**
  * Write a string to the console.
  *
- * @param const std::string & line
- * @param Types::Colors color
+ * @param const std::string & message
+ * @param ...
  * @return void
  */
-void Output::write(const std::string & line, Types::Colors color)
+void Output::write(const std::string & message, ...)
 {
+    va_list args;
+
+    va_start(args, message);
+    vprintf(message.c_str(), args);
+    va_end(args);
+}
+
+/**
+ * Write a colored string to the console.
+ *
+ * @param Types::Colors color
+ * @param const std::string & message
+ * @param ... any
+ * @return void
+ */
+void Output::write(Types::Colors color, const std::string & message, ...)
+{
+    va_list args;
+
+    va_start(args, message);
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
         HANDLE hConsole;
         hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -112,22 +110,22 @@ void Output::write(const std::string & line, Types::Colors color)
         switch (color)
         {
         case Types::Colors::NORMAL:
-            printf("%s", line.c_str());
+            vprintf(message.c_str(), args);
             break;
         case Types::Colors::RED:
             SetConsoleTextAttribute(hConsole, COLOR_RED);
-            printf("%s", line.c_str());
+            vprintf(message.c_str(), args);
             break;
         case Types::Colors::YELLOW:
             SetConsoleTextAttribute(hConsole, COLOR_YELLOW);
-            printf("%s", line.c_str());
+            vprintf(message.c_str(), args);
             break;
         case Types::Colors::GREEN:
             SetConsoleTextAttribute(hConsole, COLOR_GREEN);
-            printf("%s", line.c_str());
+            vprintf(message.c_str(), args);
             break;
         default:
-            printf("%s", line.c_str());
+            vprintf(message.c_str(), args);
             break;
         }
 
@@ -136,33 +134,62 @@ void Output::write(const std::string & line, Types::Colors color)
         switch (color)
         {
         case Types::Colors::NORMAL:
-            printf("%s", line.c_str());
+            vprintf(message.c_str(), args);
             break;
         case Types::Colors::RED:
-            printf("%s%s%s", COLOR_RED, line.c_str(), COLOR_RESET);
+            printf(COLOR_RED);
+            vprintf(message.c_str(), args);
+            printf(COLOR_RESET);
             break;
         case Types::Colors::YELLOW:
-            printf("%s%s%s", COLOR_YELLOW, line.c_str(), COLOR_RESET);
+            printf(COLOR_YELLOW);
+            vprintf(message.c_str(), args);
+            printf(COLOR_RESET);
             break;
         case Types::Colors::GREEN:
-            printf("%s%s%s", COLOR_GREEN, line.c_str(), COLOR_RESET);
+            printf(COLOR_GREEN);
+            vprintf(message.c_str(), args);
+            printf(COLOR_RESET);
             break;
         default:
-            printf("%s", line.c_str());
+            vprintf(message.c_str(), args);
             break;
         }
     #endif
+    va_end(args);
 }
 
 /**
  * Write a line to the console.
  *
  * @param const std::string & line
- * @param Types::Colors color
+ * @param ... any
  * @return void
  */
-void Output::writeLine(const std::string & line, Types::Colors color)
+void Output::writeLine(const std::string & line, ...)
 {
+    va_list args;
+
+    va_start(args, line);
+    vprintf(line.c_str(), args);
+    va_end(args);
+
+    printf("\n");
+}
+
+/**
+ * Write a colored line to the console.
+ *
+ * @param Types::Colors color
+ * @param const std::string & line
+ * @param ... any
+ * @return void
+ */
+void Output::writeLine(Types::Colors color, const std::string & line, ...)
+{
+    va_list args;
+
+    va_start(args, line);
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
         HANDLE hConsole;
         hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -171,22 +198,22 @@ void Output::writeLine(const std::string & line, Types::Colors color)
         switch (color)
         {
         case Types::Colors::NORMAL:
-            printf("%s\n", line.c_str());
+            vprintf(line.c_str(), args);
             break;
         case Types::Colors::RED:
             SetConsoleTextAttribute(hConsole, COLOR_RED);
-            printf("%s\n", line.c_str());
+            vprintf(line.c_str(), args);
             break;
         case Types::Colors::YELLOW:
             SetConsoleTextAttribute(hConsole, COLOR_YELLOW);
-            printf("%s\n", line.c_str());
+            vprintf(line.c_str(), args);
             break;
         case Types::Colors::GREEN:
             SetConsoleTextAttribute(hConsole, COLOR_GREEN);
-            printf("%s\n", line.c_str());
+            vprintf(line.c_str(), args);
             break;
         default:
-            printf("%s\n", line.c_str());
+            vprintf(line.c_str(), args);
             break;
         }
 
@@ -195,65 +222,107 @@ void Output::writeLine(const std::string & line, Types::Colors color)
         switch (color)
         {
         case Types::Colors::NORMAL:
-            printf("%s\n", line.c_str());
+            vprintf(line.c_str(), args);
             break;
         case Types::Colors::RED:
-            printf("%s%s%s\n", COLOR_RED, line.c_str(), COLOR_RESET);
+            printf(COLOR_RED);
+            vprintf(line.c_str(), args);
+            printf(COLOR_RESET);
             break;
         case Types::Colors::YELLOW:
-            printf("%s%s%s\n", COLOR_YELLOW, line.c_str(), COLOR_RESET);
+            printf(COLOR_YELLOW);
+            vprintf(line.c_str(), args);
+            printf(COLOR_RESET);
             break;
         case Types::Colors::GREEN:
-            printf("%s%s%s\n", COLOR_GREEN, line.c_str(), COLOR_RESET);
+            printf(COLOR_GREEN);
+            vprintf(line.c_str(), args);
+            printf(COLOR_RESET);
             break;
         default:
-            printf("%s\n", line.c_str());
+            vprintf(line.c_str(), args);
             break;
         }
     #endif
-}
+    va_end(args);
 
-/**
- * Write a line break to the console.
- * 
- * @return void
- */
-void Output::writeLineBreak()
-{
-    std::cout << '\n';
+    printf("\n");
 }
 
 /**
  * Write an error to the console.
  *
  * @param const std::string & line
+ * @param ... any
  * @return void
  */
-void Output::error(const std::string & line)
+void Output::error(const std::string & line, ...)
 {
-    writeLine(line, Types::Colors::RED);
+    va_list args;
+
+    va_start(args, line);
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+        HANDLE hConsole;
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        FlushConsoleInputBuffer(hConsole);
+        SetConsoleTextAttribute(hConsole, COLOR_RED);
+        vprintf(line.c_str(), args);
+        SetConsoleTextAttribute(hConsole, 15);
+    #else
+        printf(COLOR_RED);
+        vprintf(line.c_str(), args);
+        printf(COLOR_RESET);
+    #endif
+    va_end(args);
+
+    printf("\n");
 }
 
 /**
  * Write an info to the console.
  *
  * @param const std::string & line
+ * @param ... any
  * @return void
  */
-void Output::info(const std::string & line)
+void Output::info(const std::string & line, ...)
 {
-    writeLine(line, Types::Colors::NORMAL);
+    va_list p_args;
+
+    va_start(p_args, line);
+    vprintf(line.c_str(), p_args);
+    va_end(p_args);
+
+    printf("\n");
 }
 
 /**
  * Write a warning to the console.
  *
  * @param const std::string & line
+ * @param ... any
  * @return void
  */
-void Output::warning(const std::string & line)
+void Output::warning(const std::string & line, ...)
 {
-    writeLine(line, Types::Colors::YELLOW);
+    va_list args;
+
+    va_start(args, line);
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+        HANDLE hConsole;
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        FlushConsoleInputBuffer(hConsole);
+        SetConsoleTextAttribute(hConsole, COLOR_YELLOW);
+        vprintf(line.c_str(), args);
+        SetConsoleTextAttribute(hConsole, 15);
+    #else
+        printf(COLOR_YELLOW);
+        vprintf(line.c_str(), args);
+        printf(COLOR_RESET);
+    #endif
+    va_end(args);
+
+    printf("\n");
 }
 
 /**

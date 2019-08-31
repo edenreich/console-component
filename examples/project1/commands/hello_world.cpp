@@ -59,15 +59,15 @@ ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::Outp
     }
     else
     {
-        output->write("Hello "); output->writeLine(to);
+        output->writeLine("Hello %s", to.c_str());
     }
 
-    // for (auto & option : input->getOptions()) 
-    // {
-    //     output->write("alias: "); output->writeLine(option.first);
-    //     output->write("key: ");   output->writeLine(option.second.first);
-    //     output->write("value: "); output->writeLine(option.second.second);
-    // }
+    for (auto & option : input->getOptions()) 
+    {
+        output->writeLine("alias: %s", option.first.c_str());
+        output->writeLine("key: %s", option.second.first.c_str());
+        output->writeLine("value: %s", option.second.second.c_str());
+    }
 
     return ExitCode::Ok;
 }
