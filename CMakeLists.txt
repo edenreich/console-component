@@ -6,7 +6,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_PDB_OUTPUT_DIRECTORY     ${CMAKE_BINARY_DIR}/bin)
 
-set(WITH_EXAMPLES OFF)
+option(WITH_EXAMPLES "Compile examples." OFF)
+option(WITH_TESTS "Compile the tests as well." ON)
 
 add_subdirectory(src)
 
@@ -15,4 +16,7 @@ if(WITH_EXAMPLES)
     add_subdirectory(examples/project2)
 endif()
 
-enable_testing()
+if(WITH_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
