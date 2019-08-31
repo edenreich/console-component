@@ -3,28 +3,6 @@ cmake_minimum_required(VERSION 3.12)
 
 project(http)
 
-set(PROJECT_ROOT_DIRECTORY 
-    ${PROJECT_SOURCE_DIR}/../../
-)
-
-set(LIBRARY_INCLUDE_DIRECTORY
-    ${PROJECT_ROOT_DIRECTORY}/build/dist/include
-)
-
-set(LIBRARY_LIB_DIRECTORY
-    ${PROJECT_ROOT_DIRECTORY}/build/dist/lib
-)
-
-if(MSVC)
-set(LIBRARY_FILENAME
-    commandline.lib
-)
-else()
-set(LIBRARY_FILENAME
-    libcommandline.a
-)
-endif(MSVC)
-
 set(HEADERS_CXX_FILES
     commands/long_task.h
 )
@@ -35,7 +13,7 @@ set(SOURCES_CXX_FILES
 )
 
 include_directories(
-    ${LIBRARY_INCLUDE_DIRECTORY}
+    ${CMAKE_BINARY_DIR}/dist/include
 )
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
@@ -46,6 +24,6 @@ add_executable(${PROJECT_NAME}
     ${SOURCES_CXX_FILES}
 )
 
-target_link_libraries(${PROJECT_NAME} ${LIBRARY_LIB_DIRECTORY}/${LIBRARY_FILENAME} Threads::Threads)
+target_link_libraries(${PROJECT_NAME} commandline Threads::Threads)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin)

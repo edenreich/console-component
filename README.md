@@ -125,14 +125,14 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
     std::string source = input->getOption("source");
     std::string dest = input->getOption("dest");
 
-    output->write("Copying files from "); output->write(source); output->write(" to "); output->writeLine(dest);
+    output->writeLine("Copying files from %s to %s", source.c_str(), dest.c_str());
 
-    // for (auto & option : input->getOptions()) 
-    // {
-    //     output->write("alias: "); output->writeLine(option.first);
-    //     output->write("key: ");   output->writeLine(option.second.first);
-    //     output->write("value: "); output->writeLine(option.second.second);
-    // }
+    for (auto & option : input->getOptions()) 
+    {
+        output->write("alias: %s", option.first.c_str());
+        output->write("key: %s", option.second.first.c_str());
+        output->write("value: %s", option.second.second.c_str());
+    }
 
     return ExitCode::Ok;
 }
@@ -172,6 +172,8 @@ int main(int argc, char * argv[])
 ## Build
 
 Run `cd build && cmake .. && cmake --build . --target install`
+
+You can also build the project with examples to do that set `WITH_EXAMPLE` flag to `ON`.
 
 ## Distributed Files
 

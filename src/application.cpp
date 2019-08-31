@@ -230,13 +230,21 @@ ExitCode Application::run()
     if (arguments.empty()) {
         if (shouldPrintHelpAutomatically()) {
             m_output->printHelp();
-            return ExitCode::NeedHelp;
         }
 
-        return ExitCode::Ok;
+        return ExitCode::NeedHelp;
     }
     
     requestedCommand = arguments[0];
+
+    // First positional argument should not be an option, it always has to be a command name (no strings with - or -- are allowed)
+    if (std::regex_search(requestedCommand, matchedOption, isOption) || std::regex_search(requestedCommand, matchedOption, isAliasOption) ) {
+        if (shouldPrintHelpAutomatically()) {
+            m_output->printHelp();
+        }
+
+        return ExitCode::NeedHelp;
+    }
 
     for (std::size_t i = 1; i != arguments.size(); ++i)
     {

@@ -1,6 +1,10 @@
 
 
-project(commandline)
+project(commandline
+    VERSION 1.0.0
+    LANGUAGES C CXX
+    DESCRIPTION "Commandline parser library for building powerful cli."
+)
 
 set(BUILD_SHARED_LIBS OFF)
 set(DISTRIBUTE_DIR ${CMAKE_BINARY_DIR}/dist)
@@ -41,26 +45,14 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/include
 )
 
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/dist)
+file(COPY console DESTINATION ${CMAKE_BINARY_DIR}/dist/include)
+
 install(
     TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION ${DISTRIBUTE_DIR}/bin
     LIBRARY DESTINATION ${DISTRIBUTE_DIR}/lib
     ARCHIVE DESTINATION ${DISTRIBUTE_DIR}/lib
-)
-
-install(
-    FILES ${HEADERS_CXX_FILES_CONSOLE}
-    DESTINATION ${DISTRIBUTE_DIR}/include/console
-)
-
-install(
-    FILES ${HEADERS_CXX_FILES_CONSOLE_INTERFACES}
-    DESTINATION ${DISTRIBUTE_DIR}/include/console/interfaces
-)
-
-install(
-    FILES ${HEADERS_CXX_FILES_CONSOLE_TYPES}
-    DESTINATION ${DISTRIBUTE_DIR}/include/console/types
 )
 
 message("[INFO] - Distribution dir: " ${DISTRIBUTE_DIR})
