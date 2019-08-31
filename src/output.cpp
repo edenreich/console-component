@@ -76,11 +76,11 @@ void Output::printCommandHelp(Interfaces::CommandInterface * command)
 /**
  * Write a string to the console.
  *
- * @param const std::string & message
+ * @param const std::string message
  * @param ...
  * @return void
  */
-void Output::write(const std::string & message, ...)
+void Output::write(const std::string message, ...)
 {
     va_list args;
 
@@ -93,11 +93,11 @@ void Output::write(const std::string & message, ...)
  * Write a colored string to the console.
  *
  * @param Types::Colors color
- * @param const std::string & message
+ * @param const std::string message
  * @param ... any
  * @return void
  */
-void Output::write(Types::Colors color, const std::string & message, ...)
+void Output::write(Types::Colors color, const std::string message, ...)
 {
     va_list args;
 
@@ -162,11 +162,11 @@ void Output::write(Types::Colors color, const std::string & message, ...)
 /**
  * Write a line to the console.
  *
- * @param const std::string & line
+ * @param const std::string line
  * @param ... any
  * @return void
  */
-void Output::writeLine(const std::string & line, ...)
+void Output::writeLine(const std::string line, ...)
 {
     va_list args;
 
@@ -181,11 +181,11 @@ void Output::writeLine(const std::string & line, ...)
  * Write a colored line to the console.
  *
  * @param Types::Colors color
- * @param const std::string & line
+ * @param const std::string line
  * @param ... any
  * @return void
  */
-void Output::writeLine(Types::Colors color, const std::string & line, ...)
+void Output::writeLine(Types::Colors color, const std::string line, ...)
 {
     va_list args;
 
@@ -252,11 +252,11 @@ void Output::writeLine(Types::Colors color, const std::string & line, ...)
 /**
  * Write an error to the console.
  *
- * @param const std::string & line
+ * @param const std::string line
  * @param ... any
  * @return void
  */
-void Output::error(const std::string & line, ...)
+void Output::error(const std::string line, ...)
 {
     va_list args;
 
@@ -281,11 +281,11 @@ void Output::error(const std::string & line, ...)
 /**
  * Write an info to the console.
  *
- * @param const std::string & line
+ * @param const std::string line
  * @param ... any
  * @return void
  */
-void Output::info(const std::string & line, ...)
+void Output::info(const std::string line, ...)
 {
     va_list p_args;
 
@@ -299,11 +299,11 @@ void Output::info(const std::string & line, ...)
 /**
  * Write a warning to the console.
  *
- * @param const std::string & line
+ * @param const std::string line
  * @param ... any
  * @return void
  */
-void Output::warning(const std::string & line, ...)
+void Output::warning(const std::string line, ...)
 {
     va_list args;
 
