@@ -38,6 +38,6 @@ set(SOURCES_CXX_FILES
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES_CXX_FILES})
 target_link_libraries(${PROJECT_NAME} gtest commandline)
 add_test(NAME ParserTest COMMAND ${PROJECT_NAME})
-add_test(NAME OutputTest COMMAND ${PROJECT_NAME})
+add_test(NAME OutputInterfaceTest COMMAND ${PROJECT_NAME})
 
 set_tests_properties(${unit} PROPERTIES TIMEOUT 10)
