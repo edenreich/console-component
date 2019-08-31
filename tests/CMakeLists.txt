@@ -1,10 +1,6 @@
 
 project(tests)
 
-set(SOURCES_CXX_FILES
-  unit/example_test.cpp
-)
-
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
@@ -34,8 +30,14 @@ include_directories(
     ${CMAKE_BINARY_DIR}/dist/include
 )
 
+set(SOURCES_CXX_FILES
+  unit/parser_test.cpp
+  unit/output_test.cpp
+)
+
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES_CXX_FILES})
 target_link_libraries(${PROJECT_NAME} gtest commandline)
-add_test(NAME ExampleTest COMMAND example)
+add_test(NAME ParserTest COMMAND ${PROJECT_NAME})
+add_test(NAME OutputTest COMMAND ${PROJECT_NAME})
 
 set_tests_properties(${unit} PROPERTIES TIMEOUT 10)
