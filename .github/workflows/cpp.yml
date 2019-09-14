@@ -2,14 +2,10 @@ name: C++ CI
 
 on:
   pull_request:
-    paths:
-      - '!*.md'
     branches:
       - master
       - develop
   push:
-    paths:
-      - '!*.md'
     branches:
       - master
       - develop
