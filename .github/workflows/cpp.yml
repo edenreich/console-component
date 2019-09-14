@@ -1,6 +1,10 @@
 name: C++ CI
 
-on: 
+on:
+  pull_request:
+    branches:
+    - master
+    - develop
   push:
     branches:
     - master
