@@ -2,10 +2,14 @@ name: C++ CI
 
 on:
   pull_request:
+    paths:
+      - '!*.md'
     branches:
       - master
       - develop
   push:
+    paths:
+      - '!*.md'
     branches:
       - master
       - develop
@@ -21,8 +25,10 @@ jobs:
     runs-on: ${{matrix.os}}
     
     steps:
-    - uses: actions/checkout@master
-    - name: configure
-      run: cd build && cmake ..
-    - name: build
-      run: cd build && cmake --build . --target install
+      - uses: actions/checkout@master
+
+      - name: configure
+        run: cd build && cmake ..
+
+      - name: build
+        run: cd build && cmake --build . --target install
