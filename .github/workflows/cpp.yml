@@ -24,10 +24,10 @@ jobs:
       - uses: actions/checkout@master
 
       - name: configure
-        run: cd build && cmake ..
+        run: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
 
       - name: build
-        run: cd build && cmake --build . --target install
+        run: cd build && cmake --build . --target install --config Release
 
       - name: test
         run: ./build/bin/tests
