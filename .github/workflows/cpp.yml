@@ -32,3 +32,6 @@ jobs:
 
       - name: build
         run: cd build && cmake --build . --target install
+
+      - name: test
+        run: ./build/bin/tests
