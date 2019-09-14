@@ -12,5 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: check if cmake is installed
-      run: cmake --version
+    - name: configure
+      run: cd build && cmake ..
+    - name: build
+      run: cd build && cmake --build . --target install
