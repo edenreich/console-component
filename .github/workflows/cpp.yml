@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: test
+      run: ls -la
     - name: configure
       run: cd build && cmake ..
     - name: build
