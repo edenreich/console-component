@@ -1,0 +1,16 @@
+name: C++ CI
+
+on: 
+  push:
+    branches:
+    - master
+    - develop
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: check if cmake is installed
+      run: cmake --version
