@@ -30,9 +30,9 @@ jobs:
         run: cd build && cmake --build . --target install --config Release
 
       - name: test
-        if: ${{matrix.os}} == 'ubuntu-latest' || ${{matrix.os}} == 'macOS-latest'
+        if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
         run: ./build/bin/tests
 
       - name: test-on-windows
-        if: ${{matrix.os}} == 'windows-latest'
+        if: matrix.os == 'windows-latest'
         run: build/bin/tests.exe
