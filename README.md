@@ -1,12 +1,12 @@
 <p>
-  <a href="https://github.com/edenreich/ConsoleLibrary"><img alt="GitHub Actions status" src="https://github.com/edenreich/ConsoleLibrary/workflows/default/badge.svg"></a>
+  <a href="https://github.com/edenreich/console-component"><img alt="GitHub Actions status" src="https://github.com/edenreich/console-component/workflows/default/badge.svg"></a>
 </p>
 
 <p align="left"><img src="https://drive.google.com/uc?export=view&id=1lsu360wEzjfEyqACii6PtRU0KSv1B6hK"></p>
 
-# Commandline Parser Library
+# Console Component
 
-An easy to use library for building powerful console applications written in C++.
+An easy to use component for building powerful console applications written in C++.
 
 ## Usage
 
@@ -189,7 +189,7 @@ This project is currently focused to target linux, and yet it also supports wind
 
 ## Motiviation
 
-Often I find myself have to write the same code over and over again, So I've decided to dedicate my time to build a commandline application in an OOP way.
+Often I find myself have to write the same code over and over again, So I've decided to dedicate my time to build a console application in an OOP way.
 After all, all it is needed is a CPP and HEADER file per command.
 Having dedicated class / object per command makes it easier to maintain.
 

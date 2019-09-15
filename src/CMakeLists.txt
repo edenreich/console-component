@@ -1,9 +1,9 @@
 
 
-project(commandline
+project(console
     VERSION 1.0.0
     LANGUAGES C CXX
-    DESCRIPTION "Commandline parser library for building powerful cli."
+    DESCRIPTION "An easy to use component for building powerful console applications."
 )
 
 set(BUILD_SHARED_LIBS OFF)

@@ -24,6 +24,6 @@ add_executable(${PROJECT_NAME}
     ${SOURCES_CXX_FILES}
 )
 
-target_link_libraries(${PROJECT_NAME} commandline Threads::Threads)
+target_link_libraries(${PROJECT_NAME} console Threads::Threads)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin)
