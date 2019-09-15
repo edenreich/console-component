@@ -1,4 +1,6 @@
-![Build](https://github.com/edenreich/ConsoleLibrary/workflows/cpp/badge.svg)
+<p>
+  <a href="https://github.com/edenreich/ConsoleLibrary"><img alt="GitHub Actions status" src="https://github.com/edenreich/ConsoleLibrary/workflows/cpp/badge.svg"></a>
+</p>
 
 <p align="left"><img src="https://drive.google.com/uc?export=view&id=1lsu360wEzjfEyqACii6PtRU0KSv1B6hK"></p>
 
