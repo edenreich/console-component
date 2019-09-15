@@ -32,7 +32,3 @@ jobs:
       - name: test
         if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
         run: ./build/bin/tests
-
-      - name: test-on-windows
-        if: matrix.os == 'windows-latest'
-        run: build/bin/tests.exe
