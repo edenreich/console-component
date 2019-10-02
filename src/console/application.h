@@ -142,9 +142,9 @@ namespace Console {
 		/**
 		 * Getter for the input interface.
 		 * 
-		 * @return Interfaces::InputInterface
+		 * @return Interfaces::InputInterface *
 		 */
-		Interfaces::InputInterface * getInput();
+		Interfaces::InputInterface * getInput() const override;
 
         /**
          * Run the console application.

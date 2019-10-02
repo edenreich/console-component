@@ -127,9 +127,9 @@ namespace Console {
 			/**
 			 * Getter for the input interface.
 			 * 
-			 * @return InputInterface
+			 * @return InputInterface *
 			 */
-			virtual InputInterface * getInput() = 0;
+			virtual InputInterface * getInput() const = 0;
 
 			/**
 			 * Run the console application.
