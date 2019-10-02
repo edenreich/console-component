@@ -15,6 +15,11 @@ namespace Console {
         public:
 
             /**
+             * Destructor
+             */
+            virtual ~InputInterface() {}
+
+            /**
              * Retrieve an input from the user.
              *
              * @param const std::string & question

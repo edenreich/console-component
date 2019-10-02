@@ -17,6 +17,11 @@ namespace Console {
         public:
 
             /**
+             * Destructor
+             */
+            virtual ~CommandInterface() {}
+
+            /**
              * Handle the command.
              *
              * @param InputInterface * input

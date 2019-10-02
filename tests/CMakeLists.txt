@@ -1,4 +1,3 @@
-
 project(tests)
 
 # Download and unpack googletest at configure time

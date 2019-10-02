@@ -200,7 +200,7 @@ bool Application::shouldPrintHelpAutomatically()
  * 
  * @return Interfaces::InputInterface
  */
-Interfaces::InputInterface * Application::getInput()
+Interfaces::InputInterface * Application::getInput() const
 {
     return m_input;
 }
