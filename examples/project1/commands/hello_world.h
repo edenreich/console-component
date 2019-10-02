@@ -43,6 +43,6 @@ public:
      * @param OutputInterface * output
      * @return ExitCode
      */
-    ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output);
+    ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output) override;
 
 };
