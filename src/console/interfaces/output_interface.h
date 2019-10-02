@@ -27,6 +27,11 @@ namespace Console {
         public:
 
             /**
+             * Destructor
+             */
+            virtual ~OutputInterface() {}
+
+            /**
              * Print the help message.
              *
              * @return void
