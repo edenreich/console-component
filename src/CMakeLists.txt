@@ -9,6 +9,9 @@ project(console
 set(BUILD_SHARED_LIBS OFF)
 set(DISTRIBUTE_DIR ${CMAKE_BINARY_DIR}/dist)
 
+set(CMAKE_DEBUG_POSTFIX _${CMAKE_SYSTEM_NAME}_d)
+set(CMAKE_RELEASE_POSTFIX _${CMAKE_SYSTEM_NAME}_r)
+
 set(HEADERS_CXX_FILES_CONSOLE
     console/application.h
     console/output.h

@@ -185,7 +185,7 @@ After building the project all distributed files should be located in `build/dis
 
 ## Target
 
-This project is currently focused to target linux, and yet it also supports windows.
+This project targets Linux, Windows and macOS
 
 ## Motiviation
 
