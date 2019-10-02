@@ -15,6 +15,11 @@ namespace Console {
 
 		public:
 
+            /**
+             * Destructor
+             */
+            virtual ~ApplicationInterface() {}
+
 			/**
 			 * Setter for the application name.
 			 *
