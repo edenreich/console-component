@@ -5,8 +5,10 @@ In this example we build a simple todo application.
 
 ## Build Steps
 
-1. First let's build the library, **in the root directory** run `cd build && cmake .. && cmake --build . --target install`
-2. Lastly let's build this project and link the library, from **this directory** run `cd build && cmake .. && cmake --build . --target install`
+1. Change directory to build `cd build`
+2. Download the library by running `conan install ..`
+3. Configure the project by running `cmake ..`
+4. Build the project by running `cmake --build . --config Release -- -j4`
 
 The binary will be inside of `bin` directory.
 

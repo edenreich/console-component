@@ -1,28 +1,24 @@
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(todo)
+project(todo CXX)
 
-include_directories(
-    ${CMAKE_BINARY_DIR}/dist/include
-)
+# Setup Conan
+if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
+    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+    conan_basic_setup(TARGETS)
+endif()
 
-set(HEADERS_CXX_FILES
-    commands/copy_files.h
-    commands/hello_world.h
-)
-
+# Collect Implemention Files
 set(SOURCES_CXX_FILES
     main.cpp
     commands/copy_files.cpp
     commands/hello_world.cpp
 )
 
-add_executable(${PROJECT_NAME}
-    ${HEADERS_CXX_FILES}
-    ${SOURCES_CXX_FILES}
-)
+# Add Implemention Files To Executable
+add_executable(${PROJECT_NAME} ${SOURCES_CXX_FILES})
 
-target_link_libraries(${PROJECT_NAME} console)
-
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+# Link The Executable With The Library
+target_include_directories(${PROJECT_NAME} PUBLIC CONAN_PKG::console-component)
+target_link_libraries(${PROJECT_NAME} CONAN_PKG::console-component)
