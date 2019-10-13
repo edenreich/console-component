@@ -1,5 +1,0 @@
-[requires]
-console-component/1.0.2
-
-[generators]
-cmake
