@@ -29,9 +29,7 @@ set(SOURCES_CXX_FILES
 add_executable(${PROJECT_NAME} ${SOURCES_CXX_FILES})
 
 # Add The Definition Files
-include_directories(
-    ${CMAKE_BINARY_DIR}/dist/include
-)
+include_directories(${CMAKE_BINARY_DIR}/dist/include)
 
 # Link The Executable With The Library
-target_link_libraries(${PROJECT_NAME} commandline)
+target_link_libraries(${PROJECT_NAME} console)
