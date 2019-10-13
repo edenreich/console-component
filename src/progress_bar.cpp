@@ -1,4 +1,4 @@
-#include "console/progress_bar.h"
+#include "include/console/progress_bar.h"
 
 #include <iostream>
 #include <cmath>

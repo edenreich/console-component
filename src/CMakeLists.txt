@@ -12,26 +12,6 @@ set(DISTRIBUTE_DIR ${CMAKE_BINARY_DIR}/dist)
 set(CMAKE_DEBUG_POSTFIX _${CMAKE_SYSTEM_NAME}_d)
 set(CMAKE_RELEASE_POSTFIX _${CMAKE_SYSTEM_NAME}_r)
 
-set(HEADERS_CXX_FILES_CONSOLE
-    console/application.h
-    console/output.h
-    console/input.h
-    console/progress_bar.h
-)
-
-set(HEADERS_CXX_FILES_CONSOLE_INTERFACES
-    console/interfaces/command_interface.h
-    console/interfaces/output_interface.h
-    console/interfaces/input_interface.h
-    console/interfaces/application_interface.h
-)
-
-set(HEADERS_CXX_FILES_CONSOLE_TYPES
-    console/types/colors.h
-    console/types/exit_code.h
-    console/types/collections.h
-)
-
 set(SOURCES_CXX_FILES
     application.cpp
     output.cpp
@@ -40,16 +20,8 @@ set(SOURCES_CXX_FILES
 )
 
 add_library(${PROJECT_NAME}
-    ${HEADERS_CXX_FILES}
     ${SOURCES_CXX_FILES}
 )
-
-target_include_directories(${PROJECT_NAME} PUBLIC 
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/include
-)
-
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/dist)
-file(COPY console DESTINATION ${CMAKE_BINARY_DIR}/dist/include)
 
 install(
     TARGETS ${PROJECT_NAME}
@@ -57,5 +29,7 @@ install(
     LIBRARY DESTINATION ${DISTRIBUTE_DIR}/lib
     ARCHIVE DESTINATION ${DISTRIBUTE_DIR}/lib
 )
+
+install(DIRECTORY include DESTINATION ${DISTRIBUTE_DIR})
 
 message("[INFO] - Distribution dir: " ${DISTRIBUTE_DIR})
