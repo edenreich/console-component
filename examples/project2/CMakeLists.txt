@@ -35,4 +35,4 @@ find_package(Threads REQUIRED)
 add_executable(${PROJECT_NAME} ${SOURCES_CXX_FILES})
 
 # Link The Executable With The Libraries
-target_link_libraries(${PROJECT_NAME} commandline Threads::Threads)
+target_link_libraries(${PROJECT_NAME} console Threads::Threads)
