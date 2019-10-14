@@ -1,3 +1,6 @@
+
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+
 project(tests)
 
 # Download and unpack googletest at configure time
