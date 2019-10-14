@@ -15,17 +15,6 @@ option(WITH_TESTS "Compile the tests as well." ON)
 
 add_subdirectory(src)
 
-install(
-    TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION ${DISTRIBUTE_DIR}/bin
-    LIBRARY DESTINATION ${DISTRIBUTE_DIR}/lib
-    ARCHIVE DESTINATION ${DISTRIBUTE_DIR}/lib
-)
-
-file(COPY src/include DESTINATION ${DISTRIBUTE_DIR})
-
-message(STATUS "[INFO] Distributed Files Directory: " ${DISTRIBUTE_DIR})
-
 if(WITH_TESTS)
     enable_testing()
     add_subdirectory(tests)
