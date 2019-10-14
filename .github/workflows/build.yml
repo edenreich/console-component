@@ -23,17 +23,39 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: configure
-        run: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
+      - name: download latest cmake - Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get purge cmake
+          curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Linux-x86_64.tar.gz -o /tmp/cmake.tar.gz
+          tar -xf /tmp/cmake.tar.gz --directory /tmp
+          cp /tmp/cmake*/bin/cmake /usr/bin/cmake
+          cp -R /tmp/cmake*/share/cmake-3.15 /usr/share/cmake-3.15
 
-      - name: build
-        run: cd build && cmake --build . --target install --config Release
+      - name: debug
+        run: cmake --version
+      
+      # - name: download latest cmake - MacOS
+      #   if: matrix.os == 'macOS-latest'
+      #   run: |
+      #     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+      #     brew install cmake
 
-      - name: test
-        if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
-        run: ./build/bin/tests
+      # - name: download latest cmake - Windows
+      #   if: matrix.os == 'windows-latest'
+      #   run: curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-win64-x64.msi -o install.msi && install.msi
 
-      - uses: actions/upload-artifact@master
-        with:
-          name: binaries
-          path: build/dist/lib
+      # - name: configure
+      #   run: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
+
+      # - name: build
+      #   run: cd build && cmake --build . --target install --config Release
+
+      # - name: test
+      #   if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      #   run: ./build/bin/tests
+
+      # - uses: actions/upload-artifact@master
+      #   with:
+      #     name: binaries
+      #     path: build/dist/lib
