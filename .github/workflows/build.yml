@@ -23,6 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: debug
+        run: cmake --version
+
       - name: configure
         run: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
 
