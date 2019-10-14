@@ -32,8 +32,8 @@ jobs:
           sudo cp /tmp/cmake*/bin/cmake /usr/local/bin/cmake
           sudo cp -R /tmp/cmake*/share/cmake-3.15 /usr/share/cmake-3.15
 
-      # - name: debug
-      #   run: cmake --version
+      - name: debug
+        run: cmake --version
       
       # - name: download latest cmake - MacOS
       #   if: matrix.os == 'macOS-latest'
