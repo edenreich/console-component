@@ -6,7 +6,7 @@ project(console)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(WITH_TESTS "Compile the tests as well." OFF)
+option(WITH_TESTS "Compile the tests as well." ON)
 
 add_subdirectory(src)
 
