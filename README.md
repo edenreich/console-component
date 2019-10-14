@@ -12,7 +12,12 @@ An easy to use component for building powerful console applications written in C
 
 The easiest way to install this component is by using CPM (CMake Package Manager):
 
-1. First let's download the CPM script `mkdir -p cmake && wget -O cmake/CPM.cmake https://raw.githubusercontent.com/TheLartians/CPM/master/cmake/CPM.cmake`
+1. First let's download the CPM script 
+
+```sh 
+    mkdir -p cmake && wget -O cmake/CPM.cmake https://raw.githubusercontent.com/TheLartians/CPM/master/cmake/CPM.cmake
+```
+
 2. Then include this script in your CMake file:
 
 ```cmake
