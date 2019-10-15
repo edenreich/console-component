@@ -15,9 +15,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-latest
+          # - ubuntu-latest
+          # - macOS-latest
           - windows-latest
-          - macOS-latest
     runs-on: ${{matrix.os}}
     
     steps:
@@ -32,21 +32,23 @@ jobs:
       #     sudo cp /tmp/cmake*/bin/cmake /usr/local/bin/cmake
       #     sudo cp -R /tmp/cmake*/share/cmake-3.15 /usr/local/share/cmake-3.15
 
-      - name: download latest cmake - MacOS
-        if: matrix.os == 'macOS-latest'
-        run: |
-          sudo rm -rf /usr/local/bin/cmake
-          sudo curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Darwin-x86_64.tar.gz -o /tmp/cmake.tar.gz
-          sudo tar -xf /tmp/cmake.tar.gz --directory /tmp
-          sudo cp /tmp/cmake*/bin/cmake /usr/local/bin/cmake
-          sudo cp -R /tmp/cmake*/share/cmake-3.15 /usr/local/share/cmake-3.15
+      # @todo fix download for macos
+      # - name: download latest cmake - MacOS
+      #   if: matrix.os == 'macOS-latest'
+      #   run: |
+      #     sudo rm -rf /usr/local/bin/cmake
+      #     sudo curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Darwin-x86_64.tar.gz -o /tmp/cmake.tar.gz
+      #     sudo tar -xf /tmp/cmake.tar.gz --directory /tmp
+      #     sudo cp /tmp/cmake*/bin/cmake /usr/local/bin/cmake
+      #     sudo cp -R /tmp/cmake*/share/cmake-3.15 /usr/local/share/cmake-3.15
+
+      - name: download latest cmake - Windows
+        if: matrix.os == 'windows-latest'
+        run: curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-win64-x64.msi -o install.msi && install.msi
 
       - name: debug
         run: cmake --version
 
-      # - name: download latest cmake - Windows
-      #   if: matrix.os == 'windows-latest'
-      #   run: curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-win64-x64.msi -o install.msi && install.msi
 
       # - name: configure
       #   run: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
