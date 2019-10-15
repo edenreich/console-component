@@ -15,22 +15,22 @@ jobs:
     strategy:
       matrix:
         os:
-          # - ubuntu-latest
+          - ubuntu-latest
           # - macOS-latest
           - windows-latest
     runs-on: ${{matrix.os}}
     
     steps:
-      # - uses: actions/checkout@master
+      - uses: actions/checkout@master
 
-      # - name: download latest cmake - Ubuntu
-      #   if: matrix.os == 'ubuntu-latest'
-      #   run: |
-      #     sudo rm -rf /usr/local/bin/cmake
-      #     sudo curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Linux-x86_64.tar.gz -o /tmp/cmake.tar.gz
-      #     sudo tar -xf /tmp/cmake.tar.gz --directory /tmp
-      #     sudo cp /tmp/cmake*/bin/cmake /usr/local/bin/cmake
-      #     sudo cp -R /tmp/cmake*/share/cmake-3.15 /usr/local/share/cmake-3.15
+      - name: download latest cmake - Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo rm -rf /usr/local/bin/cmake
+          sudo curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Linux-x86_64.tar.gz -o /tmp/cmake.tar.gz
+          sudo tar -xf /tmp/cmake.tar.gz --directory /tmp
+          sudo cp /tmp/cmake*/bin/cmake /usr/local/bin/cmake
+          sudo cp -R /tmp/cmake*/share/cmake-3.15 /usr/local/share/cmake-3.15
 
       # @todo fix download for macos
       # - name: download latest cmake - MacOS
@@ -51,20 +51,17 @@ jobs:
           jar xf cmake.zip
           cp -R "cmake-3.15.4-win64-x64" "C:\Program Files\CMake"
 
-      - name: debug
-        run: cmake --version
+      - name: configure
+        run: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
 
-      # - name: configure
-      #   run: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
+      - name: build
+        run: cd build && cmake --build . --target install --config Release
 
-      # - name: build
-      #   run: cd build && cmake --build . --target install --config Release
+      - name: test
+        if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+        run: ./build/bin/tests
 
-      # - name: test
-      #   if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
-      #   run: ./build/bin/tests
-
-      # - uses: actions/upload-artifact@master
-      #   with:
-      #     name: binaries
-      #     path: build/dist/lib
+      - uses: actions/upload-artifact@master
+        with:
+          name: binaries
+          path: build/dist/lib
