@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{matrix.os}}
     
     steps:
-      - uses: actions/checkout@master
+      # - uses: actions/checkout@master
 
       # - name: download latest cmake - Ubuntu
       #   if: matrix.os == 'ubuntu-latest'
