@@ -42,12 +42,14 @@ jobs:
       #     sudo cp /tmp/cmake*/bin/cmake /usr/local/bin/cmake
       #     sudo cp -R /tmp/cmake*/share/cmake-3.15 /usr/local/share/cmake-3.15
 
-      - name: download latest cmake - Windows
-        if: matrix.os == 'windows-latest'
-        run: curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-win64-x64.msi -o install.msi && install.msi
+      # - name: download latest cmake - Windows
+      #   if: matrix.os == 'windows-latest'
+      #   run: |
+      #     curl -L https://www.7-zip.org/a/7z1900.exe -o
+      #     curl -L https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-win64-x64.zip -o cmake.zip
 
       - name: debug
-        run: cmake --version
+        run: which cmake
 
 
       # - name: configure
