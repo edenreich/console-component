@@ -51,8 +51,8 @@ jobs:
           jar xf cmake.zip
           cp -R "cmake-3.15.4-win64-x64" "C:\Program Files\CMake"
 
-      # - name: debug
-      #   run: printenv
+      - name: debug
+        run: cmake --version
 
       # - name: configure
       #   run: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
