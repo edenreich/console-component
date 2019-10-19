@@ -1,13 +1,14 @@
 
 # Example 2
 
-In this example we will use async operations.
+In this example we will link with pthreads to leverage async operations.
 
 ## Build Steps
 
-1. First let's build the library, **in the root directory** run `cd build && cmake .. && cmake --build . --target install`
-2. Lastly let's build this project and link the library, from **this directory** run `cd build && cmake .. && cmake --build . --target install`
+1. Change directory to build `cd build`
+2. Configure the project by running `cmake ..`
+3. Build the project by running `cmake --build . --config Release -- -j4`
 
-The binary will be inside of `bin` directory.
+The executable will be inside of the `bin` directory.
 
-Let's test that it works, just run: `./bin/http`
+Let's test that it works, from the root directory of this project just run: `./bin/http`

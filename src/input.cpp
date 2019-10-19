@@ -1,4 +1,4 @@
-#include "console/input.h"
+#include "include/console/input.h"
 
 #include <iostream>
 

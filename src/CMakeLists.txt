@@ -1,36 +1,16 @@
 
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 project(console
-    VERSION 1.0.0
+    VERSION 1.0.2
     LANGUAGES C CXX
     DESCRIPTION "An easy to use component for building powerful console applications."
 )
 
 set(BUILD_SHARED_LIBS OFF)
-set(DISTRIBUTE_DIR ${CMAKE_BINARY_DIR}/dist)
 
 set(CMAKE_DEBUG_POSTFIX _${CMAKE_SYSTEM_NAME}_d)
 set(CMAKE_RELEASE_POSTFIX _${CMAKE_SYSTEM_NAME}_r)
-
-set(HEADERS_CXX_FILES_CONSOLE
-    console/application.h
-    console/output.h
-    console/input.h
-    console/progress_bar.h
-)
-
-set(HEADERS_CXX_FILES_CONSOLE_INTERFACES
-    console/interfaces/command_interface.h
-    console/interfaces/output_interface.h
-    console/interfaces/input_interface.h
-    console/interfaces/application_interface.h
-)
-
-set(HEADERS_CXX_FILES_CONSOLE_TYPES
-    console/types/colors.h
-    console/types/exit_code.h
-    console/types/collections.h
-)
 
 set(SOURCES_CXX_FILES
     application.cpp
@@ -40,16 +20,8 @@ set(SOURCES_CXX_FILES
 )
 
 add_library(${PROJECT_NAME}
-    ${HEADERS_CXX_FILES}
     ${SOURCES_CXX_FILES}
 )
-
-target_include_directories(${PROJECT_NAME} PUBLIC 
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/include
-)
-
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/dist)
-file(COPY console DESTINATION ${CMAKE_BINARY_DIR}/dist/include)
 
 install(
     TARGETS ${PROJECT_NAME}
@@ -58,4 +30,6 @@ install(
     ARCHIVE DESTINATION ${DISTRIBUTE_DIR}/lib
 )
 
-message("[INFO] - Distribution dir: " ${DISTRIBUTE_DIR})
+file(COPY include DESTINATION ${DISTRIBUTE_DIR})
+
+message(STATUS "[INFO] Distributed Files Directory: " ${DISTRIBUTE_DIR})

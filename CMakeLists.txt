@@ -1,31 +1,19 @@
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+
+project(console
+    VERSION 1.0.2
+    LANGUAGES C CXX
+    DESCRIPTION "An easy to use component for building powerful console applications."
+)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(DISTRIBUTE_DIR ${CMAKE_BINARY_DIR}/dist)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY         ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY         ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY         ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_PDB_OUTPUT_DIRECTORY             ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_PDB_OUTPUT_DIRECTORY_RELEASE     ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_PDB_OUTPUT_DIRECTORY_DEBUG       ${CMAKE_BINARY_DIR}/bin)
-
-option(WITH_EXAMPLES "Compile examples." ON)
 option(WITH_TESTS "Compile the tests as well." ON)
 
 add_subdirectory(src)
-
-if(WITH_EXAMPLES)
-    add_subdirectory(examples/project1)
-    add_subdirectory(examples/project2)
-endif()
 
 if(WITH_TESTS)
     enable_testing()

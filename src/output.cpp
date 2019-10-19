@@ -1,5 +1,5 @@
-#include "console/output.h"
-#include "console/progress_bar.h"
+#include "include/console/output.h"
+#include "include/console/progress_bar.h"
 
 #include <iostream>
 #include <cstdarg>

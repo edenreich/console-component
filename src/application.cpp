@@ -2,9 +2,9 @@
 #include <typeinfo>
 #include <regex>
 
-#include "console/application.h"
-#include "console/input.h"
-#include "console/output.h"
+#include "include/console/application.h"
+#include "include/console/input.h"
+#include "include/console/output.h"
 
 using namespace Console;
 

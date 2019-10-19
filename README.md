@@ -8,6 +8,42 @@
 
 An easy to use component for building powerful console applications written in C++.
 
+## Install
+
+The easiest way to install this component is by using CPM (CMake Package Manager):
+
+1. First let's download the CPM script 
+
+```sh 
+    mkdir -p cmake && wget -O cmake/CPM.cmake https://raw.githubusercontent.com/TheLartians/CPM/master/cmake/CPM.cmake
+```
+
+2. Then include this script in your CMake file:
+
+```cmake
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+
+project(my_cli CXX)
+
+# Add The CPM Script
+include(cmake/CPM.cmake)
+
+# Add The console-component
+CPMAddPackage(
+  NAME console
+  GITHUB_REPOSITORY edenreich/console-component
+  VERSION 1.0.2
+  OPTIONS
+    "WITH_TESTS Off"
+)
+```
+
+3. Create a directory called commands, there you would store all your command objects (see usage on how to create a command).
+
+4. Lastly link your executable with the console-component like this: `target_link_libraries(${PROJECT_NAME} console)`
+
+If you having trouble setting this up, take a look on the a examples first.
+
 ## Usage
 
 1. Create a command definition file:
@@ -175,9 +211,7 @@ int main(int argc, char * argv[])
 
 ## Build
 
-Run `cd build && cmake .. && cmake --build . --target install`
-
-You can also build the project with examples to do that set `WITH_EXAMPLE` flag to `ON`.
+Run `cd build && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release --target install -- -j4`
 
 ## Distributed Files
 
