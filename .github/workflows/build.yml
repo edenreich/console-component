@@ -23,11 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Update CMake
-        uses: edenreich/cmake@master
-        with:
-          os: ${{ matrix.os }}
-
       # CMake needs to be updated only on ubuntu unfortunately, github recently updated the version on macOS and Windows, need to wait for ubuntu
       - name: download latest cmake - Ubuntu
         if: matrix.os == 'ubuntu-latest'
