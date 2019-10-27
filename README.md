@@ -2,11 +2,23 @@
   <a href="https://github.com/edenreich/console-component"><img alt="GitHub Actions status" src="https://github.com/edenreich/console-component/workflows/build/badge.svg"></a>
 </p>
 
-<p align="left"><img src="https://drive.google.com/uc?export=view&id=1lsu360wEzjfEyqACii6PtRU0KSv1B6hK"></p>
-
 # Console Component
 
 An easy to use component for building powerful console applications written in C++.
+
+- [Console Component](#Console-Component)
+    - [Preview](#Preview)
+    - [Install](#Install)
+    - [Usage](#Usage)
+    - [Build](#Build)
+    - [Target](#Target)
+    - [Motiviation](#Motiviation)
+    - [Contribution](#Contribution)
+
+## Preview
+
+<p align="left"><img src="https://drive.google.com/uc?export=view&id=1lsu360wEzjfEyqACii6PtRU0KSv1B6hK"></p>
+
 
 ## Install
 
@@ -217,8 +229,6 @@ int main(int argc, char * argv[])
 
 Run `cd build && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release --target install -- -j4`
 
-## Distributed Files
-
 After building the project all distributed files should be located in `build/dist`.
 
 ## Target
@@ -233,6 +243,6 @@ Having dedicated class / object per command makes it easier to maintain.
 
 Because it is statically linked library I have avoided including external libraries and kept it as simple as possible.
 
-## Contributing Guidelines
+## Contribution
 
 If you find this project interesting or have any suggestions, feel free to send a pull request. I will be more than happy to review it.
