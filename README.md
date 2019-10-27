@@ -10,7 +10,12 @@ An easy to use component for building powerful console applications written in C
 
 ## Install
 
-The easiest way to install this component is by using CPM (CMake Package Manager):
+The easiest way to install is to use the vscode extension:
+
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=EdenReich.cpp-console-generator)
+[Repository](https://github.com/edenreich/console-generator-ext-vscode)
+
+Alternative this could also be achieved in few manual steps:
 
 1. First let's download the CPM script 
 
@@ -60,7 +65,6 @@ namespace Types = Console::Types;
 
 /**
  * @name copy-files
- * @description copy files from <source> to <dist>
  */
 class CopyFiles : public Interfaces::CommandInterface
 {
