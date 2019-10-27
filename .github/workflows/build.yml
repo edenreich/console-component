@@ -34,10 +34,14 @@ jobs:
           sudo cp -R /tmp/cmake*/share/cmake-3.15 /usr/local/share/cmake-3.15
 
       - name: configure
-        run: cd build && cmake .. -DCMAKE_BUILD_TYPE=Release
+        run: |
+          cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
 
       - name: build
-        run: cd build && cmake --build . --target install --config Release
+        run: |
+          cd build 
+          cmake --build . --target install --config Release
 
       - name: test
         if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
