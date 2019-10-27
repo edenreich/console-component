@@ -12,8 +12,8 @@ An easy to use component for building powerful console applications written in C
 
 The easiest way to install is to use the vscode extension:
 
-[Marketplace](https://marketplace.visualstudio.com/items?itemName=EdenReich.cpp-console-generator)
-[Repository](https://github.com/edenreich/console-generator-ext-vscode)
+- [Marketplace](https://marketplace.visualstudio.com/items?itemName=EdenReich.cpp-console-generator)
+- [Repository](https://github.com/edenreich/console-generator-ext-vscode)
 
 Alternative this could also be achieved in few manual steps:
 
