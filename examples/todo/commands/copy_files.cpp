@@ -8,7 +8,7 @@
  */
 std::string CopyFiles::getName()
 {
-    return "copy-files";
+    return "copy:files";
 }
 
 /**
@@ -24,7 +24,7 @@ std::string CopyFiles::getDescription()
 /**
  * Retrieve the command options.
  *
- * @return Types::AvailableOptions
+ * @return Console::Types::AvailableOptions
  */
 Types::AvailableOptions CopyFiles::getOptions()
 {
@@ -39,8 +39,8 @@ Types::AvailableOptions CopyFiles::getOptions()
 /**
  * Handle the command.
  *
- * @param InputInterface * input
- * @param OutputInterface * output
+ * @param Console::Interfaces::InputInterface * input
+ * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
 ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)

@@ -1,6 +1,6 @@
 #include <console/application.h>
 
-#include "commands/long_task.h"
+#include "commands/fetch_data.h"
 
 
 int main(int argc, char * argv[])
@@ -9,12 +9,12 @@ int main(int argc, char * argv[])
 
     app.setApplicationName("Http Client");
     app.setApplicationUsage("./bin/http <command> [options]");
-    app.setApplicationVersion("1.0");
+    app.setApplicationVersion("1.0.0");
     app.setAutoPrintHelp(true);
 
     app.setApplicationDescription("This is my awesome http client.");
 
-    app.addCommand(new LongTask);
+    app.addCommand(new FetchData);
 
     return app.run();
 }

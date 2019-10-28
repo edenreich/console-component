@@ -7,10 +7,9 @@ namespace Interfaces = Console::Interfaces;
 namespace Types = Console::Types;
 
 /**
- * @name copy-files
- * @description copy files from <source> to <dist>
+ * @name hello:world
  */
-class CopyFiles : public Interfaces::CommandInterface
+class HelloWorld : public Interfaces::CommandInterface
 {
 
 public:
@@ -32,15 +31,15 @@ public:
     /**
      * Retrieve the command options.
      *
-     * @return Types::AvailableOptions
+     * @return Console::Types::AvailableOptions
      */
     Types::AvailableOptions getOptions() override;
 
     /**
      * Handle the command.
      *
-     * @param InputInterface * input
-     * @param OutputInterface * output
+     * @param Console::Interfaces::InputInterface * input
+     * @param Console::Interfaces::OutputInterface * output
      * @return ExitCode
      */
     ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output) override;

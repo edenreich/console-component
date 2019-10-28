@@ -6,12 +6,10 @@
 namespace Interfaces = Console::Interfaces;
 namespace Types = Console::Types;
 
-
 /**
- * @name long-task
- * @description this is a long running task
+ * @name copy:files
  */
-class LongTask : public Interfaces::CommandInterface
+class CopyFiles : public Interfaces::CommandInterface
 {
 
 public:
@@ -33,35 +31,17 @@ public:
     /**
      * Retrieve the command options.
      *
-     * @return Types::AvailableOptions
+     * @return Console::Types::AvailableOptions
      */
     Types::AvailableOptions getOptions() override;
 
     /**
      * Handle the command.
      *
-     * @param InputInterface * input
-     * @param OutputInterface * output
+     * @param Console::Interfaces::InputInterface * input
+     * @param Console::Interfaces::OutputInterface * output
      * @return ExitCode
      */
     ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output) override;
-
-private:
-
-    /**
-     * An example for a long running task
-     * 
-     * @param Interfaces::OutputInterface * output
-     * @return void
-     */
-    void exampleTask(Interfaces::OutputInterface * output);
-
-    /**
-     * An example for a long running task2
-     * 
-     * @param Interfaces::OutputInterface * output
-     * @return void
-     */
-    void exampleTask2(Interfaces::OutputInterface * output);
 
 };

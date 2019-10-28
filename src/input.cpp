@@ -23,6 +23,8 @@ Input::Input(Interfaces::ApplicationInterface * app)
  */
 std::string Input::ask(const std::string & question)
 {
+    std::cout << question << '\n';
+
     std::string input;
 
     std::cin >> input;
@@ -39,7 +41,6 @@ Types::Options Input::getOptions()
 {
     return m_options;
 }
-
 
 /**
  * Setter for the parsed options.

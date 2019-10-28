@@ -1,5 +1,5 @@
 
-# Example 1
+# Todo Application
 
 In this example we build a simple todo application.
 
@@ -7,7 +7,7 @@ In this example we build a simple todo application.
 
 1. Change directory to build `cd build`
 2. Configure the project by running `cmake ..`
-3. Build the project by running `cmake --build . --config Release -- -j4`
+3. Build the project by running `cmake --build . --config Release -- -j8`
 
 The executable will be inside of `bin` directory.
 
