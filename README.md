@@ -82,7 +82,7 @@ namespace Interfaces = Console::Interfaces;
 namespace Types = Console::Types;
 
 /**
- * @name copy-files
+ * @name copy:files
  */
 class CopyFiles : public Interfaces::CommandInterface
 {
@@ -106,15 +106,15 @@ public:
     /**
      * Retrieve the command options.
      *
-     * @return Types::AvailableOptions
+     * @return Console::Types::AvailableOptions
      */
     Types::AvailableOptions getOptions() override;
 
     /**
      * Handle the command.
      *
-     * @param InputInterface * input
-     * @param OutputInterface * output
+     * @param Console::Interfaces::InputInterface * input
+     * @param Console::Interfaces::OutputInterface * output
      * @return ExitCode
      */
     ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output) override;
@@ -136,7 +136,7 @@ public:
  */
 std::string CopyFiles::getName()
 {
-    return "copy-files";
+    return "copy:files";
 }
 
 /**
@@ -152,7 +152,7 @@ std::string CopyFiles::getDescription()
 /**
  * Retrieve the command options.
  *
- * @return Types::AvailableOptions
+ * @return Console::Types::AvailableOptions
  */
 Types::AvailableOptions CopyFiles::getOptions()
 {
@@ -167,8 +167,8 @@ Types::AvailableOptions CopyFiles::getOptions()
 /**
  * Handle the command.
  *
- * @param InputInterface * input
- * @param OutputInterface * output
+ * @param Console::Interfaces::InputInterface * input
+ * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
 ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
@@ -179,7 +179,7 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
     }
 
     if (input->getOption("source").empty() || input->getOption("dest").empty()) {
-        output->error("wrong options..");
+        output->warning("wrong options..");
         output->printCommandHelp(this);
         return ExitCode::NeedHelp;
     }
@@ -187,14 +187,7 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
     std::string source = input->getOption("source");
     std::string dest = input->getOption("dest");
 
-    output->writeLine("Copying files from %s to %s", source.c_str(), dest.c_str());
-
-    for (auto & option : input->getOptions()) 
-    {
-        output->write("alias: %s", option.first.c_str());
-        output->write("key: %s", option.second.first.c_str());
-        output->write("value: %s", option.second.second.c_str());
-    }
+    output->info("Copying files from %s to %s", source.c_str(), dest.c_str());
 
     return ExitCode::Ok;
 }
@@ -216,7 +209,7 @@ int main(int argc, char * argv[])
 
     app.setApplicationName("Todo List Application");
     app.setApplicationUsage("./bin/todo [command] [options]");
-    app.setApplicationVersion("1.0");
+    app.setApplicationVersion("1.0.0");
     app.setAutoPrintHelp(true);
 
     app.setApplicationDescription("Todo List Application");

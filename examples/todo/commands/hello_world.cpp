@@ -8,7 +8,7 @@
  */
 std::string HelloWorld::getName()
 {
-    return "hello-world";
+    return "hello:world";
 }
 
 /**
@@ -24,7 +24,7 @@ std::string HelloWorld::getDescription()
 /**
  * Retrieve the command options.
  *
- * @return Types::AvailableOptions
+ * @return Console::Types::AvailableOptions
  */
 Types::AvailableOptions HelloWorld::getOptions()
 {
@@ -38,8 +38,8 @@ Types::AvailableOptions HelloWorld::getOptions()
 /**
  * Handle the command.
  *
- * @param InputInterface * input
- * @param OutputInterface * output
+ * @param Console::Interfaces::InputInterface * input
+ * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
 ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
@@ -52,7 +52,7 @@ ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::Outp
         }
     }
 
-    std::string to = input->getOption("to", "t");
+    std::string to = input->ask("To who ?");
 
     if (to.empty()) {
         output->writeLine("Hello World..");
