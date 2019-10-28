@@ -17,8 +17,14 @@ An easy to use component for building powerful console applications written in C
 
 ## Preview
 
-<p align="left"><img src="https://drive.google.com/uc?export=view&id=1lsu360wEzjfEyqACii6PtRU0KSv1B6hK"></p>
+- Install:
+<p align="left"><img src="https://drive.google.com/uc?export=view&id=1iRNoWwXo0ZsWZ8T9VdJXouaabXP5r6ra"></p>
 
+- Create Project:
+<p align="left"><img src="https://drive.google.com/uc?export=view&id=1B-M_ITUwNsU3nTICGJ1l91aEggJmZx5z"></p>
+
+- Usage:
+<p align="left"><img src="https://drive.google.com/uc?export=view&id=1MX0seuhVv7uu4QzMaEXHMyDJRviioSy0"></p>
 
 ## Install
 
