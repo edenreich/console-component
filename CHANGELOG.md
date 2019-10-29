@@ -1,6 +1,21 @@
 # Release Notes
 
-## [Unreleased](https://github.com/edenreich/console-component/compare/v1.0.4...master)
+## [Unreleased](https://github.com/edenreich/console-component/compare/v1.0.5...master)
+
+## [v1.0.4 (2019-10-30)](https://github.com/edenreich/console-component/compare/v1.0.3...v1.0.4)
+
+### Added
+- None
+
+### Changed
+- Modified the examples to be a bit more clearer
+
+### Removed
+- None
+
+### Fixed
+- Fixed Input::ask method, now it prints the question and waits for input
+
 
 ## [v1.0.3 (2019-10-21)](https://github.com/edenreich/console-component/compare/v1.0.2...v1.0.3)
 
@@ -13,6 +28,8 @@
 ### Removed
 - None
 
+### Fixed
+- None
 
 ## [v1.0.2 (2019-08-31)](https://github.com/edenreich/console-component/compare/v1.0.1...v1.0.2)
 
@@ -26,6 +43,9 @@
 
 ### Removed
 - Removed output::writeLineBreak() method
+
+### Fixed
+- None
 
 
 ## [v1.0.1 (2019-06-16)](https://github.com/edenreich/console-component/compare/v1.0.0...v1.0.1)
@@ -42,6 +62,9 @@
 ### Removed
 - None
 
+### Fixed
+- None
+
 
 ## [v1.0.0 (2019-06-15)](https://github.com/edenreich/console-component/compare/v1.0.0...v1.0.0)
 
@@ -56,5 +79,8 @@
 - None
 
 ### Removed
+- None
+
+### Fixed
 - None
 
