@@ -26,6 +26,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(SOURCES_CXX_FILES
   unit/parser_test.cpp
   unit/output_test.cpp
+  unit/input_test.cpp
 )
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES_CXX_FILES})
