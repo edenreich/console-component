@@ -9,19 +9,18 @@
 #include <sstream>
 #include <console/progress_bar.h>
 
-
 /**
  * An example for a long running task
- * 
+ *
  * @param Console::Interfaces::OutputInterface * output
  * @return std::vector
  */
-std::vector<int> FetchData::fetch(Console::Interfaces::OutputInterface * output)
+std::vector<int> FetchData::fetch(Console::Interfaces::OutputInterface* output)
 {
     const unsigned int items = 15;
     std::vector<int> veryUsefuldata;
 
-    Console::ProgressBar * progressBar = output->createProgressBar(items);
+    Console::ProgressBar* progressBar = output->createProgressBar(items);
 
     output->writeLine("Sending an http request..");
 
@@ -50,20 +49,14 @@ std::vector<int> FetchData::fetch(Console::Interfaces::OutputInterface * output)
  *
  * @return std::string
  */
-std::string FetchData::getName()
-{
-    return "fetch:data";
-}
+std::string FetchData::getName() { return "fetch:data"; }
 
 /**
  * Retrieve the description of the command.
  *
  * @return std::string
  */
-std::string FetchData::getDescription()
-{
-    return "fetch data from an external api";
-}
+std::string FetchData::getDescription() { return "fetch data from an external api"; }
 
 /**
  * Retrieve the command options.
@@ -86,8 +79,8 @@ Types::AvailableOptions FetchData::getOptions()
  * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
-ExitCode FetchData::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
-{    
+ExitCode FetchData::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output)
+{
     // Create a packaged task.
     std::packaged_task<std::vector<int>()> task(std::bind(&FetchData::fetch, this, output));
 
@@ -99,13 +92,13 @@ ExitCode FetchData::handle(Interfaces::InputInterface * input, Interfaces::Outpu
 
     // Get the promise results.
     std::vector<int> results = promise.get();
-    
+
     // Join the thread to the main context.
     t.join();
 
     // Output the results.
     output->writeLine("Printing the results from the request:");
-    for (auto & data : results)
+    for (auto& data : results)
     {
         std::stringstream ss;
         ss << data;

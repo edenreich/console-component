@@ -13,7 +13,6 @@ class CopyFiles : public Interfaces::CommandInterface
 {
 
 public:
-
     /**
      * Retrieve the name of the command.
      *
@@ -42,6 +41,5 @@ public:
      * @param Console::Interfaces::OutputInterface * output
      * @return ExitCode
      */
-    ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output) override;
-
+    ExitCode handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) override;
 };

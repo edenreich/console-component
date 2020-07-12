@@ -4,13 +4,13 @@
 #include <console/output.h>
 #include <console/types/colors.h>
 
-
-TEST(OutputInterfaceTest, ItOutputsFormattedMessages) {
+TEST(OutputInterfaceTest, ItOutputsFormattedMessages)
+{
     int argc = 2;
-    char * argv[] = {(char*)"command", (char*)"--option=value"};
-    
+    char* argv[] = { (char*)"command", (char*)"--option=value" };
+
     Console::Application app(argc, argv);
-    
+
     Console::Output outputInterface(&app);
 
     testing::internal::CaptureStdout();
@@ -25,12 +25,13 @@ TEST(OutputInterfaceTest, ItOutputsFormattedMessages) {
     EXPECT_EQ(output2, "0.15$ item");
 }
 
-TEST(OutputInterfaceTest, ItOutputsColoredMessages) {
+TEST(OutputInterfaceTest, ItOutputsColoredMessages)
+{
     int argc = 2;
-    char * argv[] = {(char*)"command", (char*)"--option=value"};
-    
+    char* argv[] = { (char*)"command", (char*)"--option=value" };
+
     Console::Application app(argc, argv);
-    
+
     Console::Output outputInterface(&app);
 
     testing::internal::CaptureStdout();
@@ -40,12 +41,13 @@ TEST(OutputInterfaceTest, ItOutputsColoredMessages) {
     EXPECT_EQ(output, "\x1B[41mError occured on line 105 at in this file\x1B[0m");
 }
 
-TEST(OutputInterfaceTest, ItOutputsAnError) {
+TEST(OutputInterfaceTest, ItOutputsAnError)
+{
     int argc = 2;
-    char * argv[] = {(char*)"command", (char*)"--option=value"};
-    
+    char* argv[] = { (char*)"command", (char*)"--option=value" };
+
     Console::Application app(argc, argv);
-    
+
     Console::Output outputInterface(&app);
 
     testing::internal::CaptureStdout();

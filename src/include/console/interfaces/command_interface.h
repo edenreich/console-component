@@ -5,17 +5,18 @@
 #include "input_interface.h"
 #include "output_interface.h"
 
-
-namespace Console {
-    namespace Interfaces {
+namespace Console
+{
+    namespace Interfaces
+    {
 
         /**
          * The Command Interface
          */
-        class CommandInterface {
+        class CommandInterface
+        {
 
         public:
-
             /**
              * Destructor
              */
@@ -28,7 +29,7 @@ namespace Console {
              * @param InputInterface * output
              * @return ExitCode
              */
-            virtual ExitCode handle(InputInterface * input, OutputInterface * output) = 0;
+            virtual ExitCode handle(InputInterface* input, OutputInterface* output) = 0;
 
             /**
              * Retrieve the name of the command.
@@ -50,10 +51,8 @@ namespace Console {
              * @return Types::AvailableOptions
              */
             virtual Types::AvailableOptions getOptions() = 0;
-
         };
     }
 }
-
 
 #endif // COMMAND_H

@@ -3,17 +3,18 @@
 
 #include "../types/collections.h"
 
-
-namespace Console {
-    namespace Interfaces {
+namespace Console
+{
+    namespace Interfaces
+    {
 
         /**
          * The Input Interface
          */
-        class InputInterface {
+        class InputInterface
+        {
 
         public:
-
             /**
              * Destructor
              */
@@ -25,7 +26,7 @@ namespace Console {
              * @param const std::string & question
              * @return std::string
              */
-            virtual std::string ask(const std::string & question) = 0;
+            virtual std::string ask(const std::string& question) = 0;
 
             /**
              * Retrieve the parsed options.
@@ -45,7 +46,7 @@ namespace Console {
             /**
              * Determine if the -h or --help flag
              * was supplied.
-             * 
+             *
              * @return bool
              */
             virtual bool wantsHelp() = 0;
@@ -53,25 +54,23 @@ namespace Console {
             /**
              * Retrieve the option value
              * by given option.
-             * 
+             *
              * @param const std::string & option
              * @return std::string
              */
-            virtual std::string getOption(const std::string & option) = 0;
+            virtual std::string getOption(const std::string& option) = 0;
 
             /**
              * Retrieve the option value
              * by given option and alias.
-             * 
+             *
              * @param const std::string & option
              * @param const std::string & alias
              * @return std::string
              */
-            virtual std::string getOption(const std::string & option, const std::string & alias) = 0;
-
+            virtual std::string getOption(const std::string& option, const std::string& alias) = 0;
         };
     }
 }
-
 
 #endif // INPUT_INTERFACE_H
