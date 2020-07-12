@@ -25,6 +25,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(COMMANDS_CXX_FILES
   unit/commands/greetings/hi.cpp
+  unit/commands/greetings/hey.cpp
   unit/commands/todo/list.cpp
 )
 

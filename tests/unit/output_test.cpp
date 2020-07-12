@@ -5,6 +5,7 @@
 #include <console/types/colors.h>
 
 #include "commands/greetings/hi.h"
+#include "commands/greetings/hey.h"
 #include "commands/todo/list.h"
 
 TEST(OutputInterfaceTest, ItOutputsFormattedMessages)
@@ -116,6 +117,7 @@ TEST(OutputInterfaceTest, ItOutputsApplicationAvailableCommandsInDifferentNamesp
     Console::Output outputInterface(&app);
 
     app.addCommand(new Hi); // namespace of greetings
+    app.addCommand(new Hey); // namespace of greetings
     app.addCommand(new List); // namespace of todo
 
     testing::internal::CaptureStdout();
@@ -128,6 +130,7 @@ TEST(OutputInterfaceTest, ItOutputsApplicationAvailableCommandsInDifferentNamesp
                                        "Available Commands:\x1B[0m\n"
                                        "\x1B[33m greetings\n\x1B[0m"
                                        "\x1B[32m  greetings:hi\x1B[0m\tSay Hi\n"
+                                       "\x1B[32m  greetings:hey\x1B[0m\tSay Hey\n"
                                        "\x1B[33m todo\n\x1B[0m"
                                        "\x1B[32m  todo:list\x1B[0m\tList all todos\n\n";
 
