@@ -111,6 +111,35 @@ namespace Console
 
     private:
         /**
+         * Print the title of the application.
+         *
+         * @return void
+         */
+        void printApplicationTitle();
+
+        /**
+         * Print the usage line of the application.
+         *
+         * @return void
+         */
+        void printApplicationUsage();
+
+        /**
+         * Print the global options of the application.
+         *
+         * @return void
+         */
+        void printApplicationOptions();
+
+        /**
+         * Print the available commands.
+         *
+         * @return void
+         */
+        void printAvailableCommands();
+
+    private:
+        /**
          * Store the application interface.
          *
          * @var Interfaces::ApplicationInterface * m_app
