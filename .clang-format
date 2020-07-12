@@ -1,0 +1,28 @@
+BasedOnStyle: WebKit
+
+Language: Cpp
+# BreakBeforeBraces: Stroustrup
+SortIncludes: false
+ColumnLimit: 150
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+IndentWidth: 4
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: All
+PenaltyBreakComment: 60
+SpacesBeforeTrailingComments: 1
+TabWidth: 4
+UseTab: Never
+BraceWrapping:
+  AfterClass:      true
+  AfterControlStatement: true
+  AfterEnum:       true
+  AfterFunction:   true
+  AfterNamespace:  true
+  AfterObjCDeclaration: true
+  AfterStruct:     true
+  AfterUnion:      true
+  BeforeCatch:     true
+  BeforeElse:      true
+  IndentBraces:    false
+BreakBeforeBraces: Custom
