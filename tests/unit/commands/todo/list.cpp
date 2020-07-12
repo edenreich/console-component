@@ -33,7 +33,4 @@ Types::AvailableOptions List::getOptions()
  * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
-ExitCode List::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output)
-{
-    return ExitCode::Ok;
-}
+ExitCode List::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) { return ExitCode::Ok; }

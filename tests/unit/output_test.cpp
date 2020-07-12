@@ -7,8 +7,8 @@
 
 TEST(OutputInterfaceTest, ItOutputsFormattedMessages)
 {
-    int argc = 2;
-    char* argv[] = { (char*)"command", (char*)"--option=value" };
+    int argc = 1;
+    char* argv[1] = { (char*)"scriptname" };
 
     Console::Application app(argc, argv);
 
@@ -28,8 +28,8 @@ TEST(OutputInterfaceTest, ItOutputsFormattedMessages)
 
 TEST(OutputInterfaceTest, ItOutputsColoredMessages)
 {
-    int argc = 2;
-    char* argv[] = { (char*)"command", (char*)"--option=value" };
+    int argc = 1;
+    char* argv[1] = { (char*)"scriptname" };
 
     Console::Application app(argc, argv);
 
@@ -44,8 +44,8 @@ TEST(OutputInterfaceTest, ItOutputsColoredMessages)
 
 TEST(OutputInterfaceTest, ItOutputsAnError)
 {
-    int argc = 2;
-    char* argv[] = { (char*)"command", (char*)"--option=value" };
+    int argc = 1;
+    char* argv[1] = { (char*)"scriptname" };
 
     Console::Application app(argc, argv);
 
@@ -60,8 +60,8 @@ TEST(OutputInterfaceTest, ItOutputsAnError)
 
 TEST(OutputInterfaceTest, ItOutputsApplicationHelp)
 {
-    int argc = 0;
-    char* argv[] = {};
+    int argc = 1;
+    char* argv[1] = { (char*)"scriptname" };
 
     Console::Application app(argc, argv);
 
@@ -71,19 +71,18 @@ TEST(OutputInterfaceTest, ItOutputsApplicationHelp)
     outputInterface.printHelp();
     const std::string output = testing::internal::GetCapturedStdout();
 
-    const std::string expectedOutput = 
-"\x1B[32m\x1B[0m\n\x1B[33mVersion: \x1B[0m\n\n\x1B[33m"
-"Usage:\x1B[0m\n  app [command] [options]\n\n\n\x1B[33mOptions:\x1B[0m\n"
-"  -h, --help\tDisplay this help message\n\n\x1B[33m"
-"Available Commands:\x1B[0m\n\n";
+    const std::string expectedOutput = "\x1B[32m\x1B[0m\n\x1B[33mVersion: \x1B[0m\n\n\x1B[33m"
+                                       "Usage:\x1B[0m\n  app [command] [options]\n\n\n\x1B[33mOptions:\x1B[0m\n"
+                                       "  -h, --help\tDisplay this help message\n\n\x1B[33m"
+                                       "Available Commands:\x1B[0m\n\n";
 
     EXPECT_EQ(output, expectedOutput);
 }
 
 TEST(OutputInterfaceTest, ItOutputsApplicationAvailableCommands)
 {
-    int argc = 0;
-    char* argv[] = {};
+    int argc = 1;
+    char* argv[1] = { (char*)"scriptname" };
 
     Console::Application app(argc, argv);
 
@@ -95,12 +94,11 @@ TEST(OutputInterfaceTest, ItOutputsApplicationAvailableCommands)
     outputInterface.printHelp();
     const std::string output = testing::internal::GetCapturedStdout();
 
-    const std::string expectedOutput = 
-"\x1B[32m\x1B[0m\n\x1B[33mVersion: \x1B[0m\n\n\x1B[33m"
-"Usage:\x1B[0m\n  app [command] [options]\n\n\n\x1B[33mOptions:\x1B[0m\n"
-"  -h, --help\tDisplay this help message\n\n\x1B[33m"
-"Available Commands:\x1B[0m\n"
-"\x1B[32m  todo:list\x1B[0m\tList all todos\n\n";
+    const std::string expectedOutput = "\x1B[32m\x1B[0m\n\x1B[33mVersion: \x1B[0m\n\n\x1B[33m"
+                                       "Usage:\x1B[0m\n  app [command] [options]\n\n\n\x1B[33mOptions:\x1B[0m\n"
+                                       "  -h, --help\tDisplay this help message\n\n\x1B[33m"
+                                       "Available Commands:\x1B[0m\n"
+                                       "\x1B[32m  todo:list\x1B[0m\tList all todos\n\n";
 
     EXPECT_EQ(output, expectedOutput);
 }
