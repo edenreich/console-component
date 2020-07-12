@@ -4,9 +4,10 @@
 #include <console/application.h>
 #include <console/types/exit_code.h>
 
-TEST(ParserTest, ItReturnsExitCodeNumberTwoIfNoPositionalArgumentWasGivenFirst) {
+TEST(ParserTest, ItReturnsExitCodeNumberTwoIfNoPositionalArgumentWasGivenFirst)
+{
     int argc = 2;
-    char * argv[] = {(char*)"--option1=value1", (char*)"--option2=value2"}; 
+    char* argv[] = { (char*)"--option1=value1", (char*)"--option2=value2" };
 
     Console::Application app(argc, argv);
 

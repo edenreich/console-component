@@ -1,25 +1,18 @@
 #include "hello_world.h"
 
-
 /**
  * Retrieve the name of the command.
  *
  * @return std::string
  */
-std::string HelloWorld::getName()
-{
-    return "hello:world";
-}
+std::string HelloWorld::getName() { return "hello:world"; }
 
 /**
  * Retrieve the description of the command.
  *
  * @return std::string
  */
-std::string HelloWorld::getDescription()
-{
-    return "output hello world to the console";
-}
+std::string HelloWorld::getDescription() { return "output hello world to the console"; }
 
 /**
  * Retrieve the command options.
@@ -42,11 +35,12 @@ Types::AvailableOptions HelloWorld::getOptions()
  * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
-ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
+ExitCode HelloWorld::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output)
 {
-    for (auto & option : input->getOptions()) 
+    for (auto& option : input->getOptions())
     {
-        if (input->wantsHelp()) {
+        if (input->wantsHelp())
+        {
             output->printCommandHelp(this);
             return ExitCode::NeedHelp;
         }
@@ -54,7 +48,8 @@ ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::Outp
 
     std::string to = input->ask("To who ?");
 
-    if (to.empty()) {
+    if (to.empty())
+    {
         output->writeLine("Hello World..");
     }
     else
@@ -62,7 +57,7 @@ ExitCode HelloWorld::handle(Interfaces::InputInterface * input, Interfaces::Outp
         output->writeLine("Hello %s", to.c_str());
     }
 
-    for (auto & option : input->getOptions()) 
+    for (auto& option : input->getOptions())
     {
         output->writeLine("alias: %s", option.first.c_str());
         output->writeLine("key: %s", option.second.first.c_str());

@@ -1,25 +1,18 @@
 #include "copy_files.h"
 
-
 /**
  * Retrieve the name of the command.
  *
  * @return std::string
  */
-std::string CopyFiles::getName()
-{
-    return "copy:files";
-}
+std::string CopyFiles::getName() { return "copy:files"; }
 
 /**
  * Retrieve the description of the command.
  *
  * @return std::string
  */
-std::string CopyFiles::getDescription()
-{
-    return "copy files from <source> to <dist>";
-}
+std::string CopyFiles::getDescription() { return "copy files from <source> to <dist>"; }
 
 /**
  * Retrieve the command options.
@@ -43,14 +36,16 @@ Types::AvailableOptions CopyFiles::getOptions()
  * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
-ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output)
+ExitCode CopyFiles::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output)
 {
-    if (input->wantsHelp()) {
+    if (input->wantsHelp())
+    {
         output->printCommandHelp(this);
         return ExitCode::NeedHelp;
     }
 
-    if (input->getOption("source").empty() || input->getOption("dest").empty()) {
+    if (input->getOption("source").empty() || input->getOption("dest").empty())
+    {
         output->warning("wrong options..");
         output->printCommandHelp(this);
         return ExitCode::NeedHelp;

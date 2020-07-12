@@ -5,15 +5,14 @@
 
 using namespace Console;
 
-
 /**
  * - Initialize the progress bar.
  * - Initialize the total items to progress.
- * 
+ *
  * @param Interfaces::OutputInterface * output
  * @param const unsigned int totalItems
  */
-ProgressBar::ProgressBar(Interfaces::OutputInterface * output, const unsigned int totalItems)
+ProgressBar::ProgressBar(Interfaces::OutputInterface* output, const unsigned int totalItems)
 {
     m_output = output;
     m_totalItems = totalItems;
@@ -31,20 +30,14 @@ ProgressBar::ProgressBar(Interfaces::OutputInterface * output, const unsigned in
 /**
  * Destroy the progress bar.
  */
-ProgressBar::~ProgressBar()
-{
-    stop();
-}
+ProgressBar::~ProgressBar() { stop(); }
 
 /**
  * Start the progress bar.
  *
  * @return void
  */
-void ProgressBar::start()
-{
-    draw();
-}
+void ProgressBar::start() { draw(); }
 
 /**
  * Advance the progress bar.
@@ -54,9 +47,12 @@ void ProgressBar::start()
  */
 void ProgressBar::advance(const unsigned int progress)
 {
-    if (m_progress < m_totalItems) {
+    if (m_progress < m_totalItems)
+    {
         m_progress = m_progress + progress;
-    } else {
+    }
+    else
+    {
         m_progress = m_totalItems;
     }
 
@@ -65,7 +61,7 @@ void ProgressBar::advance(const unsigned int progress)
 
 /**
  * Stop the progress bar.
- * 
+ *
  * @return void
  */
 void ProgressBar::stop()
@@ -76,25 +72,26 @@ void ProgressBar::stop()
 
 /**
  * Draw the progress bar.
- * 
+ *
  * @return void
  */
 void ProgressBar::draw()
 {
     m_indicator.resize(m_width);
-    std::fill(m_indicator.begin(), m_indicator.begin()+m_width, '-');
+    std::fill(m_indicator.begin(), m_indicator.begin() + m_width, '-');
 
-    #pragma warning( push )
-    #pragma warning( disable : 4244)
+#pragma warning(push)
+#pragma warning(disable : 4244)
     m_currentPercentage = std::floor((static_cast<float>(m_progress) / static_cast<float>(m_totalItems)) * m_maxPercentage);
     m_position = std::floor((static_cast<float>(m_currentPercentage) / static_cast<float>(m_maxPercentage)) * m_width);
-    #pragma warning( pop )
+#pragma warning(pop)
 
-    if (m_currentPercentage > m_maxPercentage) {
+    if (m_currentPercentage > m_maxPercentage)
+    {
         m_position = m_width;
     }
 
-    std::fill(m_indicator.begin(), m_indicator.begin()+m_position, '=');
+    std::fill(m_indicator.begin(), m_indicator.begin() + m_position, '=');
     m_indicator[m_position] = '>';
 
     std::cout << '\r' << m_currentPercentage << '%' << " [" << m_indicator.c_str() << "] items: " << m_progress << " / " << m_totalItems;

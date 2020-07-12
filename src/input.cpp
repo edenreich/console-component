@@ -4,16 +4,12 @@
 
 using namespace Console;
 
-
 /**
  * Initialize the application interface.
- * 
+ *
  * @param Interfaces::ApplicationInterface * app
  */
-Input::Input(Interfaces::ApplicationInterface * app)
-{
-    m_app = app;
-}
+Input::Input(Interfaces::ApplicationInterface* app) { m_app = app; }
 
 /**
  * Retrieve an input from the user.
@@ -21,7 +17,7 @@ Input::Input(Interfaces::ApplicationInterface * app)
  * @param const std::string & question
  * @return std::string
  */
-std::string Input::ask(const std::string & question)
+std::string Input::ask(const std::string& question)
 {
     std::cout << question << '\n';
 
@@ -37,10 +33,7 @@ std::string Input::ask(const std::string & question)
  *
  * @return Options
  */
-Types::Options Input::getOptions()
-{
-    return m_options;
-}
+Types::Options Input::getOptions() { return m_options; }
 
 /**
  * Setter for the parsed options.
@@ -48,20 +41,17 @@ Types::Options Input::getOptions()
  * @return Types::Options options
  * @return void
  */
-void Input::setOptions(Types::Options options)
-{
-    m_options = options;
-}
+void Input::setOptions(Types::Options options) { m_options = options; }
 
 /**
  * Determine if the -h or --help flag
  * was supplied.
- * 
+ *
  * @return bool
  */
 bool Input::wantsHelp()
 {
-    for (auto & option : getOptions()) 
+    for (auto& option : getOptions())
     {
         if (option.first == "h" || option.second.first == "help")
             return true;
@@ -73,13 +63,13 @@ bool Input::wantsHelp()
 /**
  * Retrieve the option value
  * by given option.
- * 
+ *
  * @param const std::string & option
  * @return std::string
  */
-std::string Input::getOption(const std::string & option)
+std::string Input::getOption(const std::string& option)
 {
-    for (auto & availableOption : getOptions()) 
+    for (auto& availableOption : getOptions())
     {
         if (availableOption.second.first == option)
             return availableOption.second.second;
@@ -91,14 +81,14 @@ std::string Input::getOption(const std::string & option)
 /**
  * Retrieve the option value
  * by given option and alias.
- * 
+ *
  * @param const std::string & option
  * @param const std::string & alias
  * @return std::string
  */
-std::string Input::getOption(const std::string & option, const std::string & alias)
+std::string Input::getOption(const std::string& option, const std::string& alias)
 {
-    for (auto & availableOption : getOptions()) 
+    for (auto& availableOption : getOptions())
     {
         if (availableOption.first == alias || availableOption.second.first == option)
             return availableOption.second.second;
