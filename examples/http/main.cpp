@@ -2,8 +2,7 @@
 
 #include "commands/fetch_data.h"
 
-
-int main(int argc, char * argv[])
+int main(int argc, char* argv[])
 {
     Console::Application app(argc, argv);
 

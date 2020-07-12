@@ -8,15 +8,14 @@
 
 using namespace Console;
 
-
 /**
  * - Initialize the arguments count
  * - initialize the arguments values
- * 
+ *
  * @param int & argc
  * @param char ** argv
  */
-Application::Application(int & argc, char ** argv)
+Application::Application(int& argc, char** argv)
 {
     m_argc = argc;
     m_argv = argv;
@@ -33,7 +32,7 @@ Application::Application(int & argc, char ** argv)
  */
 Application::~Application()
 {
-    for (auto & command : getAvailableCommands())
+    for (auto& command : getAvailableCommands())
     {
         delete command.second;
     }
@@ -48,20 +47,14 @@ Application::~Application()
  * @param const std::string & name
  * @return void
  */
-void Application::setApplicationName(const std::string & name)
-{
-    m_name = name;
-}
+void Application::setApplicationName(const std::string& name) { m_name = name; }
 
 /**
  * Getter for the application name.
  *
  * @return std::string
  */
-std::string Application::getApplicationName()
-{
-    return m_name;
-}
+std::string Application::getApplicationName() { return m_name; }
 
 /**
  * Setter for the application usage.
@@ -69,20 +62,14 @@ std::string Application::getApplicationName()
  * @param const std::string & usage
  * @return void
  */
-void Application::setApplicationUsage(const std::string & usage)
-{
-    m_usage = usage;
-}
+void Application::setApplicationUsage(const std::string& usage) { m_usage = usage; }
 
 /**
  * Getter for the application usage.
  *
  * @return std::string
  */
-std::string Application::getApplicationUsage()
-{
-    return m_usage;
-}
+std::string Application::getApplicationUsage() { return m_usage; }
 
 /**
  * Setter for the application version.
@@ -90,20 +77,14 @@ std::string Application::getApplicationUsage()
  * @param const std::string & version
  * @return void
  */
-void Application::setApplicationVersion(const std::string & version)
-{
-    m_version = version;
-}
+void Application::setApplicationVersion(const std::string& version) { m_version = version; }
 
 /**
  * Getter for the application version.
  *
  * @return std::string
  */
-std::string Application::getApplicationVersion()
-{
-    return m_version;
-}
+std::string Application::getApplicationVersion() { return m_version; }
 
 /**
  * Setter for the application description.
@@ -111,20 +92,14 @@ std::string Application::getApplicationVersion()
  * @param const std::string & description
  * @return void
  */
-void Application::setApplicationDescription(const std::string & description)
-{
-    m_description = description;
-}
+void Application::setApplicationDescription(const std::string& description) { m_description = description; }
 
 /**
  * Getter for the application description.
  *
  * @return std::string
  */
-std::string Application::getApplicationDescription()
-{
-    return m_description;
-}
+std::string Application::getApplicationDescription() { return m_description; }
 
 /**
  * Add a command instance to the application.
@@ -132,10 +107,10 @@ std::string Application::getApplicationDescription()
  * @param CommandInterface * command
  * @return void
  */
-void Application::addCommand(Interfaces::CommandInterface * command)
+void Application::addCommand(Interfaces::CommandInterface* command)
 {
     std::string commandName = typeid(*(command)).name();
-    
+
     m_commands[commandName] = command;
 }
 
@@ -145,10 +120,7 @@ void Application::addCommand(Interfaces::CommandInterface * command)
  *
  * @return Types::Commands
  */
-Types::Commands Application::getAvailableCommands()
-{
-    return m_commands;
-}
+Types::Commands Application::getAvailableCommands() { return m_commands; }
 
 /**
  * Add a command instance to the application.
@@ -158,8 +130,8 @@ Types::Commands Application::getAvailableCommands()
  * @param const std::string & alias
  * @return void
  */
-void Application::addGlobalOption(const std::string & option, const std::string & description, const std::string & alias)
-{   
+void Application::addGlobalOption(const std::string& option, const std::string& description, const std::string& alias)
+{
     m_options[alias] = Types::Option(option, description);
 }
 
@@ -168,10 +140,7 @@ void Application::addGlobalOption(const std::string & option, const std::string 
  *
  * @return Types::AvailableOptions
  */
-Types::AvailableOptions Application::getAvailableGlobalOptions()
-{
-    return m_options;
-}
+Types::AvailableOptions Application::getAvailableGlobalOptions() { return m_options; }
 
 /**
  * Set print help to automatically.
@@ -179,10 +148,7 @@ Types::AvailableOptions Application::getAvailableGlobalOptions()
  * @param bool yes
  * @return void
  */
-void Application::setAutoPrintHelp(bool yes)
-{
-    m_printHelpAutomatically = yes;
-}
+void Application::setAutoPrintHelp(bool yes) { m_printHelpAutomatically = yes; }
 
 /**
  * Indicates if the application should print
@@ -190,24 +156,18 @@ void Application::setAutoPrintHelp(bool yes)
  *
  * @return bool
  */
-bool Application::shouldPrintHelpAutomatically()
-{
-    return m_printHelpAutomatically;
-}
+bool Application::shouldPrintHelpAutomatically() { return m_printHelpAutomatically; }
 
 /**
  * Getter for the input interface.
- * 
+ *
  * @return Interfaces::InputInterface
  */
-Interfaces::InputInterface * Application::getInput() const
-{
-    return m_input;
-}
+Interfaces::InputInterface* Application::getInput() const { return m_input; }
 
 /**
  * Run the console application.
- * 
+ *
  * @return ExitCode
  */
 ExitCode Application::run()
@@ -227,19 +187,23 @@ ExitCode Application::run()
     std::smatch matchedOptionAlias;
     std::smatch matchedOptionValue;
 
-    if (arguments.empty()) {
-        if (shouldPrintHelpAutomatically()) {
+    if (arguments.empty())
+    {
+        if (shouldPrintHelpAutomatically())
+        {
             m_output->printHelp();
         }
 
         return ExitCode::NeedHelp;
     }
-    
+
     requestedCommand = arguments[0];
 
     // First positional argument should not be an option, it always has to be a command name (no strings with - or -- are allowed)
-    if (std::regex_search(requestedCommand, matchedOption, isOption) || std::regex_search(requestedCommand, matchedOption, isAliasOption) ) {
-        if (shouldPrintHelpAutomatically()) {
+    if (std::regex_search(requestedCommand, matchedOption, isOption) || std::regex_search(requestedCommand, matchedOption, isAliasOption))
+    {
+        if (shouldPrintHelpAutomatically())
+        {
             m_output->printHelp();
         }
 
@@ -249,28 +213,32 @@ ExitCode Application::run()
     for (std::size_t i = 1; i != arguments.size(); ++i)
     {
         // Is it an option with = sign ? (i.e --option=value)
-        if (std::regex_search(arguments[i], matchedOptionWithEqual, isOptionWithEqual)) {
+        if (std::regex_search(arguments[i], matchedOptionWithEqual, isOptionWithEqual))
+        {
             std::string optionKey;
             std::string optionValue;
 
             optionKey = matchedOptionWithEqual[1].str();
             optionValue = matchedOptionWithEqual[2].str();
-            
+
             options[std::to_string(i)] = Types::Option(optionKey, optionValue);
             continue;
         }
 
         // Is it an option which is an alias ? (i.e -h)
-        if (std::regex_search(arguments[i], matchedOptionAlias, isAliasOption)) {
-            
+        if (std::regex_search(arguments[i], matchedOptionAlias, isAliasOption))
+        {
+
             // Is it the last argument ? if so treat it as a flag.
-            if (i+1 >= arguments.size()) {
+            if (i + 1 >= arguments.size())
+            {
                 options[matchedOptionAlias[1].str()] = Types::Option("none", "true");
             }
             // Is the next value is valid option value ? (=not an option).
-            else if (std::regex_search(arguments[i+1], matchedOptionValue, isOptionValue)) {
-                options[matchedOptionAlias[1].str()] = Types::Option("none", matchedOptionValue.str());   
-                i++; 
+            else if (std::regex_search(arguments[i + 1], matchedOptionValue, isOptionValue))
+            {
+                options[matchedOptionAlias[1].str()] = Types::Option("none", matchedOptionValue.str());
+                i++;
             }
             // otherwise, treat the option as a flag.
             else
@@ -282,35 +250,40 @@ ExitCode Application::run()
         }
 
         // Is it a regular option ? (i.e --option value)
-        if (std::regex_search(arguments[i], matchedOption, isOption)) {
+        if (std::regex_search(arguments[i], matchedOption, isOption))
+        {
 
             // Is it the last argument ? if so treat it as a flag.
-            if (i+1 >= arguments.size()) {
+            if (i + 1 >= arguments.size())
+            {
                 options[std::to_string(i)] = Types::Option(matchedOption[1].str(), "true");
             }
             // Is the next value is valid option value ? (=not an option).
-            else if (std::regex_search(arguments[i+1], matchedOptionValue, isOptionValue)) {
-                options[std::to_string(i)] = Types::Option(matchedOption[1].str(), matchedOptionValue.str());   
-                i++; 
+            else if (std::regex_search(arguments[i + 1], matchedOptionValue, isOptionValue))
+            {
+                options[std::to_string(i)] = Types::Option(matchedOption[1].str(), matchedOptionValue.str());
+                i++;
             }
             // otherwise, treat the option as a flag.
             else
             {
                 options[std::to_string(i)] = Types::Option(matchedOption[1].str(), "true");
             }
-            
+
             continue;
         }
     }
 
-    for (auto & command : getAvailableCommands())
+    for (auto& command : getAvailableCommands())
     {
-        if (requestedCommand.empty() && shouldPrintHelpAutomatically()) {
+        if (requestedCommand.empty() && shouldPrintHelpAutomatically())
+        {
             m_output->printHelp();
             break;
         }
 
-        if (command.second->getName() == requestedCommand) {
+        if (command.second->getName() == requestedCommand)
+        {
             m_input->setOptions(options);
             return command.second->handle(m_input, m_output);
         }

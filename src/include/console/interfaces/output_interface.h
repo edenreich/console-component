@@ -4,28 +4,29 @@
 #include <string>
 #include "../types/colors.h"
 
-
-namespace Console {
+namespace Console
+{
 
     class ProgressBar;
 
-    namespace Types {
+    namespace Types
+    {
 
         enum class Colors;
-
     }
 
-    namespace Interfaces {
+    namespace Interfaces
+    {
 
         class CommandInterface;
 
         /**
          * The Output Interface
          */
-        class OutputInterface {
+        class OutputInterface
+        {
 
         public:
-
             /**
              * Destructor
              */
@@ -44,7 +45,7 @@ namespace Console {
              * @param CommandInterface * command
              * @return void
              */
-            virtual void printCommandHelp(CommandInterface * command) = 0;
+            virtual void printCommandHelp(CommandInterface* command) = 0;
 
             /**
              * Write a string to the console.
@@ -113,15 +114,13 @@ namespace Console {
 
             /**
              * Create a progress bar instance.
-             * 
+             *
              * @param const unsigned int items
              * @return Console::ProgressBar
              */
-            virtual ProgressBar * createProgressBar(const unsigned int items) = 0;
-
+            virtual ProgressBar* createProgressBar(const unsigned int items) = 0;
         };
     }
 }
-
 
 #endif // OUTPUT_INTERFACE_H

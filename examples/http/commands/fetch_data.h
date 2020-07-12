@@ -8,7 +8,6 @@
 namespace Interfaces = Console::Interfaces;
 namespace Types = Console::Types;
 
-
 /**
  * @name fetch:data
  */
@@ -16,7 +15,6 @@ class FetchData : public Interfaces::CommandInterface
 {
 
 public:
-
     /**
      * Retrieve the name of the command.
      *
@@ -45,16 +43,14 @@ public:
      * @param Console::Interfaces::OutputInterface * output
      * @return ExitCode
      */
-    ExitCode handle(Interfaces::InputInterface * input, Interfaces::OutputInterface * output) override;
+    ExitCode handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) override;
 
 private:
-
     /**
      * An example for a long running task
-     * 
+     *
      * @param Console::Interfaces::OutputInterface * output
      * @return std::vector
      */
-    std::vector<int> fetch(Interfaces::OutputInterface * output);
-
+    std::vector<int> fetch(Interfaces::OutputInterface* output);
 };

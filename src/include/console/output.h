@@ -4,22 +4,22 @@
 #include "interfaces/output_interface.h"
 #include "interfaces/application_interface.h"
 
-
-namespace Console {
+namespace Console
+{
 
     /**
      * The Output Class
      */
-    class Output : public Interfaces::OutputInterface {
+    class Output : public Interfaces::OutputInterface
+    {
 
     public:
-
         /**
          * Initialize the application interface.
-         * 
+         *
          * @param Interfaces::ApplicationInterface * app
          */
-        Output(Interfaces::ApplicationInterface * app);
+        Output(Interfaces::ApplicationInterface* app);
 
         /**
          * Print the help message.
@@ -34,7 +34,7 @@ namespace Console {
          * @param Interfaces::CommandInterface * command
          * @return void
          */
-        void printCommandHelp(Interfaces::CommandInterface * command) override;
+        void printCommandHelp(Interfaces::CommandInterface* command) override;
 
         /**
          * Write a string to the console.
@@ -103,24 +103,20 @@ namespace Console {
 
         /**
          * Create a progress bar instance.
-         * 
+         *
          * @param const unsigned int items
          * @return ProgressBar
          */
-        ProgressBar * createProgressBar(const unsigned int items) override;
+        ProgressBar* createProgressBar(const unsigned int items) override;
 
     private:
-
         /**
          * Store the application interface.
-         * 
+         *
          * @var Interfaces::ApplicationInterface * m_app
          */
-        Interfaces::ApplicationInterface * m_app;
-
+        Interfaces::ApplicationInterface* m_app;
     };
-
 }
-
 
 #endif // OUTPUT_H
