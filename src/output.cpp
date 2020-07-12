@@ -358,11 +358,15 @@ void Output::printApplicationOptions()
 void Output::printAvailableCommands()
 {
     writeLine(Types::Colors::YELLOW, "Available Commands:");
-    for (auto& command : m_app->getAvailableCommands())
+    for (auto& commandNamespace : m_app->getAvailableCommands())
     {
-        write(Types::Colors::GREEN, "  %s", command.second->getName().c_str());
-        write("\t");
-        writeLine(command.second->getDescription());
+        write(Types::Colors::YELLOW, " %s\n", commandNamespace.first.c_str());
+        for (auto& command : commandNamespace.second)
+        {
+            write(Types::Colors::GREEN, "  %s", command.second->getName().c_str());
+            write("\t");
+            writeLine(command.second->getDescription());
+        }
     }
     write("\n");
 }

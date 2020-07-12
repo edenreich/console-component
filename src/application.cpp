@@ -32,9 +32,12 @@ Application::Application(int& argc, char** argv)
  */
 Application::~Application()
 {
-    for (auto& command : getAvailableCommands())
+    for (auto& commandNamespace: getAvailableCommands())
     {
-        delete command.second;
+        for (auto& command : commandNamespace.second)
+        {
+            delete command.second;
+        }
     }
 
     delete m_output;
@@ -110,8 +113,9 @@ std::string Application::getApplicationDescription() { return m_description; }
 void Application::addCommand(Interfaces::CommandInterface* command)
 {
     std::string commandName = typeid(*(command)).name();
+    std::string commandNamespace = command->getName().substr(0, command->getName().find(':'));
 
-    m_commands[commandName] = command;
+    m_commands[commandNamespace][commandName] = command;
 }
 
 /**
@@ -274,18 +278,21 @@ ExitCode Application::run()
         }
     }
 
-    for (auto& command : getAvailableCommands())
+    for (auto& commandNamespace : getAvailableCommands())
     {
-        if (requestedCommand.empty() && shouldPrintHelpAutomatically())
+        for (auto& command : commandNamespace.second)
         {
-            m_output->printHelp();
-            break;
-        }
+            if (requestedCommand.empty() && shouldPrintHelpAutomatically())
+            {
+                m_output->printHelp();
+                break;
+            }
 
-        if (command.second->getName() == requestedCommand)
-        {
-            m_input->setOptions(options);
-            return command.second->handle(m_input, m_output);
+            if (command.second->getName() == requestedCommand)
+            {
+                m_input->setOptions(options);
+                return command.second->handle(m_input, m_output);
+            }
         }
     }
 
