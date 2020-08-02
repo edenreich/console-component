@@ -19,5 +19,8 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Debug
-        run: which clang-format-10
+      - name: Install Clang Format
+        run: sudo apt-get install clang-format-10
+
+      - name: Run linting
+        run: find . -iname '*.cpp' -o -iname '*.h' | grep -v build | xargs clang-format-10 -n
