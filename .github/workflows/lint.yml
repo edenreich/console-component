@@ -1,0 +1,28 @@
+name: Lint
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Install Clang Format
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y clang-format-10
+
+      - name: Run linting
+        run: find . -iname '*.cpp' -o -iname '*.h' | grep -v build | xargs clang-format-10 -n
