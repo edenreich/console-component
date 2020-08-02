@@ -32,7 +32,7 @@ Application::Application(int& argc, char** argv)
  */
 Application::~Application()
 {
-    for (auto& commandNamespace: getAvailableCommands())
+    for (auto& commandNamespace : getAvailableCommands())
     {
         for (auto& command : commandNamespace.second)
         {
