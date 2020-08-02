@@ -1,6 +1,5 @@
-<p>
-  <a href="https://github.com/edenreich/console-component"><img alt="GitHub Actions status" src="https://github.com/edenreich/console-component/workflows/build/badge.svg"></a>
-</p>
+
+![Build](https://github.com/edenreich/console-component/workflows/Build/badge.svg?branch=master) ![Lint](https://github.com/edenreich/console-component/workflows/Lint/badge.svg?branch=master)
 
 # Console Component
 
