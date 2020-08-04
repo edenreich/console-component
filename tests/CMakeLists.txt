@@ -23,13 +23,19 @@ include_directories(
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+set(COMMANDS_CXX_FILES
+  unit/commands/greetings/hi.cpp
+  unit/commands/greetings/hey.cpp
+  unit/commands/todo/list.cpp
+)
+
 set(SOURCES_CXX_FILES
   unit/parser_test.cpp
   unit/output_test.cpp
   unit/input_test.cpp
 )
 
-add_executable(${PROJECT_NAME} main.cpp ${SOURCES_CXX_FILES})
+add_executable(${PROJECT_NAME} main.cpp ${COMMANDS_CXX_FILES} ${SOURCES_CXX_FILES})
 target_link_libraries(${PROJECT_NAME} gtest console)
 
 add_test(NAME ParserTest COMMAND ${PROJECT_NAME})

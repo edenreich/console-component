@@ -20,32 +20,13 @@ Output::Output(Interfaces::ApplicationInterface* app) { m_app = app; }
  */
 void Output::printHelp()
 {
-    writeLine(Types::Colors::GREEN, m_app->getApplicationName());
-    writeLine(Types::Colors::YELLOW, "Version: %s", m_app->getApplicationVersion().c_str());
-    writeLine(m_app->getApplicationDescription());
+    printApplicationTitle();
 
-    // Usage
-    writeLine(Types::Colors::YELLOW, "Usage:");
-    writeLine("  %s\n", m_app->getApplicationUsage().c_str());
+    printApplicationUsage();
 
-    // Options
-    writeLine(Types::Colors::YELLOW, "Options:");
-    writeLine("  -h, --help\tDisplay this help message");
-    for (auto& option : m_app->getAvailableGlobalOptions())
-    {
-        writeLine("  %s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
-    }
+    printApplicationOptions();
 
-    write("\n");
-
-    // Available Commands
-    writeLine(Types::Colors::YELLOW, "Available Commands:");
-    for (auto& command : m_app->getAvailableCommands())
-    {
-        write(Types::Colors::GREEN, "  %s", command.second->getName().c_str());
-        write("\t");
-        writeLine(command.second->getDescription());
-    }
+    printAvailableCommands();
 }
 
 /**
@@ -328,3 +309,64 @@ void Output::warning(const std::string line, ...)
  * @return ProgressBar *
  */
 ProgressBar* Output::createProgressBar(const unsigned int items) { return new ProgressBar(this, items); }
+
+/**
+ * Print the title of the application.
+ *
+ * @return void
+ */
+void Output::printApplicationTitle()
+{
+    writeLine(Types::Colors::GREEN, m_app->getApplicationName());
+    writeLine(Types::Colors::YELLOW, "Version: %s", m_app->getApplicationVersion().c_str());
+    writeLine(m_app->getApplicationDescription());
+}
+
+/**
+ * Print the usage line of the application.
+ *
+ * @return void
+ */
+void Output::printApplicationUsage()
+{
+    writeLine(Types::Colors::YELLOW, "Usage:");
+    writeLine("  %s", m_app->getApplicationUsage().c_str());
+    write("\n\n");
+}
+
+/**
+ * Print the global options of the application.
+ *
+ * @return void
+ */
+void Output::printApplicationOptions()
+{
+    writeLine(Types::Colors::YELLOW, "Options:");
+    writeLine("  -h, --help\tDisplay this help message");
+    for (auto& option : m_app->getAvailableGlobalOptions())
+    {
+        writeLine("  %s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
+    }
+    write("\n");
+}
+
+/**
+ * Print the available commands.
+ *
+ * @return void
+ */
+void Output::printAvailableCommands()
+{
+    writeLine(Types::Colors::YELLOW, "Available Commands:");
+    for (auto& commandNamespace : m_app->getAvailableCommands())
+    {
+        write(Types::Colors::YELLOW, " %s\n", commandNamespace.first.c_str());
+        for (auto& command : commandNamespace.second)
+        {
+            write(Types::Colors::GREEN, "  %s", command.second->getName().c_str());
+            write("\t");
+            writeLine(command.second->getDescription());
+        }
+    }
+    write("\n");
+}
