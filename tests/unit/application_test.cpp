@@ -28,15 +28,9 @@ TEST(ApplicationTest, ItReturnsExitCodeNumberTwoIfNoPositionalArgumentWasGivenFi
 TEST(ApplicationTest, ItAddsCommands)
 {
     int argc = 1;
-    char* argv[] = { (char*)"todo" };
+    char* argv[] = { (char*)"binary" };
 
     Console::Application app(argc, argv);
-
-    app.setApplicationName("Awesome Application");
-    app.setApplicationUsage("todo [command] [options]");
-    app.setApplicationVersion("1.0");
-    app.setAutoPrintHelp(false);
-    app.setApplicationDescription("Todo List Application");
 
     app.addCommand(new Hey);
     app.addCommand(new Hi);
@@ -52,4 +46,20 @@ TEST(ApplicationTest, ItAddsCommands)
     }
 
     EXPECT_EQ(2, count);
+}
+
+TEST(ApplicationTest, ItGuessTheCommand)
+{
+    int argc = 2;
+    char* argv[] = { (char*)"binary", (char*)"greetings:he" };
+
+    Console::Application app(argc, argv);
+
+    app.addCommand(new Hey); // binary greetings:hey
+
+    testing::internal::CaptureStdout();
+    app.run();
+    const std::string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(output, "You probably meant greetings:hey ?\n");
 }

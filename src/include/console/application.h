@@ -154,6 +154,14 @@ namespace Console
         Interfaces::OutputInterface* getOutput() const override;
 
         /**
+         * Guess the requested command.
+         *
+         * @param std::string commandName
+         * @return std::string
+         */
+        std::string guessCommand(std::string commandName) override;
+
+        /**
          * Run the console application.
          *
          * @return ExitCode

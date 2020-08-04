@@ -177,6 +177,29 @@ Interfaces::InputInterface* Application::getInput() const { return m_input; }
 Interfaces::OutputInterface* Application::getOutput() const { return m_output; }
 
 /**
+ * Guess the requested command.
+ *
+ * @param std::string commandName
+ * @return std::string
+ */
+std::string Application::guessCommand(std::string commandName)
+{
+    for (const auto& commandNamespace : getAvailableCommands())
+    {
+        for (const auto& command : commandNamespace.second)
+        {
+            int comparison = 0;
+            comparison = commandName.compare(command.second->getName());
+            if (comparison < 2)
+            {
+                return command.second->getName();
+            }
+        }
+    }
+    return "";
+}
+
+/**
  * Run the console application.
  *
  * @return ExitCode
@@ -283,9 +306,9 @@ ExitCode Application::run()
         }
     }
 
-    for (auto& commandNamespace : getAvailableCommands())
+    for (const auto& commandNamespace : getAvailableCommands())
     {
-        for (auto& command : commandNamespace.second)
+        for (const auto& command : commandNamespace.second)
         {
             if (requestedCommand.empty())
             {
@@ -304,6 +327,12 @@ ExitCode Application::run()
             m_input->setOptions(options);
             return command.second->handle(m_input, m_output);
         }
+    }
+
+    std::string guess = guessCommand(requestedCommand);
+    if (!guess.empty())
+    {
+        m_output->info("You probably meant %s ?", guess.c_str());
     }
 
     if (shouldPrintHelpAutomatically())

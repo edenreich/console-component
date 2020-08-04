@@ -145,6 +145,14 @@ namespace Console
             virtual OutputInterface* getOutput() const = 0;
 
             /**
+             * Guess the requested command.
+             *
+             * @param std::string commandName
+             * @return std::string
+             */
+            virtual std::string guessCommand(std::string commandName) = 0;
+
+            /**
              * Run the console application.
              *
              * @return ExitCode
