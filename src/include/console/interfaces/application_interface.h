@@ -19,7 +19,7 @@ namespace Console
             /**
              * Destructor
              */
-            virtual ~ApplicationInterface() {}
+            virtual ~ApplicationInterface() { }
 
             /**
              * Setter for the application name.
@@ -133,9 +133,16 @@ namespace Console
             /**
              * Getter for the input interface.
              *
-             * @return InputInterface *
+             * @return InputInterface*
              */
             virtual InputInterface* getInput() const = 0;
+
+            /**
+             * Getter for the output interface.
+             *
+             * @return OutputInterface*
+             */
+            virtual OutputInterface* getOutput() const = 0;
 
             /**
              * Run the console application.
