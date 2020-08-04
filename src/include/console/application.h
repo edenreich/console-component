@@ -8,7 +8,6 @@
 
 namespace Console
 {
-
     /**
      * The Application Class
      */

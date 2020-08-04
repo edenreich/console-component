@@ -6,18 +6,15 @@
 
 namespace Console
 {
-
     class ProgressBar;
 
     namespace Types
     {
-
         enum class Colors;
     }
 
     namespace Interfaces
     {
-
         class CommandInterface;
 
         /**
@@ -30,7 +27,7 @@ namespace Console
             /**
              * Destructor
              */
-            virtual ~OutputInterface() {}
+            virtual ~OutputInterface() { }
 
             /**
              * Print the help message.

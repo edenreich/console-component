@@ -7,7 +7,6 @@ namespace Console
 {
     namespace Interfaces
     {
-
         /**
          * The Input Interface
          */
@@ -18,7 +17,7 @@ namespace Console
             /**
              * Destructor
              */
-            virtual ~InputInterface() {}
+            virtual ~InputInterface() { }
 
             /**
              * Retrieve an input from the user.

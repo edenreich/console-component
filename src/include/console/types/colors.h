@@ -21,7 +21,6 @@ namespace Console
 {
     namespace Types
     {
-
         enum class Colors
         {
             NORMAL,
