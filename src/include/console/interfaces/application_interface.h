@@ -147,10 +147,10 @@ namespace Console
             /**
              * Guess the requested command.
              *
-             * @param std::string commandName
+             * @param const std::string& commandName
              * @return std::string
              */
-            virtual std::string guessCommand(std::string commandName) = 0;
+            virtual std::string guessCommand(const std::string& commandName) = 0;
 
             /**
              * Run the console application.

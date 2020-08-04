@@ -156,10 +156,10 @@ namespace Console
         /**
          * Guess the requested command.
          *
-         * @param std::string commandName
+         * @param const std::string& commandName
          * @return std::string
          */
-        std::string guessCommand(std::string commandName) override;
+        std::string guessCommand(const std::string& commandName) override;
 
         /**
          * Run the console application.

@@ -179,10 +179,10 @@ Interfaces::OutputInterface* Application::getOutput() const { return m_output; }
 /**
  * Guess the requested command.
  *
- * @param std::string commandName
+ * @param const std::string& commandName
  * @return std::string
  */
-std::string Application::guessCommand(std::string commandName)
+std::string Application::guessCommand(const std::string& commandName)
 {
     for (const auto& commandNamespace : getAvailableCommands())
     {
