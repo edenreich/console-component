@@ -7,7 +7,6 @@
 
 namespace Console
 {
-
     namespace Interfaces
     {
         class CommandInterface;

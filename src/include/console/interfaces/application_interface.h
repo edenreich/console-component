@@ -8,7 +8,6 @@ namespace Console
 {
     namespace Interfaces
     {
-
         /**
          * The Application Interface
          */
