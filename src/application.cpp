@@ -188,9 +188,8 @@ std::string Application::guessCommand(const std::string& commandName)
     {
         for (const auto& command : commandNamespace.second)
         {
-            int comparison = 0;
-            comparison = commandName.compare(command.second->getName());
-            if (comparison < 2)
+            int comparison = commandName.compare(command.second->getName());
+            if (comparison < 2 && comparison > -2)
             {
                 return command.second->getName();
             }
