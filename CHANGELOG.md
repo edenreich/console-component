@@ -1,6 +1,20 @@
 # Release Notes
 
-## [Unreleased](https://github.com/edenreich/console-component/compare/v1.0.5...master)
+## [Unreleased](https://github.com/edenreich/console-component/compare/v1.0.6...master)
+
+## [v1.0.5 (2020-08-04)](https://github.com/edenreich/console-component/compare/v1.0.4...v1.0.5)
+
+### Added
+- Command namespace, all commands are groupped under whatever comes before the colon.
+
+### Changed
+- None
+
+### Removed
+- None
+
+### Fixed
+- None
 
 ## [v1.0.4 (2019-10-30)](https://github.com/edenreich/console-component/compare/v1.0.3...v1.0.4)
 
