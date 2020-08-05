@@ -165,9 +165,38 @@ bool Application::shouldPrintHelpAutomatically() { return m_printHelpAutomatical
 /**
  * Getter for the input interface.
  *
- * @return Interfaces::InputInterface
+ * @return Interfaces::InputInterface*
  */
 Interfaces::InputInterface* Application::getInput() const { return m_input; }
+
+/**
+ * Getter for the output interface.
+ *
+ * @return Interfaces::OutputInterface*
+ */
+Interfaces::OutputInterface* Application::getOutput() const { return m_output; }
+
+/**
+ * Guess the requested command.
+ *
+ * @param const std::string& commandName
+ * @return std::string
+ */
+std::string Application::guessCommand(const std::string& commandName)
+{
+    for (const auto& commandNamespace : getAvailableCommands())
+    {
+        for (const auto& command : commandNamespace.second)
+        {
+            int comparison = commandName.compare(command.second->getName());
+            if (comparison < 2 && comparison > -2)
+            {
+                return command.second->getName();
+            }
+        }
+    }
+    return "";
+}
 
 /**
  * Run the console application.
@@ -232,7 +261,6 @@ ExitCode Application::run()
         // Is it an option which is an alias ? (i.e -h)
         if (std::regex_search(arguments[i], matchedOptionAlias, isAliasOption))
         {
-
             // Is it the last argument ? if so treat it as a flag.
             if (i + 1 >= arguments.size())
             {
@@ -256,7 +284,6 @@ ExitCode Application::run()
         // Is it a regular option ? (i.e --option value)
         if (std::regex_search(arguments[i], matchedOption, isOption))
         {
-
             // Is it the last argument ? if so treat it as a flag.
             if (i + 1 >= arguments.size())
             {
@@ -278,23 +305,39 @@ ExitCode Application::run()
         }
     }
 
-    for (auto& commandNamespace : getAvailableCommands())
+    for (const auto& commandNamespace : getAvailableCommands())
     {
-        for (auto& command : commandNamespace.second)
+        for (const auto& command : commandNamespace.second)
         {
-            if (requestedCommand.empty() && shouldPrintHelpAutomatically())
+            if (requestedCommand.empty())
             {
-                m_output->printHelp();
+                if (shouldPrintHelpAutomatically())
+                {
+                    m_output->printHelp();
+                }
+                return ExitCode::NeedHelp;
+            }
+
+            if (command.second->getName() != requestedCommand)
+            {
                 break;
             }
 
-            if (command.second->getName() == requestedCommand)
-            {
-                m_input->setOptions(options);
-                return command.second->handle(m_input, m_output);
-            }
+            m_input->setOptions(options);
+            return command.second->handle(m_input, m_output);
         }
     }
 
-    return ExitCode::Ok;
+    std::string guess = guessCommand(requestedCommand);
+    if (!guess.empty())
+    {
+        m_output->info("You probably meant %s ?", guess.c_str());
+    }
+
+    if (shouldPrintHelpAutomatically())
+    {
+        m_output->printHelp();
+    }
+
+    return ExitCode::NeedHelp;
 }

@@ -6,7 +6,6 @@
 
 namespace Console
 {
-
     /**
      * The Output Class
      */
