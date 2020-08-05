@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/edenreich/console-component/compare/v1.0.7...master)
 
-## [v1.0.6 (2020-08-04)](https://github.com/edenreich/console-component/compare/v1.0.5...v1.0.6)
+## [v1.0.6 (2020-08-05)](https://github.com/edenreich/console-component/compare/v1.0.5...v1.0.6)
 
 ### Added
 - Command suggestion - if a command is not found, the cli will try to figure out what command you meant.
