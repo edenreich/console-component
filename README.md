@@ -54,7 +54,7 @@ include(cmake/CPM.cmake)
 CPMAddPackage(
   NAME console
   GITHUB_REPOSITORY edenreich/console-component
-  VERSION 1.0.2
+  VERSION 1.0.6
   OPTIONS
     "WITH_TESTS Off"
 )
