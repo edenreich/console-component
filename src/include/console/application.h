@@ -8,7 +8,6 @@
 
 namespace Console
 {
-
     /**
      * The Application Class
      */
@@ -142,9 +141,24 @@ namespace Console
         /**
          * Getter for the input interface.
          *
-         * @return Interfaces::InputInterface *
+         * @return Interfaces::InputInterface*
          */
         Interfaces::InputInterface* getInput() const override;
+
+        /**
+         * Getter for the output interface.
+         *
+         * @return Interfaces::OutputInterface*
+         */
+        Interfaces::OutputInterface* getOutput() const override;
+
+        /**
+         * Guess the requested command.
+         *
+         * @param const std::string& commandName
+         * @return std::string
+         */
+        std::string guessCommand(const std::string& commandName) override;
 
         /**
          * Run the console application.
@@ -164,7 +178,7 @@ namespace Console
         /**
          * Store the arguments values.
          *
-         * @var char ** m_argv
+         * @var char** m_argv
          */
         char** m_argv;
 
@@ -222,14 +236,14 @@ namespace Console
         /**
          * Store the output interface.
          *
-         * @var Interfaces::OutputInterface * m_output
+         * @var Interfaces::OutputInterface* m_output
          */
         Interfaces::OutputInterface* m_output;
 
         /**
          * Store the input interface.
          *
-         * @var Interfaces::InputInterface m_input
+         * @var Interfaces::InputInterface* m_input
          */
         Interfaces::InputInterface* m_input;
     };

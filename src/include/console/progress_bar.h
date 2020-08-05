@@ -5,7 +5,6 @@
 
 namespace Console
 {
-
     /**
      * The ProgressBar Class
      */

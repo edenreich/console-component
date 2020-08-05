@@ -9,7 +9,6 @@ namespace Console
 {
     namespace Interfaces
     {
-
         /**
          * The Command Interface
          */
@@ -20,7 +19,7 @@ namespace Console
             /**
              * Destructor
              */
-            virtual ~CommandInterface() {}
+            virtual ~CommandInterface() { }
 
             /**
              * Handle the command.

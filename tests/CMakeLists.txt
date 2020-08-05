@@ -30,7 +30,7 @@ set(COMMANDS_CXX_FILES
 )
 
 set(SOURCES_CXX_FILES
-  unit/parser_test.cpp
+  unit/application_test.cpp
   unit/output_test.cpp
   unit/input_test.cpp
 )
