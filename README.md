@@ -34,20 +34,18 @@ The easiest way to install is to use the vscode extension:
 
 Alternative this could also be achieved in few manual steps:
 
-1. First let's download the CPM script 
-
-```sh 
-    mkdir -p cmake && wget -O cmake/CPM.cmake https://raw.githubusercontent.com/TheLartians/CPM/master/cmake/CPM.cmake
-```
-
-2. Then include this script in your CMake file:
+1. Create a **CMakeLists.txt** file:
 
 ```cmake
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(my_cli CXX)
+project(todo CXX)
 
-# Add The CPM Script
+# Add The CPM Package Manager
+if(NOT EXISTS "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
+  file(DOWNLOAD https://raw.githubusercontent.com/TheLartians/CPM.cmake/master/cmake/CPM.cmake "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
+endif()
+
 include(cmake/CPM.cmake)
 
 # Add The console-component
@@ -58,11 +56,38 @@ CPMAddPackage(
   OPTIONS
     "WITH_TESTS Off"
 )
+
+# Move The Default Directory Of The Executable To bin Directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+
+# Collect Implemention Files Of The Current Project
+set(SOURCES_CXX_FILES
+    main.cpp
+    # add your implemention files here..
+)
+
+# Add The Implemention Files To The Executable
+add_executable(${PROJECT_NAME} ${SOURCES_CXX_FILES})
+
+# Add The Definition Files
+include_directories(${CMAKE_BINARY_DIR}/dist/include)
+
+# Link The Executable With The Library
+target_link_libraries(${PROJECT_NAME} console)
+```
+2. Create a **build** directory and cd into it `cd build`.
+3. Look at usage for creating commands or use the [console-component-generator](https://github.com/edenreich/console-component-generator) util to generates command files easily.
+
+```sh
+curl -sSL https://github.com/edenreich/console-component-generator/releases/download/v1.0.0/console-gen -o console-gen
+chmod u+x console-gen && sudo mv console-gen /usr/bin/console-gen
 ```
 
-3. Create a directory called commands, there you would store all your command objects (see usage on how to create a command).
+4. Build your project:
 
-4. Lastly link your executable with the console-component like this: `target_link_libraries(${PROJECT_NAME} console)`
+```sh
+cmake .. && make
+```
 
 If you having trouble setting this up, take a look on the a examples first.
 
@@ -121,7 +146,7 @@ public:
 };
 ```
 
-1. Create a command implemention file:
+2. Create a command implemention file:
 
 ```cpp
 // commands/copy_files.cpp
