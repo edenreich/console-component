@@ -75,7 +75,12 @@ include_directories(${CMAKE_BINARY_DIR}/dist/include)
 # Link The Executable With The Library
 target_link_libraries(${PROJECT_NAME} console)
 ```
-2. Create a **build** directory and cd into it `cd build`.
+2. Create a **build** directory and cd into it :
+
+```sh
+mkdir build && cd build
+```
+
 3. Look at usage for creating commands or use the [console-component-generator](https://github.com/edenreich/console-component-generator) util to generates command files easily.
 
 ```sh
@@ -93,7 +98,37 @@ If you having trouble setting this up, take a look on the a examples first.
 
 ## Usage
 
-1. Create a command definition file:
+1. Create the application:
+
+```cpp
+// main.cpp
+#include <console/application.h>
+
+#include "commands/copy_files.h"
+#include "commands/hello_world.h"
+
+
+int main(int argc, char * argv[])
+{
+    Console::Application app(argc, argv);
+
+    app.setApplicationName("Todo List Application");
+    app.setApplicationUsage("./bin/todo [command] [options]");
+    app.setApplicationVersion("1.0.0");
+    app.setAutoPrintHelp(true);
+
+    app.setApplicationDescription("Todo List Application");
+
+    app.addGlobalOption("--test", "Testing the application", "-t");
+
+    app.addCommand(new CopyFiles);
+    app.addCommand(new HelloWorld);
+
+    return app.run();
+}
+```
+
+2. Create a command definition file:
 
 ```cpp
 // commands/copy_files.h
@@ -146,7 +181,7 @@ public:
 };
 ```
 
-2. Create a command implemention file:
+3. Create a command implemention file:
 
 ```cpp
 // commands/copy_files.cpp
@@ -216,37 +251,6 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface * input, Interfaces::Outpu
     return ExitCode::Ok;
 }
 ```
-
-3. Create the application and add the command:
-
-```cpp
-// main.cpp
-#include <console/application.h>
-
-#include "commands/copy_files.h"
-#include "commands/hello_world.h"
-
-
-int main(int argc, char * argv[])
-{
-    Console::Application app(argc, argv);
-
-    app.setApplicationName("Todo List Application");
-    app.setApplicationUsage("./bin/todo [command] [options]");
-    app.setApplicationVersion("1.0.0");
-    app.setAutoPrintHelp(true);
-
-    app.setApplicationDescription("Todo List Application");
-
-    app.addGlobalOption("--test", "Testing the application", "-t");
-
-    app.addCommand(new CopyFiles);
-    app.addCommand(new HelloWorld);
-
-    return app.run();
-}
-```
-
 
 ## Build
 
