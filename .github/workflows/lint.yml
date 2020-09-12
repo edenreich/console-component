@@ -11,8 +11,8 @@ on:
       - develop
 
 jobs:
-  run-linters:
-    name: Run linters
+  run-linter:
+    name: Run linter
     runs-on: ubuntu-latest
 
     steps:
@@ -25,4 +25,4 @@ jobs:
           sudo apt-get install -y clang-format-10
 
       - name: Run linting
-        run: find . -iname '*.cpp' -o -iname '*.h' | grep -v build | xargs clang-format-10 -n
+        run: find . -iname '*.cpp' -o -iname '*.h' | grep -v build | xargs clang-format-10 -n -Werror
