@@ -1,4 +1,3 @@
-
 ![Build](https://github.com/edenreich/console-component/workflows/Build/badge.svg?branch=master) ![Lint](https://github.com/edenreich/console-component/workflows/Lint/badge.svg?branch=master)
 
 # Console Component
@@ -6,13 +5,13 @@
 An easy to use component for building powerful console applications written in C++.
 
 - [Console Component](#Console-Component)
-    - [Preview](#Preview)
-    - [Install](#Install)
-    - [Usage](#Usage)
-    - [Build](#Build)
-    - [Target](#Target)
-    - [Motiviation](#Motiviation)
-    - [Contribution](#Contribution)
+  - [Preview](#Preview)
+  - [Install](#Install)
+  - [Usage](#Usage)
+  - [Build](#Build)
+  - [Target](#Target)
+  - [Motivation](#Motivation)
+  - [Contribution](#Contribution)
 
 ## Preview
 
@@ -32,7 +31,7 @@ The easiest way to install is to use the vscode extension:
 - [Marketplace](https://marketplace.visualstudio.com/items?itemName=EdenReich.cpp-console-generator)
 - [Repository](https://github.com/edenreich/console-generator-ext-vscode)
 
-Alternative this could also be achieved in few manual steps:
+Alternatively this could also be achieved in a few manual steps:
 
 1. Create a **CMakeLists.txt** file:
 
@@ -41,7 +40,7 @@ cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 project(todo CXX)
 
-# Add The CPM Package Manager
+# Add the CPM package manager
 if(NOT EXISTS "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
   file(DOWNLOAD https://raw.githubusercontent.com/TheLartians/CPM.cmake/master/cmake/CPM.cmake "${CMAKE_HOME_DIRECTORY}/cmake/CPM.cmake")
 endif()
@@ -57,25 +56,26 @@ CPMAddPackage(
     "WITH_TESTS Off"
 )
 
-# Move The Default Directory Of The Executable To bin Directory
+# Move the default directory of the executable to bin directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
-# Collect Implemention Files Of The Current Project
+# Collect implementation files of the current project
 set(SOURCES_CXX_FILES
     main.cpp
-    # add your implemention files here..
+    # add your Implementation files here..
 )
 
-# Add The Implemention Files To The Executable
+# Add the implementation files to the executable
 add_executable(${PROJECT_NAME} ${SOURCES_CXX_FILES})
 
-# Add The Definition Files
+# Add the definition files
 include_directories(${CMAKE_BINARY_DIR}/dist/include)
 
-# Link The Executable With The Library
+# Link the executable with the library
 target_link_libraries(${PROJECT_NAME} console)
 ```
-2. Create a **build** directory and cd into it :
+
+2. Create a **build** directory and cd into it:
 
 ```sh
 mkdir build && cd build
@@ -94,7 +94,7 @@ chmod u+x console-gen && sudo mv console-gen /usr/bin/console-gen
 cmake .. && make
 ```
 
-If you having trouble setting this up, take a look on the a examples first.
+If you are having trouble setting this up, take a look at the examples first.
 
 ## Usage
 
@@ -181,7 +181,7 @@ public:
 };
 ```
 
-3. Create a command implemention file:
+3. Create a command implementation file:
 
 ```cpp
 // commands/copy_files.cpp
@@ -260,15 +260,14 @@ After building the project all distributed files should be located in `build/dis
 
 ## Target
 
-This project targets Linux, Windows and macOS
+This project targets Linux, Windows and MacOS.
 
-## Motiviation
+## Motivation
 
-Often I find myself have to write the same code over and over again, So I've decided to dedicate my time to build a console application in an OOP way.
-After all, all it is needed is a CPP and HEADER file per command.
-Having dedicated class / object per command makes it easier to maintain.
+Often I find myself having to write the same code over and over again, So I've decided to dedicate my time to building a console application in an OOP way.
+After all, all it is needed is a CPP and a Header file per command. Having a dedicated class / object per command makes it easier to maintain.
 
-Because it is statically linked library I have avoided including external libraries and kept it as simple as possible.
+Because it is a statically linked library I have avoided including external libraries and kept it as simple as possible.
 
 ## Contribution
 
