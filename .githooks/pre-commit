@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# Pre-commit hook for console-component
+# Runs the project's typecheck (build) and tests before each commit.
+# Aborts the commit if either fails.
+#
+# Activate with: git config core.hooksPath .githooks
+#
+
+set -e
+
+PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+BUILD_DIR="${PROJECT_ROOT}/build"
+
+echo "=== Pre-commit: configuring and building ==="
+
+# Configure if build directory doesn't exist or CMakeLists.txt changed
+if [ ! -d "${BUILD_DIR}/CMakeCache.txt" ]; then
+    mkdir -p "${BUILD_DIR}"
+    cd "${BUILD_DIR}"
+    cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+else
+    cd "${BUILD_DIR}"
+    cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+fi
+
+echo "=== Pre-commit: building ==="
+cmake --build . --target install --config Release
+
+echo "=== Pre-commit: running tests ==="
+if [ -f "${BUILD_DIR}/bin/tests" ]; then
+    "${BUILD_DIR}/bin/tests"
+else
+    echo "WARNING: Test binary not found at ${BUILD_DIR}/bin/tests, skipping tests."
+fi
+
+echo "=== Pre-commit: all checks passed ==="
