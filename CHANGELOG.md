@@ -1,6 +1,6 @@
 # Release Notes
 
-## [Unreleased](https://github.com/edenreich/console-component/compare/v1.0.7...master)
+## [Unreleased](https://github.com/edenreich/console-component/compare/v1.0.7...main)
 
 ## [v1.0.6 (2020-08-05)](https://github.com/edenreich/console-component/compare/v1.0.5...v1.0.6)
 
