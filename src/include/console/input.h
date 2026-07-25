@@ -70,6 +70,13 @@ namespace Console
          */
         std::string getOption(const std::string& option, const std::string& alias) override;
 
+        /**
+         * Retrieve the first positional argument.
+         *
+         * @return std::string
+         */
+        std::string getArgument() override;
+
     private:
         /**
          * Store the options.
