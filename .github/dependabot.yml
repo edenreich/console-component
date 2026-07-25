@@ -6,7 +6,7 @@ updates:
       interval: "weekly"
       day: "monday"
       time: "09:00"
-      timezone: "America/New_York"
+      timezone: "Europe/Berlin"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
