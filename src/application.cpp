@@ -303,6 +303,13 @@ ExitCode Application::run()
 
             continue;
         }
+
+        // Is it a positional argument ? (a value that doesn't start with - or --)
+        if (std::regex_search(arguments[i], matchedOptionValue, isOptionValue))
+        {
+            options["argument"] = Types::Option("argument", arguments[i]);
+            continue;
+        }
     }
 
     for (const auto& commandNamespace : getAvailableCommands())

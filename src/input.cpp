@@ -96,3 +96,13 @@ std::string Input::getOption(const std::string& option, const std::string& alias
 
     return "";
 }
+
+/**
+ * Retrieve the first positional argument.
+ *
+ * @return std::string
+ */
+std::string Input::getArgument()
+{
+    return getOption("argument");
+}
