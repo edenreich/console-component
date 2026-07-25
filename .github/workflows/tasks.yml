@@ -1,0 +1,98 @@
+name: Task
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Model to use
+        type: choice
+        default: ollama_cloud/deepseek-v4-flash
+        options:
+          - ollama_cloud/deepseek-v4-flash
+          - deepseek/deepseek-v4-flash
+          - anthropic/claude-sonnet-4-6
+          - openai/gpt-5
+          - google/gemini-3-pro
+          - moonshot/kimi-k2
+      prompt:
+        description: Task for the agent (workflow_dispatch only)
+        required: false
+        default: ""
+  issues:
+    types:
+      - opened
+      - edited
+  issue_comment:
+    types:
+      - created
+  pull_request_review_comment:
+    types:
+      - created
+
+permissions:
+  issues: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  infer:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/create-github-app-token@v3.2.0
+        id: app-token
+        with:
+          client-id: 2370225
+          private-key: ${{ secrets.INFERENCE_GATEWAY_MAINTAINER_APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v7.0.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - uses: inference-gateway/infer-action@v0.35.0
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          github-app-slug: ${{ steps.app-token.outputs.app-slug }}
+          trigger-phrase: "@opentask"
+          model: ${{ inputs.model || 'ollama_cloud/deepseek-v4-flash' }}
+          direct-prompt: ${{ inputs.prompt }}
+          enable-git-operations: "true"
+          bash-allow-append: "gh project list( .*)?,gh project field-list( .*)?,gh project item-add( .*)?,gh project item-edit( .*)?,gh issue create( .*)?,gh issue edit( .*)?,gh issue comment( .*)?,gh pr comment( .*)?"
+          custom-instructions: |
+            When working on a GitHub issue that belongs to a project board, keep the board's status in
+            sync as you go. This is best-effort: on any error (no board, no Status field, missing
+            Projects permission, network failure) log it and carry on - never abort the task over a
+            board update.
+            
+            Detect membership from the ISSUE side, never by scanning the board - a board can hold
+            thousands of items and `gh project item-list` only fetches 30 by default, so scanning
+            misses the issue and does not scale:
+            
+            - `gh issue view <number> --json projectItems` lists the boards this issue is on (and its
+              current Status), in one call regardless of board size. Empty list means it is on no
+              board - do nothing further.
+            - For each board it is on, resolve the project number + id and the Status single-select
+              field (with its option ids) via `gh project list --owner <owner> --format json` and
+              `gh project field-list <number> --owner <owner> --format json`. No "Status" (or close
+              equivalent) field: log a warning and skip that board.
+            - Get the item id idempotently with `gh project item-add <number> --owner <owner> --url
+              <issue-url> --format json` - it returns the existing item's id in O(1). Do NOT list
+              items to find it.
+            - Set Status with `gh project item-edit --id <item-id> --project-id <project-id>
+              --field-id <field-id> --single-select-option-id <option-id>`: the option closest to
+              "In Progress" BEFORE you start changing anything, and the option closest to "Done" when
+              your work is complete (body refined, fix pushed, or comment posted).
+          plugins: |
+            ayghri/i-have-adhd
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          google-api-key: ${{ secrets.GOOGLE_API_KEY }}
+          deepseek-api-key: ${{ secrets.DEEPSEEK_API_KEY }}
+          groq-api-key: ${{ secrets.GROQ_API_KEY }}
+          mistral-api-key: ${{ secrets.MISTRAL_API_KEY }}
+          cloudflare-api-key: ${{ secrets.CLOUDFLARE_API_KEY }}
+          cohere-api-key: ${{ secrets.COHERE_API_KEY }}
+          ollama-cloud-api-key: ${{ secrets.OLLAMA_CLOUD_API_KEY }}
+          moonshot-api-key: ${{ secrets.MOONSHOT_API_KEY }}
+          minimax-api-key: ${{ secrets.MINIMAX_API_KEY }}
+          nvidia-api-key: ${{ secrets.NVIDIA_API_KEY }}
+          zai-api-key: ${{ secrets.ZAI_API_KEY }}
