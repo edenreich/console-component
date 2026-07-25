@@ -20,7 +20,7 @@ jobs:
       - name: Install Clang Format
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y clang-format-10
+          sudo apt-get install -y clang-format-18
 
       - name: Run linting
-        run: find . -iname '*.cpp' -o -iname '*.h' | grep -v build | xargs clang-format-10 -n
+        run: find . -iname '*.cpp' -o -iname '*.h' | grep -v build | xargs clang-format-18 -n
