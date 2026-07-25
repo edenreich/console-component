@@ -1,0 +1,12 @@
+{
+  "name": "console-component",
+  "version": "0.0.0-development",
+  "description": "An easy to use component for building powerful console applications.",
+  "private": true,
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^24.2.3"
+  }
+}
