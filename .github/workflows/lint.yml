@@ -3,12 +3,10 @@ name: Lint
 on:
   pull_request:
     branches:
-      - master
-      - develop
+      - main
   push:
     branches:
-      - master
-      - develop
+      - main
 
 jobs:
   run-linters:
