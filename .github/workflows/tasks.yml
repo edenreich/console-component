@@ -44,7 +44,7 @@ jobs:
           client-id: 4394298
           private-key: ${{ secrets.OPENTASK_APP_PRIVATE_KEY }}
 
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@v7
         with:
           token: ${{ steps.app-token.outputs.token }}
 
