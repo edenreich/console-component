@@ -1,0 +1,2 @@
+# Mark the pre-commit hook as vendored so it doesn't skew language statistics
+.githooks/pre-commit linguist-vendored
