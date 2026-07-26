@@ -14,10 +14,10 @@ namespace Console
 
     namespace Types
     {
-        typedef std::pair<std::string, std::string> Option;
-        typedef std::map<std::string, Option> Options;
-        typedef std::map<std::string, std::map<std::string, Interfaces::CommandInterface*>> Commands;
-        typedef std::map<std::string, std::pair<std::string, std::string>> AvailableOptions;
+        using Option = std::pair<std::string, std::string>;
+        using Options = std::map<std::string, Option>;
+        using Commands = std::map<std::string, std::map<std::string, Interfaces::CommandInterface*>>;
+        using AvailableOptions = std::map<std::string, std::pair<std::string, std::string>>;
     }
 }
 
