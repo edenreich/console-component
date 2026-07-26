@@ -1,3 +1,9 @@
+## [1.2.3](https://github.com/edenreich/console-component/compare/v1.2.2...v1.2.3) (2026-07-26)
+
+### Continuous Integration
+
+* pin conventional-changelog-conventionalcommits to v9 for release notes ([5770f59](https://github.com/edenreich/console-component/commit/5770f59497bfea36c0b5d30c5e6d7be5922a478c))
+
 ## [1.2.2](https://github.com/edenreich/console-component/compare/v1.2.1...v1.2.2) (2026-07-26)
 
 ## [1.2.1](https://github.com/edenreich/console-component/compare/v1.2.0...v1.2.1) (2026-07-26)
