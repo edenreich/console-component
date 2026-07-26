@@ -6,6 +6,8 @@
 #include "interfaces/output_interface.h"
 #include "interfaces/input_interface.h"
 
+#include <memory>
+
 namespace Console
 {
     /**
@@ -25,24 +27,19 @@ namespace Console
         Application(int& argc, char** argv);
 
         /**
-         * Destroy the application.
-         */
-        virtual ~Application();
-
-        /**
          * Setter for the application name.
          *
          * @param const std::string & name
          * @return void
          */
-        void setApplicationName(const std::string& name) override;
+        void setApplicationName(const std::string& name) noexcept override;
 
         /**
          * Getter for the application name.
          *
          * @return std::string
          */
-        std::string getApplicationName() override;
+        std::string getApplicationName() noexcept override;
 
         /**
          * Setter for the application usage.
@@ -50,14 +47,14 @@ namespace Console
          * @param const std::string & usage
          * @return void
          */
-        void setApplicationUsage(const std::string& usage) override;
+        void setApplicationUsage(const std::string& usage) noexcept override;
 
         /**
          * Getter for the application usage.
          *
          * @return std::string
          */
-        std::string getApplicationUsage() override;
+        std::string getApplicationUsage() noexcept override;
 
         /**
          * Setter for the application version.
@@ -65,14 +62,14 @@ namespace Console
          * @param const std::string & version
          * @return void
          */
-        void setApplicationVersion(const std::string& version) override;
+        void setApplicationVersion(const std::string& version) noexcept override;
 
         /**
          * Getter for the application version.
          *
          * @return std::string
          */
-        std::string getApplicationVersion() override;
+        std::string getApplicationVersion() noexcept override;
 
         /**
          * Setter for the application description.
@@ -80,14 +77,14 @@ namespace Console
          * @param const std::string & description
          * @return void
          */
-        void setApplicationDescription(const std::string& description) override;
+        void setApplicationDescription(const std::string& description) noexcept override;
 
         /**
          * Getter for the application description.
          *
          * @return std::string
          */
-        std::string getApplicationDescription() override;
+        std::string getApplicationDescription() noexcept override;
 
         /**
          * Add a command instance to the application.
@@ -95,7 +92,7 @@ namespace Console
          * @param CommandInterface * command
          * @return void
          */
-        void addCommand(Interfaces::CommandInterface* command) override;
+        void addCommand(Interfaces::CommandInterface* command) noexcept override;
 
         /**
          * Getter for the available commands,
@@ -103,7 +100,7 @@ namespace Console
          *
          * @return Types::Commands
          */
-        Types::Commands getAvailableCommands() override;
+        const Types::Commands& getAvailableCommands() noexcept override;
 
         /**
          * Add a command instance to the application.
@@ -113,14 +110,14 @@ namespace Console
          * @param const std::string & alias
          * @return void
          */
-        void addGlobalOption(const std::string& Option, const std::string& description, const std::string& alias) override;
+        void addGlobalOption(const std::string& Option, const std::string& description, const std::string& alias) noexcept override;
 
         /**
          * Getter for the available global options.
          *
          * @return Types::AvailableOptions
          */
-        Types::AvailableOptions getAvailableGlobalOptions() override;
+        Types::AvailableOptions getAvailableGlobalOptions() noexcept override;
 
         /**
          * Set print help to automatically.
@@ -128,7 +125,7 @@ namespace Console
          * @param bool yes
          * @return void
          */
-        void setAutoPrintHelp(bool yes) override;
+        void setAutoPrintHelp(bool yes) noexcept override;
 
         /**
          * Indicates if the application should print
@@ -136,21 +133,21 @@ namespace Console
          *
          * @return bool
          */
-        bool shouldPrintHelpAutomatically() override;
+        bool shouldPrintHelpAutomatically() noexcept override;
 
         /**
          * Getter for the input interface.
          *
          * @return Interfaces::InputInterface*
          */
-        Interfaces::InputInterface* getInput() const override;
+        Interfaces::InputInterface* getInput() const noexcept override;
 
         /**
          * Getter for the output interface.
          *
          * @return Interfaces::OutputInterface*
          */
-        Interfaces::OutputInterface* getOutput() const override;
+        Interfaces::OutputInterface* getOutput() const noexcept override;
 
         /**
          * Guess the requested command.
@@ -158,14 +155,14 @@ namespace Console
          * @param const std::string& commandName
          * @return std::string
          */
-        std::string guessCommand(const std::string& commandName) override;
+        std::string guessCommand(const std::string& commandName) noexcept override;
 
         /**
          * Run the console application.
          *
          * @return ExitCode
          */
-        ExitCode run() override;
+        [[nodiscard]] ExitCode run() noexcept override;
 
     private:
         /**
@@ -236,16 +233,16 @@ namespace Console
         /**
          * Store the output interface.
          *
-         * @var Interfaces::OutputInterface* m_output
+         * @var std::unique_ptr<Interfaces::OutputInterface> m_output
          */
-        Interfaces::OutputInterface* m_output;
+        std::unique_ptr<Interfaces::OutputInterface> m_output;
 
         /**
          * Store the input interface.
          *
-         * @var Interfaces::InputInterface* m_input
+         * @var std::unique_ptr<Interfaces::InputInterface> m_input
          */
-        Interfaces::InputInterface* m_input;
+        std::unique_ptr<Interfaces::InputInterface> m_input;
     };
 }
 

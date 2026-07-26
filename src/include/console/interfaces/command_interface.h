@@ -19,7 +19,7 @@ namespace Console
             /**
              * Destructor
              */
-            virtual ~CommandInterface() { }
+            virtual ~CommandInterface() noexcept = default;
 
             /**
              * Handle the command.
@@ -28,28 +28,28 @@ namespace Console
              * @param InputInterface * output
              * @return ExitCode
              */
-            virtual ExitCode handle(InputInterface* input, OutputInterface* output) = 0;
+            [[nodiscard]] virtual ExitCode handle(InputInterface* input, OutputInterface* output) noexcept = 0;
 
             /**
              * Retrieve the name of the command.
              *
              * @return std::string
              */
-            virtual std::string getName() = 0;
+            virtual std::string getName() noexcept = 0;
 
             /**
              * Retrieve the description of the command.
              *
              * @return std::string
              */
-            virtual std::string getDescription() = 0;
+            virtual std::string getDescription() noexcept = 0;
 
             /**
              * Retrieve the command options.
              *
              * @return Types::AvailableOptions
              */
-            virtual Types::AvailableOptions getOptions() = 0;
+            virtual Types::AvailableOptions getOptions() noexcept = 0;
         };
     }
 }

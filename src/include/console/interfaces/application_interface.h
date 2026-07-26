@@ -18,7 +18,7 @@ namespace Console
             /**
              * Destructor
              */
-            virtual ~ApplicationInterface() { }
+            virtual ~ApplicationInterface() noexcept = default;
 
             /**
              * Setter for the application name.
@@ -26,14 +26,14 @@ namespace Console
              * @param const std::string & name
              * @return void
              */
-            virtual void setApplicationName(const std::string& name) = 0;
+            virtual void setApplicationName(const std::string& name) noexcept = 0;
 
             /**
              * Getter for the application name.
              *
              * @return std::string
              */
-            virtual std::string getApplicationName() = 0;
+            virtual std::string getApplicationName() noexcept = 0;
 
             /**
              * Setter for the application usage.
@@ -41,14 +41,14 @@ namespace Console
              * @param const std::string & usage
              * @return void
              */
-            virtual void setApplicationUsage(const std::string& usage) = 0;
+            virtual void setApplicationUsage(const std::string& usage) noexcept = 0;
 
             /**
              * Getter for the application usage.
              *
              * @return std::string
              */
-            virtual std::string getApplicationUsage() = 0;
+            virtual std::string getApplicationUsage() noexcept = 0;
 
             /**
              * Setter for the application version.
@@ -56,14 +56,14 @@ namespace Console
              * @param const std::string & version
              * @return void
              */
-            virtual void setApplicationVersion(const std::string& version) = 0;
+            virtual void setApplicationVersion(const std::string& version) noexcept = 0;
 
             /**
              * Getter for the application version.
              *
              * @return std::string
              */
-            virtual std::string getApplicationVersion() = 0;
+            virtual std::string getApplicationVersion() noexcept = 0;
 
             /**
              * Setter for the application description.
@@ -71,14 +71,14 @@ namespace Console
              * @param const std::string & description
              * @return void
              */
-            virtual void setApplicationDescription(const std::string& description) = 0;
+            virtual void setApplicationDescription(const std::string& description) noexcept = 0;
 
             /**
              * Getter for the application description.
              *
              * @return std::string
              */
-            virtual std::string getApplicationDescription() = 0;
+            virtual std::string getApplicationDescription() noexcept = 0;
 
             /**
              * Add a command instance to the application.
@@ -86,7 +86,7 @@ namespace Console
              * @param CommandInterface * command
              * @return void
              */
-            virtual void addCommand(CommandInterface* command) = 0;
+            virtual void addCommand(CommandInterface* command) noexcept = 0;
 
             /**
              * Getter for the available commands,
@@ -94,7 +94,7 @@ namespace Console
              *
              * @return Types::Commands
              */
-            virtual Types::Commands getAvailableCommands() = 0;
+            virtual const Types::Commands& getAvailableCommands() noexcept = 0;
 
             /**
              * Add a global options.
@@ -104,14 +104,14 @@ namespace Console
              * @param const std::string & alias
              * @return void
              */
-            virtual void addGlobalOption(const std::string& Option, const std::string& description, const std::string& alias) = 0;
+            virtual void addGlobalOption(const std::string& Option, const std::string& description, const std::string& alias) noexcept = 0;
 
             /**
              * Getter for the available global options.
              *
              * @return Types::AvailableOptions
              */
-            virtual Types::AvailableOptions getAvailableGlobalOptions() = 0;
+            virtual Types::AvailableOptions getAvailableGlobalOptions() noexcept = 0;
 
             /**
              * Set print help to automatically.
@@ -119,7 +119,7 @@ namespace Console
              * @param bool yes
              * @return void
              */
-            virtual void setAutoPrintHelp(bool yes) = 0;
+            virtual void setAutoPrintHelp(bool yes) noexcept = 0;
 
             /**
              * Indicates if the application should print
@@ -127,21 +127,21 @@ namespace Console
              *
              * @return bool
              */
-            virtual bool shouldPrintHelpAutomatically() = 0;
+            virtual bool shouldPrintHelpAutomatically() noexcept = 0;
 
             /**
              * Getter for the input interface.
              *
              * @return InputInterface*
              */
-            virtual InputInterface* getInput() const = 0;
+            virtual InputInterface* getInput() const noexcept = 0;
 
             /**
              * Getter for the output interface.
              *
              * @return OutputInterface*
              */
-            virtual OutputInterface* getOutput() const = 0;
+            virtual OutputInterface* getOutput() const noexcept = 0;
 
             /**
              * Guess the requested command.
@@ -149,14 +149,14 @@ namespace Console
              * @param const std::string& commandName
              * @return std::string
              */
-            virtual std::string guessCommand(const std::string& commandName) = 0;
+            virtual std::string guessCommand(const std::string& commandName) noexcept = 0;
 
             /**
              * Run the console application.
              *
              * @return ExitCode
              */
-            virtual ExitCode run() = 0;
+            [[nodiscard]] virtual ExitCode run() noexcept = 0;
         };
     }
 }
