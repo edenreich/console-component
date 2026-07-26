@@ -11,7 +11,7 @@ using namespace Console;
  *
  * @param Interfaces::ApplicationInterface * app
  */
-Output::Output(Interfaces::ApplicationInterface* app) { m_app = app; }
+Output::Output(Interfaces::ApplicationInterface* app) noexcept { m_app = app; }
 
 /**
  * Print the help message.
