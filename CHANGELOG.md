@@ -1,3 +1,17 @@
+# [1.1.0](https://github.com/edenreich/console-component/compare/v1.0.6...v1.1.0) (2026-07-26)
+
+
+### Bug Fixes
+
+* **ci:** use GitHub App client-id from secret for releaser token ([#49](https://github.com/edenreich/console-component/issues/49)) ([66ac93f](https://github.com/edenreich/console-component/commit/66ac93fa168c141b50d3c25e838d681f70f06dc5))
+* **ci:** use GitHub App token for semantic-release instead of GITHUB_TOKEN ([#48](https://github.com/edenreich/console-component/issues/48)) ([669529d](https://github.com/edenreich/console-component/commit/669529df8798cc1a1fde89466ee6fb8dfcceefa6))
+
+
+### Features
+
+* add OpenTask Agent workflow ([#36](https://github.com/edenreich/console-component/issues/36)) ([96442c8](https://github.com/edenreich/console-component/commit/96442c86f389ac742f871ff42961549ca007f0f0))
+* **ci:** add semantic-release process for automated releases ([#39](https://github.com/edenreich/console-component/issues/39)) ([3fc627c](https://github.com/edenreich/console-component/commit/3fc627cdbdec1875a444f293f7e24c1335113505))
+
 # Release Notes
 
 ## [Unreleased](https://github.com/edenreich/console-component/compare/v1.0.7...main)
@@ -111,4 +125,3 @@
 
 ### Fixed
 - None
-
