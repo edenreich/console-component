@@ -24,7 +24,7 @@ namespace Console
          * @param int & argc
          * @param char ** argv
          */
-        Application(int& argc, char** argv);
+        Application(int& argc, char** argv) noexcept;
 
         /**
          * Setter for the application name.

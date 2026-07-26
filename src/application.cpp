@@ -183,7 +183,7 @@ std::string Application::guessCommand(const std::string& commandName) noexcept
  *
  * @return ExitCode
  */
-ExitCode Application::run()
+ExitCode Application::run() noexcept
 {
     m_input = std::make_unique<Input>(this);
     m_output = std::make_unique<Output>(this);
@@ -311,7 +311,7 @@ ExitCode Application::run()
             }
 
             m_input->setOptions(options);
-            return cmd->handle(m_input, m_output);
+            return cmd->handle(m_input.get(), m_output.get());
         }
     }
 
