@@ -28,6 +28,7 @@ jobs:
         run: |
           npm install --save-dev semantic-release \
             @semantic-release/changelog \
+            @semantic-release/exec \
             @semantic-release/git \
             @semantic-release/github
 
