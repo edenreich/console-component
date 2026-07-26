@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/edenreich/console-component/compare/v1.1.0...v1.2.0) (2026-07-26)
+
+
+### Features
+
+* support positional arguments in command handlers ([#38](https://github.com/edenreich/console-component/issues/38)) ([8164b66](https://github.com/edenreich/console-component/commit/8164b66dacb5f5b0ac0c850fd61e7ad31ee10a06))
+
 # [1.1.0](https://github.com/edenreich/console-component/compare/v1.0.6...v1.1.0) (2026-07-26)
 
 
