@@ -5,21 +5,21 @@
  *
  * @return std::string
  */
-std::string CopyFiles::getName() { return "copy:files"; }
+std::string CopyFiles::getName() noexcept { return "copy:files"; }
 
 /**
  * Retrieve the description of the command.
  *
  * @return std::string
  */
-std::string CopyFiles::getDescription() { return "copy files from <source> to <dist>"; }
+std::string CopyFiles::getDescription() noexcept { return "copy files from <source> to <dist>"; }
 
 /**
  * Retrieve the command options.
  *
  * @return Console::Types::AvailableOptions
  */
-Types::AvailableOptions CopyFiles::getOptions()
+Types::AvailableOptions CopyFiles::getOptions() noexcept
 {
     Types::AvailableOptions options;
 
@@ -36,7 +36,7 @@ Types::AvailableOptions CopyFiles::getOptions()
  * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
-ExitCode CopyFiles::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output)
+ExitCode CopyFiles::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) noexcept
 {
     if (input->wantsHelp())
     {

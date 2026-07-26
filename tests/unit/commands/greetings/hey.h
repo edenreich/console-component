@@ -27,7 +27,7 @@ public:
      *
      * @return Console::Types::AvailableOptions
      */
-    Types::AvailableOptions getOptions() override;
+    Types::AvailableOptions getOptions() noexcept override;
 
     /**
      * Handle the command.
@@ -36,5 +36,5 @@ public:
      * @param Console::Interfaces::OutputInterface * output
      * @return ExitCode
      */
-    ExitCode handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) override;
+    [[nodiscard]] ExitCode handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) noexcept override;
 };
