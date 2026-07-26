@@ -83,6 +83,7 @@ jobs:
               "In Progress" BEFORE you start changing anything, and the option closest to "Done" when
               your work is complete (body refined, fix pushed, or comment posted).
           plugins: |
+            DietrichGebert/ponytail
             ayghri/i-have-adhd
           agents: |
             documentation-agent
