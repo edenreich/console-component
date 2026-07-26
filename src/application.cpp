@@ -164,14 +164,14 @@ Interfaces::OutputInterface* Application::getOutput() const noexcept { return m_
  */
 std::string Application::guessCommand(const std::string& commandName) noexcept
 {
-    for (const auto& commandNamespace : getAvailableCommands())
+    for (const auto& [ns, commands] : getAvailableCommands())
     {
-        for (const auto& command : commandNamespace.second)
+        for (const auto& [cmdName, cmd] : commands)
         {
-            int comparison = commandName.compare(command.second->getName());
+            int comparison = commandName.compare(cmd->getName());
             if (comparison < 2 && comparison > -2)
             {
-                return command.second->getName();
+                return cmd->getName();
             }
         }
     }
@@ -292,9 +292,9 @@ ExitCode Application::run()
         }
     }
 
-    for (const auto& commandNamespace : getAvailableCommands())
+    for (const auto& [ns, commands] : getAvailableCommands())
     {
-        for (const auto& command : commandNamespace.second)
+        for (const auto& [cmdName, cmd] : commands)
         {
             if (requestedCommand.empty())
             {
@@ -305,13 +305,13 @@ ExitCode Application::run()
                 return ExitCode::NeedHelp;
             }
 
-            if (command.second->getName() != requestedCommand)
+            if (cmd->getName() != requestedCommand)
             {
                 break;
             }
 
             m_input->setOptions(options);
-            return command.second->handle(m_input, m_output);
+            return cmd->handle(m_input, m_output);
         }
     }
 

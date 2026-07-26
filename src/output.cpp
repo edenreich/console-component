@@ -44,9 +44,9 @@ void Output::printCommandHelp(Interfaces::CommandInterface* command)
     // Options
     writeLine(Types::Colors::YELLOW, "Options:");
     writeLine("  -h, --help\tDisplay this help message");
-    for (auto& option : command->getOptions())
+    for (auto& [optKey, optVal] : command->getOptions())
     {
-        writeLine("  %s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
+        writeLine("  %s, %s\t%s", optKey.c_str(), optVal.first.c_str(), optVal.second.c_str());
     }
 }
 
@@ -343,9 +343,9 @@ void Output::printApplicationOptions()
 {
     writeLine(Types::Colors::YELLOW, "Options:");
     writeLine("  -h, --help\tDisplay this help message");
-    for (auto& option : m_app->getAvailableGlobalOptions())
+    for (auto& [optKey, optVal] : m_app->getAvailableGlobalOptions())
     {
-        writeLine("  %s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
+        writeLine("  %s, %s\t%s", optKey.c_str(), optVal.first.c_str(), optVal.second.c_str());
     }
     write("\n");
 }
@@ -358,14 +358,14 @@ void Output::printApplicationOptions()
 void Output::printAvailableCommands()
 {
     writeLine(Types::Colors::YELLOW, "Available Commands:");
-    for (auto& commandNamespace : m_app->getAvailableCommands())
+    for (auto& [ns, commands] : m_app->getAvailableCommands())
     {
-        write(Types::Colors::YELLOW, " %s\n", commandNamespace.first.c_str());
-        for (auto& command : commandNamespace.second)
+        write(Types::Colors::YELLOW, " %s\n", ns.c_str());
+        for (auto& [cmdName, cmd] : commands)
         {
-            write(Types::Colors::GREEN, "  %s", command.second->getName().c_str());
+            write(Types::Colors::GREEN, "  %s", cmd->getName().c_str());
             write("\t");
-            writeLine(command.second->getDescription());
+            writeLine(cmd->getDescription());
         }
     }
     write("\n");

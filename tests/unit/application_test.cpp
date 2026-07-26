@@ -38,9 +38,9 @@ TEST(ApplicationTest, ItAddsCommands)
 
     unsigned int count = 0;
 
-    for (const auto& commandNamespace : app.getAvailableCommands())
+    for (const auto& [ns, commands] : app.getAvailableCommands())
     {
-        for (const auto& command : commandNamespace.second)
+        for (const auto& [cmdName, cmd] : commands)
         {
             count++;
         }
