@@ -233,7 +233,7 @@ void Output::writeLine(Types::Colors color, const std::string line, ...) noexcep
  * @param ... any
  * @return void
  */
-void Output::error(const std::string line, ...)
+void Output::error(const std::string line, ...) noexcept
 {
     va_list args;
 
@@ -308,7 +308,7 @@ void Output::warning(const std::string line, ...) noexcept
  * @param const unsigned int items
  * @return ProgressBar *
  */
-ProgressBar* Output::createProgressBar(const unsigned int items) { return new ProgressBar(this, items); }
+ProgressBar* Output::createProgressBar(const unsigned int items) noexcept { return new ProgressBar(this, items); }
 
 /**
  * Print the title of the application.
