@@ -2,12 +2,24 @@
   "branches": ["main"],
   "plugins": [
     ["@semantic-release/commit-analyzer", {
+      "preset": "conventionalcommits",
       "releaseRules": [
         { "type": "ci", "release": "patch" },
         { "type": "chore", "release": "patch" }
       ]
     }],
-    "@semantic-release/release-notes-generator",
+    ["@semantic-release/release-notes-generator", {
+      "preset": "conventionalcommits",
+      "presetConfig": {
+        "types": [
+          { "type": "feat", "section": "Features" },
+          { "type": "fix", "section": "Bug Fixes" },
+          { "type": "perf", "section": "Performance Improvements" },
+          { "type": "ci", "section": "Continuous Integration" },
+          { "type": "chore", "section": "Chores" }
+        ]
+      }
+    }],
     "@semantic-release/changelog",
     ["@semantic-release/exec", {
       "prepareCmd": "sed -i 's/^    VERSION .*/    VERSION ${nextRelease.version}/' CMakeLists.txt"
