@@ -25,7 +25,7 @@ public:
      *
      * @return std::string
      */
-    std::string getDescription() override;
+    std::string getDescription() noexcept override;
 
     /**
      * Retrieve the command options.

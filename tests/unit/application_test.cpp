@@ -59,7 +59,8 @@ TEST(ApplicationTest, ItGuessTheCommand)
     app.addCommand(new Hey); // binary greetings:hey
 
     testing::internal::CaptureStdout();
-    app.run();
+    ExitCode exitCode = app.run();
+    (void)exitCode;
     const std::string output = testing::internal::GetCapturedStdout();
 
     EXPECT_EQ(output, "You probably meant greetings:hey ?\n");
