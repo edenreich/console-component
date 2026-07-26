@@ -18,7 +18,7 @@ namespace Console
          *
          * @param Interfaces::ApplicationInterface * app
          */
-        Input(Interfaces::ApplicationInterface* app);
+        Input(Interfaces::ApplicationInterface* app) noexcept;
 
         /**
          * Retrieve an input from the user.
@@ -26,14 +26,14 @@ namespace Console
          * @param const std::string & question
          * @return std::string
          */
-        std::string ask(const std::string& question) override;
+        std::string ask(const std::string& question) noexcept override;
 
         /**
          * Retrieve the parsed options.
          *
          * @return Options
          */
-        Types::Options getOptions() override;
+        Types::Options getOptions() noexcept override;
 
         /**
          * Setter for the parsed options.
@@ -41,7 +41,7 @@ namespace Console
          * @return Console::Types::Options options
          * @return void
          */
-        void setOptions(Console::Types::Options options) override;
+        void setOptions(Console::Types::Options options) noexcept override;
 
         /**
          * Determine if the -h or --help flag
@@ -49,7 +49,7 @@ namespace Console
          *
          * @return bool
          */
-        bool wantsHelp() override;
+        bool wantsHelp() noexcept override;
 
         /**
          * Retrieve the option value
@@ -58,7 +58,7 @@ namespace Console
          * @param const std::string & option
          * @return std::string
          */
-        std::string getOption(const std::string& option) override;
+        std::string getOption(const std::string& option) noexcept override;
 
         /**
          * Retrieve the option value
@@ -68,14 +68,14 @@ namespace Console
          * @param const std::string & alias
          * @return std::string
          */
-        std::string getOption(const std::string& option, const std::string& alias) override;
+        std::string getOption(const std::string& option, const std::string& alias) noexcept override;
 
         /**
          * Retrieve the first positional argument.
          *
          * @return std::string
          */
-        std::string getArgument() override;
+        std::string getArgument() noexcept override;
 
     private:
         /**

@@ -9,7 +9,7 @@ using namespace Console;
  *
  * @param Interfaces::ApplicationInterface * app
  */
-Input::Input(Interfaces::ApplicationInterface* app) { m_app = app; }
+Input::Input(Interfaces::ApplicationInterface* app) noexcept { m_app = app; }
 
 /**
  * Retrieve an input from the user.
@@ -17,7 +17,7 @@ Input::Input(Interfaces::ApplicationInterface* app) { m_app = app; }
  * @param const std::string & question
  * @return std::string
  */
-std::string Input::ask(const std::string& question)
+std::string Input::ask(const std::string& question) noexcept
 {
     std::cout << question << '\n';
 
@@ -33,7 +33,7 @@ std::string Input::ask(const std::string& question)
  *
  * @return Options
  */
-Types::Options Input::getOptions() { return m_options; }
+Types::Options Input::getOptions() noexcept { return m_options; }
 
 /**
  * Setter for the parsed options.
@@ -41,7 +41,7 @@ Types::Options Input::getOptions() { return m_options; }
  * @return Types::Options options
  * @return void
  */
-void Input::setOptions(Types::Options options) { m_options = options; }
+void Input::setOptions(Types::Options options) noexcept { m_options = std::move(options); }
 
 /**
  * Determine if the -h or --help flag
@@ -49,7 +49,7 @@ void Input::setOptions(Types::Options options) { m_options = options; }
  *
  * @return bool
  */
-bool Input::wantsHelp()
+bool Input::wantsHelp() noexcept
 {
     for (auto& option : getOptions())
     {
@@ -67,7 +67,7 @@ bool Input::wantsHelp()
  * @param const std::string & option
  * @return std::string
  */
-std::string Input::getOption(const std::string& option)
+std::string Input::getOption(const std::string& option) noexcept
 {
     for (auto& availableOption : getOptions())
     {
@@ -86,7 +86,7 @@ std::string Input::getOption(const std::string& option)
  * @param const std::string & alias
  * @return std::string
  */
-std::string Input::getOption(const std::string& option, const std::string& alias)
+std::string Input::getOption(const std::string& option, const std::string& alias) noexcept
 {
     for (auto& availableOption : getOptions())
     {
@@ -102,7 +102,7 @@ std::string Input::getOption(const std::string& option, const std::string& alias
  *
  * @return std::string
  */
-std::string Input::getArgument()
+std::string Input::getArgument() noexcept
 {
     return getOption("argument");
 }
