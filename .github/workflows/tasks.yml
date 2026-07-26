@@ -4,18 +4,19 @@ on:
   workflow_dispatch:
     inputs:
       model:
-        description: Model to use
-        type: choice
+        description: Model to use (provider/model, e.g. llamacpp/phi-4)
+        required: false
         default: ollama_cloud/deepseek-v4-flash
-        options:
-          - ollama_cloud/deepseek-v4-flash
-          - deepseek/deepseek-v4-flash
-          - anthropic/claude-sonnet-4-6
-          - openai/gpt-5
-          - google/gemini-3-pro
-          - moonshot/kimi-k2
       prompt:
         description: Task for the agent (workflow_dispatch only)
+        required: false
+        default: ""
+      enable_git:
+        description: Enable git operations - branch, commit, PR (workflow_dispatch only)
+        required: false
+        default: "true"
+      system_prompt:
+        description: Override the direct-prompt system prompt (workflow_dispatch only)
         required: false
         default: ""
   issues:
@@ -42,21 +43,29 @@ jobs:
       - uses: actions/create-github-app-token@v3.2.0
         id: app-token
         with:
-          client-id: 4394298
+          client-id: Iv23likOeTBSPtN9mbTj
           private-key: ${{ secrets.OPENTASK_APP_PRIVATE_KEY }}
 
       - uses: actions/checkout@v7.0.1
         with:
           token: ${{ steps.app-token.outputs.token }}
 
-      - uses: inference-gateway/infer-action@v0.35.2
+      - uses: arduino/setup-task@v3.0.0
+        with:
+          version: 3.x
+
+      - uses: inference-gateway/infer-action@v0.36.0
         with:
           github-token: ${{ steps.app-token.outputs.token }}
           github-app-slug: ${{ steps.app-token.outputs.app-slug }}
           trigger-phrase: "@opentask"
-          model: ${{ inputs.model || 'ollama_cloud/deepseek-v4-flash' }}
+          model: ${{ inputs.model || vars.DEFAULT_MODEL || 'ollama_cloud/deepseek-v4-flash' }}
+          llamacpp-api-url: ${{ secrets.LLAMACPP_API_URL }}
+          llamacpp-api-key: ${{ secrets.LLAMACPP_API_KEY }}
           direct-prompt: ${{ inputs.prompt }}
-          enable-git-operations: "true"
+          system-prompt-direct: ${{ inputs.system_prompt }}
+          enable-git-operations: "${{ inputs.enable_git || 'true' }}"
+          debug: "false"
           bash-allow-append: "gh project list( .*)?,gh project field-list( .*)?,gh project item-add( .*)?,gh project item-edit( .*)?,gh issue create( .*)?,gh issue edit( .*)?,gh issue comment( .*)?,gh pr comment( .*)?"
           custom-instructions: |
             When working on a GitHub issue that belongs to a project board, keep the board's status in
