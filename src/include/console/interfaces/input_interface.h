@@ -68,6 +68,13 @@ namespace Console
              * @return std::string
              */
             virtual std::string getOption(const std::string& option, const std::string& alias) = 0;
+
+            /**
+             * Retrieve the first positional argument.
+             *
+             * @return std::string
+             */
+            virtual std::string getArgument() = 0;
         };
     }
 }

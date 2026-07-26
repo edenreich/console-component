@@ -6,6 +6,7 @@
 
 #include "commands/greetings/hi.h"
 #include "commands/greetings/hey.h"
+#include "commands/greetings/echo.h"
 
 TEST(ApplicationTest, ItReturnsExitCodeNumberTwoIfNoPositionalArgumentWasGivenFirst)
 {
@@ -62,4 +63,38 @@ TEST(ApplicationTest, ItGuessTheCommand)
     const std::string output = testing::internal::GetCapturedStdout();
 
     EXPECT_EQ(output, "You probably meant greetings:hey ?\n");
+}
+
+TEST(ApplicationTest, ItPassesPositionalArgumentToCommand)
+{
+    int argc = 3;
+    char* argv[] = { (char*)"binary", (char*)"greetings:echo", (char*)"MyCommand" };
+
+    Console::Application app(argc, argv);
+
+    app.addCommand(new Echo);
+
+    testing::internal::CaptureStdout();
+    ExitCode exitCode = app.run();
+    const std::string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(ExitCode::Ok, exitCode);
+    EXPECT_EQ("MyCommand\n", output);
+}
+
+TEST(ApplicationTest, ItPassesPositionalArgumentWithOptions)
+{
+    int argc = 4;
+    char* argv[] = { (char*)"binary", (char*)"greetings:echo", (char*)"MyCommand", (char*)"--verbose" };
+
+    Console::Application app(argc, argv);
+
+    app.addCommand(new Echo);
+
+    testing::internal::CaptureStdout();
+    ExitCode exitCode = app.run();
+    const std::string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(ExitCode::Ok, exitCode);
+    EXPECT_EQ("MyCommand\n", output);
 }
