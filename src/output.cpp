@@ -57,7 +57,7 @@ void Output::printCommandHelp(Interfaces::CommandInterface* command) noexcept
  * @param ...
  * @return void
  */
-void Output::write(const std::string message, ...)
+void Output::write(const std::string message, ...) noexcept
 {
     va_list args;
 
@@ -74,7 +74,7 @@ void Output::write(const std::string message, ...)
  * @param ... any
  * @return void
  */
-void Output::write(Types::Colors color, const std::string message, ...)
+void Output::write(Types::Colors color, const std::string message, ...) noexcept
 {
     va_list args;
 
@@ -143,7 +143,7 @@ void Output::write(Types::Colors color, const std::string message, ...)
  * @param ... any
  * @return void
  */
-void Output::writeLine(const std::string line, ...)
+void Output::writeLine(const std::string line, ...) noexcept
 {
     va_list args;
 
