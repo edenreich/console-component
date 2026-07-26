@@ -18,7 +18,7 @@ Output::Output(Interfaces::ApplicationInterface* app) noexcept { m_app = app; }
  *
  * @return void
  */
-void Output::printHelp()
+void Output::printHelp() noexcept
 {
     printApplicationTitle();
 
@@ -35,7 +35,7 @@ void Output::printHelp()
  * @param Interfaces::CommandInterface * command
  * @return void
  */
-void Output::printCommandHelp(Interfaces::CommandInterface* command)
+void Output::printCommandHelp(Interfaces::CommandInterface* command) noexcept
 {
     // Usage
     writeLine(Types::Colors::YELLOW, "Usage:");
@@ -162,7 +162,7 @@ void Output::writeLine(const std::string line, ...)
  * @param ... any
  * @return void
  */
-void Output::writeLine(Types::Colors color, const std::string line, ...)
+void Output::writeLine(Types::Colors color, const std::string line, ...) noexcept
 {
     va_list args;
 
@@ -262,7 +262,7 @@ void Output::error(const std::string line, ...)
  * @param ... any
  * @return void
  */
-void Output::info(const std::string line, ...)
+void Output::info(const std::string line, ...) noexcept
 {
     va_list p_args;
 
@@ -280,7 +280,7 @@ void Output::info(const std::string line, ...)
  * @param ... any
  * @return void
  */
-void Output::warning(const std::string line, ...)
+void Output::warning(const std::string line, ...) noexcept
 {
     va_list args;
 
