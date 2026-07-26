@@ -13,14 +13,14 @@ public:
      *
      * @return std::string
      */
-    std::string getName() override;
+    std::string getName() noexcept override;
 
     /**
      * Retrieve the description of the command.
      *
      * @return std::string
      */
-    std::string getDescription() override;
+    std::string getDescription() noexcept override;
 
     /**
      * Retrieve the command options.
