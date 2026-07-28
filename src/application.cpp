@@ -15,33 +15,13 @@ using namespace Console;
  * @param int & argc
  * @param char ** argv
  */
-Application::Application(int& argc, char** argv)
+Application::Application(int& argc, char** argv) noexcept
 {
     m_argc = argc;
     m_argv = argv;
 
-    m_output = nullptr;
-    m_input = nullptr;
-
     m_usage = "app [command] [options]";
     m_printHelpAutomatically = false;
-}
-
-/**
- * Destroy the application.
- */
-Application::~Application()
-{
-    for (auto& commandNamespace : getAvailableCommands())
-    {
-        for (auto& command : commandNamespace.second)
-        {
-            delete command.second;
-        }
-    }
-
-    delete m_output;
-    delete m_input;
 }
 
 /**
@@ -50,14 +30,14 @@ Application::~Application()
  * @param const std::string & name
  * @return void
  */
-void Application::setApplicationName(const std::string& name) { m_name = name; }
+void Application::setApplicationName(const std::string& name) noexcept { m_name = name; }
 
 /**
  * Getter for the application name.
  *
  * @return std::string
  */
-std::string Application::getApplicationName() { return m_name; }
+std::string Application::getApplicationName() noexcept { return m_name; }
 
 /**
  * Setter for the application usage.
@@ -65,14 +45,14 @@ std::string Application::getApplicationName() { return m_name; }
  * @param const std::string & usage
  * @return void
  */
-void Application::setApplicationUsage(const std::string& usage) { m_usage = usage; }
+void Application::setApplicationUsage(const std::string& usage) noexcept { m_usage = usage; }
 
 /**
  * Getter for the application usage.
  *
  * @return std::string
  */
-std::string Application::getApplicationUsage() { return m_usage; }
+std::string Application::getApplicationUsage() noexcept { return m_usage; }
 
 /**
  * Setter for the application version.
@@ -80,14 +60,14 @@ std::string Application::getApplicationUsage() { return m_usage; }
  * @param const std::string & version
  * @return void
  */
-void Application::setApplicationVersion(const std::string& version) { m_version = version; }
+void Application::setApplicationVersion(const std::string& version) noexcept { m_version = version; }
 
 /**
  * Getter for the application version.
  *
  * @return std::string
  */
-std::string Application::getApplicationVersion() { return m_version; }
+std::string Application::getApplicationVersion() noexcept { return m_version; }
 
 /**
  * Setter for the application description.
@@ -95,14 +75,14 @@ std::string Application::getApplicationVersion() { return m_version; }
  * @param const std::string & description
  * @return void
  */
-void Application::setApplicationDescription(const std::string& description) { m_description = description; }
+void Application::setApplicationDescription(const std::string& description) noexcept { m_description = description; }
 
 /**
  * Getter for the application description.
  *
  * @return std::string
  */
-std::string Application::getApplicationDescription() { return m_description; }
+std::string Application::getApplicationDescription() noexcept { return m_description; }
 
 /**
  * Add a command instance to the application.
@@ -110,12 +90,12 @@ std::string Application::getApplicationDescription() { return m_description; }
  * @param CommandInterface * command
  * @return void
  */
-void Application::addCommand(Interfaces::CommandInterface* command)
+void Application::addCommand(Interfaces::CommandInterface* command) noexcept
 {
     std::string commandName = typeid(*(command)).name();
     std::string commandNamespace = command->getName().substr(0, command->getName().find(':'));
 
-    m_commands[commandNamespace][commandName] = command;
+    m_commands[commandNamespace][commandName] = std::unique_ptr<Interfaces::CommandInterface>(command);
 }
 
 /**
@@ -124,7 +104,7 @@ void Application::addCommand(Interfaces::CommandInterface* command)
  *
  * @return Types::Commands
  */
-Types::Commands Application::getAvailableCommands() { return m_commands; }
+const Types::Commands& Application::getAvailableCommands() noexcept { return m_commands; }
 
 /**
  * Add a command instance to the application.
@@ -134,7 +114,7 @@ Types::Commands Application::getAvailableCommands() { return m_commands; }
  * @param const std::string & alias
  * @return void
  */
-void Application::addGlobalOption(const std::string& option, const std::string& description, const std::string& alias)
+void Application::addGlobalOption(const std::string& option, const std::string& description, const std::string& alias) noexcept
 {
     m_options[alias] = Types::Option(option, description);
 }
@@ -144,7 +124,7 @@ void Application::addGlobalOption(const std::string& option, const std::string& 
  *
  * @return Types::AvailableOptions
  */
-Types::AvailableOptions Application::getAvailableGlobalOptions() { return m_options; }
+Types::AvailableOptions Application::getAvailableGlobalOptions() noexcept { return m_options; }
 
 /**
  * Set print help to automatically.
@@ -152,7 +132,7 @@ Types::AvailableOptions Application::getAvailableGlobalOptions() { return m_opti
  * @param bool yes
  * @return void
  */
-void Application::setAutoPrintHelp(bool yes) { m_printHelpAutomatically = yes; }
+void Application::setAutoPrintHelp(bool yes) noexcept { m_printHelpAutomatically = yes; }
 
 /**
  * Indicates if the application should print
@@ -160,21 +140,21 @@ void Application::setAutoPrintHelp(bool yes) { m_printHelpAutomatically = yes; }
  *
  * @return bool
  */
-bool Application::shouldPrintHelpAutomatically() { return m_printHelpAutomatically; }
+bool Application::shouldPrintHelpAutomatically() noexcept { return m_printHelpAutomatically; }
 
 /**
  * Getter for the input interface.
  *
  * @return Interfaces::InputInterface*
  */
-Interfaces::InputInterface* Application::getInput() const { return m_input; }
+Interfaces::InputInterface* Application::getInput() const noexcept { return m_input.get(); }
 
 /**
  * Getter for the output interface.
  *
  * @return Interfaces::OutputInterface*
  */
-Interfaces::OutputInterface* Application::getOutput() const { return m_output; }
+Interfaces::OutputInterface* Application::getOutput() const noexcept { return m_output.get(); }
 
 /**
  * Guess the requested command.
@@ -182,16 +162,16 @@ Interfaces::OutputInterface* Application::getOutput() const { return m_output; }
  * @param const std::string& commandName
  * @return std::string
  */
-std::string Application::guessCommand(const std::string& commandName)
+std::string Application::guessCommand(const std::string& commandName) noexcept
 {
-    for (const auto& commandNamespace : getAvailableCommands())
+    for (const auto& [ns, commands] : getAvailableCommands())
     {
-        for (const auto& command : commandNamespace.second)
+        for (const auto& [cmdName, cmd] : commands)
         {
-            int comparison = commandName.compare(command.second->getName());
+            int comparison = commandName.compare(cmd->getName());
             if (comparison < 2 && comparison > -2)
             {
-                return command.second->getName();
+                return cmd->getName();
             }
         }
     }
@@ -203,10 +183,10 @@ std::string Application::guessCommand(const std::string& commandName)
  *
  * @return ExitCode
  */
-ExitCode Application::run()
+ExitCode Application::run() noexcept
 {
-    m_input = new Input(this);
-    m_output = new Output(this);
+    m_input = std::make_unique<Input>(this);
+    m_output = std::make_unique<Output>(this);
     std::vector<std::string> arguments(m_argv + 1, m_argv + m_argc);
     Types::Options options;
     std::string requestedCommand;
@@ -312,9 +292,9 @@ ExitCode Application::run()
         }
     }
 
-    for (const auto& commandNamespace : getAvailableCommands())
+    for (const auto& [ns, commands] : getAvailableCommands())
     {
-        for (const auto& command : commandNamespace.second)
+        for (const auto& [cmdName, cmd] : commands)
         {
             if (requestedCommand.empty())
             {
@@ -325,13 +305,13 @@ ExitCode Application::run()
                 return ExitCode::NeedHelp;
             }
 
-            if (command.second->getName() != requestedCommand)
+            if (cmd->getName() != requestedCommand)
             {
                 break;
             }
 
             m_input->setOptions(options);
-            return command.second->handle(m_input, m_output);
+            return cmd->handle(m_input.get(), m_output.get());
         }
     }
 

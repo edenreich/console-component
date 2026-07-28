@@ -27,14 +27,14 @@ namespace Console
             /**
              * Destructor
              */
-            virtual ~OutputInterface() { }
+            virtual ~OutputInterface() noexcept = default;
 
             /**
              * Print the help message.
              *
              * @return void
              */
-            virtual void printHelp() = 0;
+            virtual void printHelp() noexcept = 0;
 
             /**
              * Print the command help message.
@@ -42,7 +42,7 @@ namespace Console
              * @param CommandInterface * command
              * @return void
              */
-            virtual void printCommandHelp(CommandInterface* command) = 0;
+            virtual void printCommandHelp(CommandInterface* command) noexcept = 0;
 
             /**
              * Write a string to the console.
@@ -51,7 +51,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void write(const std::string message, ...) = 0;
+            virtual void write(const std::string message, ...) noexcept = 0;
 
             /**
              * Write a colored string to the console.
@@ -61,7 +61,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void write(Types::Colors color, const std::string message, ...) = 0;
+            virtual void write(Types::Colors color, const std::string message, ...) noexcept = 0;
 
             /**
              * Write a line to the console.
@@ -70,7 +70,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void writeLine(const std::string line, ...) = 0;
+            virtual void writeLine(const std::string line, ...) noexcept = 0;
 
             /**
              * Write a colored line to the console.
@@ -80,7 +80,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void writeLine(Types::Colors color, const std::string line, ...) = 0;
+            virtual void writeLine(Types::Colors color, const std::string line, ...) noexcept = 0;
 
             /**
              * Write an error to the console.
@@ -89,7 +89,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void error(const std::string line, ...) = 0;
+            virtual void error(const std::string line, ...) noexcept = 0;
 
             /**
              * Write an info to the console.
@@ -98,7 +98,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void info(const std::string line, ...) = 0;
+            virtual void info(const std::string line, ...) noexcept = 0;
 
             /**
              * Write a warning to the console.
@@ -107,7 +107,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void warning(const std::string line, ...) = 0;
+            virtual void warning(const std::string line, ...) noexcept = 0;
 
             /**
              * Create a progress bar instance.
@@ -115,7 +115,7 @@ namespace Console
              * @param const unsigned int items
              * @return Console::ProgressBar
              */
-            virtual ProgressBar* createProgressBar(const unsigned int items) = 0;
+            virtual ProgressBar* createProgressBar(const unsigned int items) noexcept = 0;
         };
     }
 }

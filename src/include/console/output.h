@@ -18,14 +18,14 @@ namespace Console
          *
          * @param Interfaces::ApplicationInterface * app
          */
-        Output(Interfaces::ApplicationInterface* app);
+        Output(Interfaces::ApplicationInterface* app) noexcept;
 
         /**
          * Print the help message.
          *
          * @return void
          */
-        void printHelp() override;
+        void printHelp() noexcept override;
 
         /**
          * Print the command help message.
@@ -33,7 +33,7 @@ namespace Console
          * @param Interfaces::CommandInterface * command
          * @return void
          */
-        void printCommandHelp(Interfaces::CommandInterface* command) override;
+        void printCommandHelp(Interfaces::CommandInterface* command) noexcept override;
 
         /**
          * Write a string to the console.
@@ -42,7 +42,7 @@ namespace Console
          * @param ... any
          * @return void
          */
-        void write(const std::string message, ...) override;
+        void write(const std::string message, ...) noexcept override;
 
         /**
          * Write a colored string to the console.
@@ -52,7 +52,7 @@ namespace Console
          * @param ... any
          * @return void
          */
-        void write(Types::Colors color, const std::string message, ...) override;
+        void write(Types::Colors color, const std::string message, ...) noexcept override;
 
         /**
          * Write a line to the console.
@@ -61,7 +61,7 @@ namespace Console
          * @param ... any
          * @return void
          */
-        void writeLine(const std::string line, ...) override;
+        void writeLine(const std::string line, ...) noexcept override;
 
         /**
          * Write a colored line to the console.
@@ -71,7 +71,7 @@ namespace Console
          * @param ... any
          * @return void
          */
-        void writeLine(Types::Colors color, const std::string line, ...) override;
+        void writeLine(Types::Colors color, const std::string line, ...) noexcept override;
 
         /**
          * Write an error to the console.
@@ -80,7 +80,7 @@ namespace Console
          * @param ... any
          * @return void
          */
-        void error(const std::string line, ...) override;
+        void error(const std::string line, ...) noexcept override;
 
         /**
          * Write an info to the console.
@@ -89,7 +89,7 @@ namespace Console
          * @param ... any
          * @return void
          */
-        void info(const std::string line, ...) override;
+        void info(const std::string line, ...) noexcept override;
 
         /**
          * Write a warning to the console.
@@ -98,7 +98,7 @@ namespace Console
          * @param ... any
          * @return void
          */
-        void warning(const std::string line, ...) override;
+        void warning(const std::string line, ...) noexcept override;
 
         /**
          * Create a progress bar instance.
@@ -106,7 +106,7 @@ namespace Console
          * @param const unsigned int items
          * @return ProgressBar
          */
-        ProgressBar* createProgressBar(const unsigned int items) override;
+        ProgressBar* createProgressBar(const unsigned int items) noexcept override;
 
     private:
         /**

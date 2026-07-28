@@ -17,7 +17,7 @@ namespace Console
             /**
              * Destructor
              */
-            virtual ~InputInterface() { }
+            virtual ~InputInterface() noexcept = default;
 
             /**
              * Retrieve an input from the user.
@@ -25,14 +25,14 @@ namespace Console
              * @param const std::string & question
              * @return std::string
              */
-            virtual std::string ask(const std::string& question) = 0;
+            virtual std::string ask(const std::string& question) noexcept = 0;
 
             /**
              * Retrieve the parsed options.
              *
              * @return Console::Types::Options
              */
-            virtual Console::Types::Options getOptions() = 0;
+            virtual Console::Types::Options getOptions() noexcept = 0;
 
             /**
              * Setter for the parsed options.
@@ -40,7 +40,7 @@ namespace Console
              * @return Console::Types::Options options
              * @return void
              */
-            virtual void setOptions(Console::Types::Options options) = 0;
+            virtual void setOptions(Console::Types::Options options) noexcept = 0;
 
             /**
              * Determine if the -h or --help flag
@@ -48,7 +48,7 @@ namespace Console
              *
              * @return bool
              */
-            virtual bool wantsHelp() = 0;
+            virtual bool wantsHelp() noexcept = 0;
 
             /**
              * Retrieve the option value
@@ -57,7 +57,7 @@ namespace Console
              * @param const std::string & option
              * @return std::string
              */
-            virtual std::string getOption(const std::string& option) = 0;
+            virtual std::string getOption(const std::string& option) noexcept = 0;
 
             /**
              * Retrieve the option value
@@ -67,14 +67,14 @@ namespace Console
              * @param const std::string & alias
              * @return std::string
              */
-            virtual std::string getOption(const std::string& option, const std::string& alias) = 0;
+            virtual std::string getOption(const std::string& option, const std::string& alias) noexcept = 0;
 
             /**
              * Retrieve the first positional argument.
              *
              * @return std::string
              */
-            virtual std::string getArgument() = 0;
+            virtual std::string getArgument() noexcept = 0;
         };
     }
 }

@@ -59,7 +59,7 @@ build/test commands, coding style, and contribution conventions.
 ### Prerequisites
 
 - **CMake** ≥ 3.12
-- **C++14** compiler (GCC, Clang, MSVC)
+- **C++17** compiler (GCC 7+, Clang 5+, MSVC 2017+)
 - **make** (or Ninja)
 
 ### Configure
@@ -108,7 +108,7 @@ cd build && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --target inst
 
 ## Coding Style
 
-- **Language**: C++14 (`CMAKE_CXX_STANDARD 14`)
+- **Language**: C++17 (`CMAKE_CXX_STANDARD 17`)
 - **Formatting**: WebKit-based via `.clang-format` (4-space indent, 150-char column limit, All namespace indentation)
 - **Include guards**: `#ifndef` / `#define` / `#endif` style (uppercase, underscored)
 - **Comments**: Doxygen-style (`/** @param ... @return ... */`)

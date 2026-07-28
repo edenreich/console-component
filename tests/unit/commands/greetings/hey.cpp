@@ -5,21 +5,21 @@
  *
  * @return std::string
  */
-std::string Hey::getName() { return "greetings:hey"; }
+std::string Hey::getName() noexcept { return "greetings:hey"; }
 
 /**
  * Retrieve the description of the command.
  *
  * @return std::string
  */
-std::string Hey::getDescription() { return "Say Hey"; }
+std::string Hey::getDescription() noexcept { return "Say Hey"; }
 
 /**
  * Retrieve the command options.
  *
  * @return Console::Types::AvailableOptions
  */
-Types::AvailableOptions Hey::getOptions()
+Types::AvailableOptions Hey::getOptions() noexcept
 {
     Types::AvailableOptions options;
 
@@ -33,4 +33,4 @@ Types::AvailableOptions Hey::getOptions()
  * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
-ExitCode Hey::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) { return ExitCode::Ok; }
+ExitCode Hey::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) noexcept { return ExitCode::Ok; }

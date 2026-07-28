@@ -11,14 +11,14 @@ using namespace Console;
  *
  * @param Interfaces::ApplicationInterface * app
  */
-Output::Output(Interfaces::ApplicationInterface* app) { m_app = app; }
+Output::Output(Interfaces::ApplicationInterface* app) noexcept { m_app = app; }
 
 /**
  * Print the help message.
  *
  * @return void
  */
-void Output::printHelp()
+void Output::printHelp() noexcept
 {
     printApplicationTitle();
 
@@ -35,7 +35,7 @@ void Output::printHelp()
  * @param Interfaces::CommandInterface * command
  * @return void
  */
-void Output::printCommandHelp(Interfaces::CommandInterface* command)
+void Output::printCommandHelp(Interfaces::CommandInterface* command) noexcept
 {
     // Usage
     writeLine(Types::Colors::YELLOW, "Usage:");
@@ -44,9 +44,9 @@ void Output::printCommandHelp(Interfaces::CommandInterface* command)
     // Options
     writeLine(Types::Colors::YELLOW, "Options:");
     writeLine("  -h, --help\tDisplay this help message");
-    for (auto& option : command->getOptions())
+    for (auto& [optKey, optVal] : command->getOptions())
     {
-        writeLine("  %s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
+        writeLine("  %s, %s\t%s", optKey.c_str(), optVal.first.c_str(), optVal.second.c_str());
     }
 }
 
@@ -57,7 +57,7 @@ void Output::printCommandHelp(Interfaces::CommandInterface* command)
  * @param ...
  * @return void
  */
-void Output::write(const std::string message, ...)
+void Output::write(const std::string message, ...) noexcept
 {
     va_list args;
 
@@ -74,7 +74,7 @@ void Output::write(const std::string message, ...)
  * @param ... any
  * @return void
  */
-void Output::write(Types::Colors color, const std::string message, ...)
+void Output::write(Types::Colors color, const std::string message, ...) noexcept
 {
     va_list args;
 
@@ -143,7 +143,7 @@ void Output::write(Types::Colors color, const std::string message, ...)
  * @param ... any
  * @return void
  */
-void Output::writeLine(const std::string line, ...)
+void Output::writeLine(const std::string line, ...) noexcept
 {
     va_list args;
 
@@ -162,7 +162,7 @@ void Output::writeLine(const std::string line, ...)
  * @param ... any
  * @return void
  */
-void Output::writeLine(Types::Colors color, const std::string line, ...)
+void Output::writeLine(Types::Colors color, const std::string line, ...) noexcept
 {
     va_list args;
 
@@ -233,7 +233,7 @@ void Output::writeLine(Types::Colors color, const std::string line, ...)
  * @param ... any
  * @return void
  */
-void Output::error(const std::string line, ...)
+void Output::error(const std::string line, ...) noexcept
 {
     va_list args;
 
@@ -262,7 +262,7 @@ void Output::error(const std::string line, ...)
  * @param ... any
  * @return void
  */
-void Output::info(const std::string line, ...)
+void Output::info(const std::string line, ...) noexcept
 {
     va_list p_args;
 
@@ -280,7 +280,7 @@ void Output::info(const std::string line, ...)
  * @param ... any
  * @return void
  */
-void Output::warning(const std::string line, ...)
+void Output::warning(const std::string line, ...) noexcept
 {
     va_list args;
 
@@ -308,7 +308,7 @@ void Output::warning(const std::string line, ...)
  * @param const unsigned int items
  * @return ProgressBar *
  */
-ProgressBar* Output::createProgressBar(const unsigned int items) { return new ProgressBar(this, items); }
+ProgressBar* Output::createProgressBar(const unsigned int items) noexcept { return new ProgressBar(this, items); }
 
 /**
  * Print the title of the application.
@@ -343,9 +343,9 @@ void Output::printApplicationOptions()
 {
     writeLine(Types::Colors::YELLOW, "Options:");
     writeLine("  -h, --help\tDisplay this help message");
-    for (auto& option : m_app->getAvailableGlobalOptions())
+    for (auto& [optKey, optVal] : m_app->getAvailableGlobalOptions())
     {
-        writeLine("  %s, %s\t%s", option.first.c_str(), option.second.first.c_str(), option.second.second.c_str());
+        writeLine("  %s, %s\t%s", optKey.c_str(), optVal.first.c_str(), optVal.second.c_str());
     }
     write("\n");
 }
@@ -358,14 +358,14 @@ void Output::printApplicationOptions()
 void Output::printAvailableCommands()
 {
     writeLine(Types::Colors::YELLOW, "Available Commands:");
-    for (auto& commandNamespace : m_app->getAvailableCommands())
+    for (auto& [ns, commands] : m_app->getAvailableCommands())
     {
-        write(Types::Colors::YELLOW, " %s\n", commandNamespace.first.c_str());
-        for (auto& command : commandNamespace.second)
+        write(Types::Colors::YELLOW, " %s\n", ns.c_str());
+        for (auto& [cmdName, cmd] : commands)
         {
-            write(Types::Colors::GREEN, "  %s", command.second->getName().c_str());
+            write(Types::Colors::GREEN, "  %s", cmd->getName().c_str());
             write("\t");
-            writeLine(command.second->getDescription());
+            writeLine(cmd->getDescription());
         }
     }
     write("\n");

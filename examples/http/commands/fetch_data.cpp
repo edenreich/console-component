@@ -49,21 +49,21 @@ std::vector<int> FetchData::fetch(Console::Interfaces::OutputInterface* output)
  *
  * @return std::string
  */
-std::string FetchData::getName() { return "fetch:data"; }
+std::string FetchData::getName() noexcept { return "fetch:data"; }
 
 /**
  * Retrieve the description of the command.
  *
  * @return std::string
  */
-std::string FetchData::getDescription() { return "fetch data from an external api"; }
+std::string FetchData::getDescription() noexcept { return "fetch data from an external api"; }
 
 /**
  * Retrieve the command options.
  *
  * @return Console::Types::AvailableOptions
  */
-Types::AvailableOptions FetchData::getOptions()
+Types::AvailableOptions FetchData::getOptions() noexcept
 {
     Types::AvailableOptions options;
 
@@ -79,7 +79,7 @@ Types::AvailableOptions FetchData::getOptions()
  * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
-ExitCode FetchData::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output)
+ExitCode FetchData::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) noexcept
 {
     // Create a packaged task.
     std::packaged_task<std::vector<int>()> task(std::bind(&FetchData::fetch, this, output));

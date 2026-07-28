@@ -5,21 +5,21 @@
  *
  * @return std::string
  */
-std::string HelloWorld::getName() { return "hello:world"; }
+std::string HelloWorld::getName() noexcept { return "hello:world"; }
 
 /**
  * Retrieve the description of the command.
  *
  * @return std::string
  */
-std::string HelloWorld::getDescription() { return "output hello world to the console"; }
+std::string HelloWorld::getDescription() noexcept { return "output hello world to the console"; }
 
 /**
  * Retrieve the command options.
  *
  * @return Console::Types::AvailableOptions
  */
-Types::AvailableOptions HelloWorld::getOptions()
+Types::AvailableOptions HelloWorld::getOptions() noexcept
 {
     Types::AvailableOptions options;
 
@@ -35,7 +35,7 @@ Types::AvailableOptions HelloWorld::getOptions()
  * @param Console::Interfaces::OutputInterface * output
  * @return ExitCode
  */
-ExitCode HelloWorld::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output)
+ExitCode HelloWorld::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) noexcept
 {
     for (auto& option : input->getOptions())
     {
