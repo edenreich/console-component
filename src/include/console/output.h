@@ -4,6 +4,8 @@
 #include "interfaces/output_interface.h"
 #include "interfaces/application_interface.h"
 
+#include <string_view>
+
 namespace Console
 {
     /**
@@ -38,67 +40,60 @@ namespace Console
         /**
          * Write a string to the console.
          *
-         * @param const std::string line
-         * @param ... any
+         * @param std::string_view message
          * @return void
          */
-        void write(const std::string message, ...) noexcept override;
+        void write(std::string_view message) noexcept override;
 
         /**
          * Write a colored string to the console.
          *
          * @param Types::Colors color
-         * @param const std::string message
-         * @param ... any
+         * @param std::string_view message
          * @return void
          */
-        void write(Types::Colors color, const std::string message, ...) noexcept override;
+        void write(Types::Colors color, std::string_view message) noexcept override;
 
         /**
          * Write a line to the console.
          *
-         * @param const std::string & line
-         * @param ... any
+         * @param std::string_view line
          * @return void
          */
-        void writeLine(const std::string line, ...) noexcept override;
+        void writeLine(std::string_view line) noexcept override;
 
         /**
          * Write a colored line to the console.
          *
          * @param Types::Colors color
-         * @param const std::string line
-         * @param ... any
+         * @param std::string_view line
          * @return void
          */
-        void writeLine(Types::Colors color, const std::string line, ...) noexcept override;
+        void writeLine(Types::Colors color, std::string_view line) noexcept override;
 
         /**
          * Write an error to the console.
          *
-         * @param const std::string line
-         * @param ... any
+         * @param std::string_view line
          * @return void
          */
-        void error(const std::string line, ...) noexcept override;
+        void error(std::string_view line) noexcept override;
 
         /**
          * Write an info to the console.
          *
-         * @param const std::string line
-         * @param ... any
+         * @param std::string_view line
          * @return void
          */
-        void info(const std::string line, ...) noexcept override;
+        void info(std::string_view line) noexcept override;
 
         /**
          * Write a warning to the console.
          *
-         * @param const std::string line
-         * @param ... any
+         * @param std::string_view line
          * @return void
          */
-        void warning(const std::string line, ...) noexcept override;
+        void warning(std::string_view line) noexcept override;
 
         /**
          * Create a progress bar instance.

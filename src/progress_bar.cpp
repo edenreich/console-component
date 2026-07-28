@@ -1,7 +1,9 @@
 #include "include/console/progress_bar.h"
 
 #include <iostream>
+#include <format>
 #include <cmath>
+#include <algorithm>
 
 using namespace Console;
 
@@ -80,11 +82,8 @@ void ProgressBar::draw()
     m_indicator.resize(m_width);
     std::fill(m_indicator.begin(), m_indicator.begin() + m_width, '-');
 
-#pragma warning(push)
-#pragma warning(disable : 4244)
-    m_currentPercentage = std::floor((static_cast<float>(m_progress) / static_cast<float>(m_totalItems)) * m_maxPercentage);
-    m_position = std::floor((static_cast<float>(m_currentPercentage) / static_cast<float>(m_maxPercentage)) * m_width);
-#pragma warning(pop)
+    m_currentPercentage = static_cast<unsigned int>(std::floor((static_cast<float>(m_progress) / static_cast<float>(m_totalItems)) * m_maxPercentage));
+    m_position = static_cast<unsigned int>(std::floor((static_cast<float>(m_currentPercentage) / static_cast<float>(m_maxPercentage)) * m_width));
 
     if (m_currentPercentage > m_maxPercentage)
     {
@@ -94,6 +93,6 @@ void ProgressBar::draw()
     std::fill(m_indicator.begin(), m_indicator.begin() + m_position, '=');
     m_indicator[m_position] = '>';
 
-    std::cout << '\r' << m_currentPercentage << '%' << " [" << m_indicator.c_str() << "] items: " << m_progress << " / " << m_totalItems;
+    std::cout << std::format("\r{}% [{}] items: {} / {}", m_currentPercentage, m_indicator, m_progress, m_totalItems);
     std::cout.flush();
 }

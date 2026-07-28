@@ -1,6 +1,8 @@
 #include <iostream>
 #include <typeinfo>
 #include <regex>
+#include <span>
+#include <format>
 
 #include "include/console/application.h"
 #include "include/console/input.h"
@@ -187,7 +189,8 @@ ExitCode Application::run() noexcept
 {
     m_input = std::make_unique<Input>(this);
     m_output = std::make_unique<Output>(this);
-    std::vector<std::string> arguments(m_argv + 1, m_argv + m_argc);
+    auto args = std::span(m_argv, static_cast<std::size_t>(m_argc));
+    std::vector<std::string> arguments(args.begin() + 1, args.end());
     Types::Options options;
     std::string requestedCommand;
 
@@ -318,7 +321,7 @@ ExitCode Application::run() noexcept
     std::string guess = guessCommand(requestedCommand);
     if (!guess.empty())
     {
-        m_output->info("You probably meant %s ?", guess.c_str());
+        m_output->info(std::format("You probably meant {} ?", guess));
     }
 
     if (shouldPrintHelpAutomatically())

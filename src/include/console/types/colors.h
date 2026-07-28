@@ -1,7 +1,7 @@
 #ifndef COLORS_H
 #define COLORS_H
 
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+#ifdef _WIN32
 #include <windows.h>
 
 #define COLOR_RESET 0x0015

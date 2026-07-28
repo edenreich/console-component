@@ -2,6 +2,7 @@
 #define OUTPUT_INTERFACE_H
 
 #include <string>
+#include <string_view>
 #include "../types/colors.h"
 
 namespace Console
@@ -51,7 +52,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void write(const std::string message, ...) noexcept = 0;
+            virtual void write(std::string_view message) noexcept = 0;
 
             /**
              * Write a colored string to the console.
@@ -61,7 +62,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void write(Types::Colors color, const std::string message, ...) noexcept = 0;
+            virtual void write(Types::Colors color, std::string_view message) noexcept = 0;
 
             /**
              * Write a line to the console.
@@ -70,7 +71,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void writeLine(const std::string line, ...) noexcept = 0;
+            virtual void writeLine(std::string_view line) noexcept = 0;
 
             /**
              * Write a colored line to the console.
@@ -80,7 +81,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void writeLine(Types::Colors color, const std::string line, ...) noexcept = 0;
+            virtual void writeLine(Types::Colors color, std::string_view line) noexcept = 0;
 
             /**
              * Write an error to the console.
@@ -89,7 +90,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void error(const std::string line, ...) noexcept = 0;
+            virtual void error(std::string_view line) noexcept = 0;
 
             /**
              * Write an info to the console.
@@ -98,7 +99,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void info(const std::string line, ...) noexcept = 0;
+            virtual void info(std::string_view line) noexcept = 0;
 
             /**
              * Write a warning to the console.
@@ -107,7 +108,7 @@ namespace Console
              * @param ... any
              * @return void
              */
-            virtual void warning(const std::string line, ...) noexcept = 0;
+            virtual void warning(std::string_view line) noexcept = 0;
 
             /**
              * Create a progress bar instance.
