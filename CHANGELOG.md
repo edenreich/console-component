@@ -1,3 +1,9 @@
+## [1.2.4](https://github.com/edenreich/console-component/compare/v1.2.3...v1.2.4) (2026-07-28)
+
+### Continuous Integration
+
+* sync OpenTask Agent workflow ([#50](https://github.com/edenreich/console-component/issues/50)) ([1435ba7](https://github.com/edenreich/console-component/commit/1435ba7170b1ff8de3b92aaf89df3c76451ae0ee))
+
 ## [1.2.3](https://github.com/edenreich/console-component/compare/v1.2.2...v1.2.3) (2026-07-26)
 
 ### Continuous Integration
