@@ -3,10 +3,9 @@
 #include <iostream>
 #include <thread>
 #include <future>
-#include <functional>
 #include <chrono>
 #include <utility>
-#include <sstream>
+#include <format>
 #include <console/progress_bar.h>
 
 /**
@@ -82,28 +81,22 @@ Types::AvailableOptions FetchData::getOptions() noexcept
 ExitCode FetchData::handle(Interfaces::InputInterface* input, Interfaces::OutputInterface* output) noexcept
 {
     // Create a packaged task.
-    std::packaged_task<std::vector<int>()> task(std::bind(&FetchData::fetch, this, output));
+    std::packaged_task<std::vector<int>()> task([this, output]() { return fetch(output); });
 
     // Get the promise object.
     std::future<std::vector<int>> promise = task.get_future();
 
     // Move the task into a separate thread.
-    std::thread t(std::move(task));
+    std::jthread t(std::move(task));
 
     // Get the promise results.
     std::vector<int> results = promise.get();
-
-    // Join the thread to the main context.
-    t.join();
 
     // Output the results.
     output->writeLine("Printing the results from the request:");
     for (auto& data : results)
     {
-        std::stringstream ss;
-        ss << data;
-
-        output->writeLine(ss.str());
+        output->writeLine(std::format("{}", data));
     }
 
     output->writeLine("Task completed..");

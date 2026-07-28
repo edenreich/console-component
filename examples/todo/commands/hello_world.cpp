@@ -1,5 +1,7 @@
 #include "hello_world.h"
 
+#include <format>
+
 /**
  * Retrieve the name of the command.
  *
@@ -54,14 +56,14 @@ ExitCode HelloWorld::handle(Interfaces::InputInterface* input, Interfaces::Outpu
     }
     else
     {
-        output->writeLine("Hello %s", to.c_str());
+        output->writeLine(std::format("Hello {}", to));
     }
 
     for (auto& option : input->getOptions())
     {
-        output->writeLine("alias: %s", option.first.c_str());
-        output->writeLine("key: %s", option.second.first.c_str());
-        output->writeLine("value: %s", option.second.second.c_str());
+        output->writeLine(std::format("alias: {}", option.first));
+        output->writeLine(std::format("key: {}", option.second.first));
+        output->writeLine(std::format("value: {}", option.second.second));
     }
 
     return ExitCode::Ok;

@@ -1,5 +1,7 @@
 #include "copy_files.h"
 
+#include <format>
+
 /**
  * Retrieve the name of the command.
  *
@@ -54,7 +56,7 @@ ExitCode CopyFiles::handle(Interfaces::InputInterface* input, Interfaces::Output
     std::string source = input->getOption("source");
     std::string dest = input->getOption("dest");
 
-    output->info("Copying files from %s to %s", source.c_str(), dest.c_str());
+    output->info(std::format("Copying files from {} to {}", source, dest));
 
     return ExitCode::Ok;
 }
