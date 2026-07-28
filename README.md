@@ -1,4 +1,4 @@
-![Build](https://github.com/edenreich/console-component/workflows/Build/badge.svg?branch=main) ![Lint](https://github.com/edenreich/console-component/workflows/Lint/badge.svg?branch=main)
+![Build](https://github.com/edenreich/console-component/actions/workflows/build.yml/badge.svg?branch=main) ![Lint](https://github.com/edenreich/console-component/actions/workflows/lint.yml/badge.svg?branch=main)
 
 # Console Component
 
