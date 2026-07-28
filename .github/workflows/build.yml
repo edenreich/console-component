@@ -25,10 +25,10 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo rm -rf /usr/local/bin/cmake
-          sudo curl -L https://github.com/Kitware/CMake/releases/download/v3.20.0/cmake-3.20.0-Linux-x86_64.tar.gz -o /tmp/cmake.tar.gz
+          sudo curl -L https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-Linux-x86_64.tar.gz -o /tmp/cmake.tar.gz
           sudo tar -xf /tmp/cmake.tar.gz --directory /tmp
           sudo cp /tmp/cmake*/bin/cmake /usr/local/bin/cmake
-          sudo cp -R /tmp/cmake*/share/cmake-3.20 /usr/local/share/cmake-3.20
+          sudo cp -R /tmp/cmake*/share/cmake-3.22 /usr/local/share/cmake-3.22
 
       - name: configure
         run: |
