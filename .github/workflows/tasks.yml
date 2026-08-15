@@ -54,7 +54,7 @@ jobs:
         with:
           version: 3.x
 
-      - uses: inference-gateway/infer-action@v0.36.0
+      - uses: inference-gateway/infer-action@v0.46.1
         with:
           github-token: ${{ steps.app-token.outputs.token }}
           github-app-slug: ${{ steps.app-token.outputs.app-slug }}
